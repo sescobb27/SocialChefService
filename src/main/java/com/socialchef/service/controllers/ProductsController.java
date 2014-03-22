@@ -36,9 +36,9 @@ public class ProductsController {
 	case "category":
 	    return Product.findByCategory(search_value);
 	case "location":
-	    return Product.findByPrice(search_value);
-	case "price":
 	    return Product.findByLocation(search_value);
+	case "price":
+	    return Product.findByPrice(search_value);
 	default:
 	    // TODO
 	    return null;
