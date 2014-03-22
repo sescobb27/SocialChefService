@@ -3,6 +3,8 @@ package com.socialchef.service.models;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import com.socialchef.service.helpers.Validator;
+
 public class User {
 
     private String name, last_name, username, email, picture;
@@ -12,7 +14,7 @@ public class User {
 
     // TESTING
     public static String[] names = { "Simon", "Edgardo", "Juan", "Camilo" };
-    public static String[] last_names = { "Escobar", "Sierra", "Noreña",
+    public static String[] last_names = { "Escobar", "Sierra", "Norenia",
 	    "Mejia" };
     public static String[] usernames = { "sescob", "easierra", "jknore",
 	    "jcmejia" };
@@ -23,11 +25,11 @@ public class User {
 
     public User(String name, String last_name, String username, String email,
 	    String picture) {
-	this.name = name;
-	this.last_name = last_name;
-	this.username = username;
-	this.email = email;
-	this.picture = picture;
+	this.name = name.trim();
+	this.last_name = last_name.trim();
+	this.username = username.trim();
+	this.email = email.trim();
+	this.picture = picture.trim();
 	this.products = new HashMap<String, Product>();
     }
 
@@ -125,5 +127,17 @@ public class User {
 	    mocks.put(username, new User(name, last_name, username, email, ""));
 	}
 	return mocks;
+    }
+
+    public static boolean validateUser (User u) {
+	return Validator.validateNames(u.name) &&
+		Validator.validateNames(u.last_name) &&
+		Validator.validateUniqueNames(u.username);
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("%s: %s %s",
+        	this.name, this.last_name, this.username);
     }
 }
