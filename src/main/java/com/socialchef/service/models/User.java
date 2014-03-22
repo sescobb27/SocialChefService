@@ -98,4 +98,17 @@ public class User {
 	return this.products.remove(p.getName()) != null;
     }
 
+    public static HashMap<String, User> mockUsers () {
+	HashMap<String, User> mocks = new HashMap<String, User>();
+
+	for (int i = 0; i < User.names.length; ++i) {
+	    String name = User.names[i];
+	    String last_name = User.last_names[i];
+	    String username = User.usernames[i];
+	    String email = User.emails[i];
+
+	    mocks.put(username, new User(name, last_name, username, email, ""));
+	}
+	return mocks;
+    }
 }
