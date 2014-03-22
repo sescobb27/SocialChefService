@@ -1,6 +1,6 @@
 package com.socialchef.service.controllers;
 
-import java.util.HashMap;
+import java.util.LinkedList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,13 +15,13 @@ public class UsersController {
 
     @RequestMapping(value = "/chefs", method = RequestMethod.GET)
     @ResponseBody
-    public HashMap<String, User> indexRoute() {
+    public LinkedList<User> indexRoute() {
 	return User.mockUsers();
     }
 
     @RequestMapping(value = "/chefs/{username}", method = RequestMethod.GET)
     @ResponseBody
     public User getUserByUsername(@PathVariable String username) {
-	return User.mockUsers().get(username);
+	return User.mockUsersAsHash().get(username);
     }
 }
