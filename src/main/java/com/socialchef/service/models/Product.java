@@ -139,7 +139,8 @@ public class Product {
 	LinkedList<Product> mocks = Product.mockProducts();
 	LinkedList<Product> results = new LinkedList<Product>();
 	for (Product p : mocks) {
-	    if (p.name.contains(query) || p.category.contains(query)
+	    if (p.name.contains(query) 
+		    || p.category.contains(query)
 		    || p.chef.getUsername().contains(query)
 		    || p.location.contains(query)) {
 		results.add(p);
