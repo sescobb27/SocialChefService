@@ -3,7 +3,9 @@ package com.socialchef.service.controllers;
 import java.util.LinkedList;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,5 +25,16 @@ public class UsersController {
     @ResponseBody
     public User getUserByUsername(@PathVariable String username) {
 	return User.mockUsersAsHash().get(username);
+    }
+
+    @RequestMapping(value="/chefs", method=RequestMethod.POST)
+    @ResponseBody
+    public User createNewUser(@RequestBody User user, Errors errors) {
+	if (User.validateUser(user)) {
+	    return user;
+	} else {
+//	    WRONG USER FIELDS
+	    return null;
+	}
     }
 }
