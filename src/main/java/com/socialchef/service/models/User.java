@@ -1,16 +1,20 @@
 package com.socialchef.service.models;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.concurrent.atomic.AtomicLong;
 
 import com.socialchef.service.helpers.Validator;
 
 public class User {
 
-    private String name, last_name, username, email, picture;
+    private String name, lastName, userName, email, picture;
     private long id;
     private float rate = 0.0f;
-    private HashMap<String, Product> products;
+    private LinkedList<Product> products;
+    private Date createdAt;
+    private static AtomicLong incrementalId = new AtomicLong(0);
 
     // TESTING
     public static String[] names = { "Simon", "Edgardo", "Juan", "Camilo" };
@@ -26,11 +30,12 @@ public class User {
     public User(String name, String last_name, String username, String email,
 	    String picture) {
 	this.name = name.trim();
-	this.last_name = last_name.trim();
-	this.username = username.trim();
+	this.lastName = last_name.trim();
+	this.userName = username.trim();
 	this.email = email.trim();
 	this.picture = picture.trim();
-	this.products = new HashMap<String, Product>();
+	this.products = new LinkedList<Product>();
+	this.id = User.incrementalId.incrementAndGet();
     }
 
     public String getName() {
@@ -41,20 +46,20 @@ public class User {
 	this.name = name;
     }
 
-    public String getLast_name() {
-	return this.last_name;
+    public String getLastName() {
+	return this.lastName;
     }
 
-    public void setLast_name(String last_name) {
-	this.last_name = last_name;
+    public void setLastName(String last_name) {
+	this.lastName = last_name;
     }
 
     public String getUsername() {
-	return this.username;
+	return this.userName;
     }
 
     public void setUsername(String username) {
-	this.username = username;
+	this.userName = username;
     }
 
     public String getEmail() {
@@ -88,17 +93,25 @@ public class User {
     public void setRate(float rate) {
 	this.rate = rate;
     }
-
+    
     public void addProduct(Product p) {
-	this.products.put(p.getName(), p);
+	this.products.add(p);
     }
 
-    public HashMap<String, Product> getAllProducts() {
+    public LinkedList<Product> getProducts() {
 	return this.products;
     }
 
+    public Date getCreatedAt() {
+	return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+	this.createdAt = createdAt;
+    }
+
     public boolean removeProduct(Product p) {
-	return this.products.remove(p.getName()) != null;
+	return this.products.remove(p);
     }
 
     public static LinkedList<User> mockUsers () {
@@ -131,13 +144,13 @@ public class User {
 
     public static boolean validateUser (User u) {
 	return Validator.validateNames(u.name) &&
-		Validator.validateNames(u.last_name) &&
-		Validator.validateUniqueNames(u.username);
+		Validator.validateNames(u.lastName) &&
+		Validator.validateUniqueNames(u.userName);
     }
     
     @Override
     public String toString() {
         return String.format("%s: %s %s",
-        	this.name, this.last_name, this.username);
+        	this.name, this.lastName, this.userName);
     }
 }

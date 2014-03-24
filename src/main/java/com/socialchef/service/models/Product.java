@@ -1,7 +1,9 @@
 package com.socialchef.service.models;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Product {
 
@@ -9,7 +11,9 @@ public class Product {
     private User chef;
     private float rate = 0.0f;
     private double price;
-    private Date delivery_time, disponibility_time;
+    private Date deliveryTime, disponibilityTime, createdAt;
+    private static AtomicLong incrementalId = new AtomicLong(0);
+    private long id;
     // TESTING
     public static String[] names = { "Plato1", "Plato2", "Plato3" };
     public static String[] categories = { "pastas", "carne", "ensalada" };
@@ -29,8 +33,9 @@ public class Product {
 	this.image = image;
 	this.chef = chef;
 	this.price = price;
-	this.delivery_time = delivery_time;
-	this.disponibility_time = disponibility_time;
+	this.deliveryTime = delivery_time;
+	this.disponibilityTime = disponibility_time;
+	this.id = Product.incrementalId.incrementAndGet();
     }
 
     public String getName() {
@@ -97,20 +102,36 @@ public class Product {
 	this.price = price;
     }
 
-    public Date getDelivery_time() {
-	return this.delivery_time;
+    public Date getDeliveryTime() {
+	return this.deliveryTime;
     }
 
-    public void setDelivery_time(Date delivery_time) {
-	this.delivery_time = delivery_time;
+    public void setDeliveryTime(Date delivery_time) {
+	this.deliveryTime = delivery_time;
     }
 
-    public Date getDisponibility_time() {
-	return this.disponibility_time;
+    public Date getDisponibilityTime() {
+	return this.disponibilityTime;
     }
 
-    public void setDisponibility_time(Date disponibility_time) {
-	this.disponibility_time = disponibility_time;
+    public void setDisponibilityTime(Date disponibility_time) {
+	this.disponibilityTime = disponibility_time;
+    }
+
+    public Date getCreatedAt() {
+	return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+	this.createdAt = createdAt;
+    }
+
+    public long getId() {
+	return id;
+    }
+
+    public void setId(long id) {
+	this.id = id;
     }
 
     public static LinkedList<Product> mockProducts() {
@@ -131,6 +152,28 @@ public class Product {
 	    Product p = new Product(p_name, p_category, p_location,
 		    p_description, "", u, p_price, null, null);
 	    mocks.add(p);
+	}
+	return mocks;
+    }
+    
+    public static HashMap<String, Product> mockProductsAsHash() {
+	HashMap<String, Product> mocks = new HashMap<String, Product>();
+	for (int i = 0; i < Product.names.length; ++i) {
+	    String u_name = User.names[i];
+	    String u_last_name = User.last_names[i];
+	    String u_username = User.usernames[i];
+	    String u_email = User.emails[i];
+
+	    User u = new User(u_name, u_last_name, u_username, u_email, "");
+	    String p_name = Product.names[i];
+	    String p_category = Product.categories[i];
+	    String p_location = Product.locations[i];
+	    String p_description = Product.descriptions[i];
+	    float p_price = Product.prices[i];
+
+	    Product p = new Product(p_name, p_category, p_location,
+		    p_description, "", u, p_price, null, null);
+	    mocks.put(p.name, p);
 	}
 	return mocks;
     }

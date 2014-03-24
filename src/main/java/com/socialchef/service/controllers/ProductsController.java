@@ -13,15 +13,13 @@ import com.socialchef.service.models.Product;
 @Controller
 public class ProductsController {
 
-    LinkedList<Product> mocks;
-
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody
     public LinkedList<Product> getAllProducts() {
-	mocks = Product.mockProducts();
+	LinkedList<Product> mocks = Product.mockProducts();
 	return mocks;
     }
-
+    
     // /products/findby?key=category&search_value=carne
     @RequestMapping(value = "/products/findby", method = RequestMethod.GET)
     @ResponseBody

@@ -5,7 +5,7 @@
 	
 	
 	<groupId>com.socialchef</groupId>
-	<artifactId>service</artifactId>
+	<artifactId>SocialChef</artifactId>
 	<name>SocialChefService</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
