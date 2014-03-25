@@ -25,7 +25,7 @@ public class ProductsController {
     @ResponseBody
     public LinkedList<Product> findBy(
 	    @RequestParam(value = "key", required = false, defaultValue = "match") String key,
-	    @RequestParam(value = "search_value", required = false, defaultValue = "adds") String search_value) {
+	    @RequestParam(value = "search_value", required = false, defaultValue = "") String search_value) {
 	System.out.println("key: " + key);
 	System.out.println("search: " + search_value);
 	switch (key) {
@@ -38,8 +38,7 @@ public class ProductsController {
 	case "price":
 	    return Product.findByPrice(search_value);
 	default:
-	    // TODO
-	    return null;
+	    return Product.findByRegex(search_value);
 	}
     }
 

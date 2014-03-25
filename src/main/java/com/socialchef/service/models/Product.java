@@ -21,6 +21,8 @@ public class Product {
     public static String[] descriptions = { "Descripcion1", "Descripcion2",
 	    "Descripcion3" };
     public static float[] prices = { 18500.0f, 12300.0f, 5000.0f };
+    public static String[] images = { "images/default.png",
+	"images/default.png", "images/default.png" };
 
     // END TESTING
     public Product(String name, String category, String location,
@@ -148,9 +150,10 @@ public class Product {
 	    String p_location = Product.locations[i];
 	    String p_description = Product.descriptions[i];
 	    float p_price = Product.prices[i];
+	    String p_image = Product.images[i];
 
 	    Product p = new Product(p_name, p_category, p_location,
-		    p_description, "", u, p_price, null, null);
+		    p_description, p_image, u, p_price, null, null);
 	    mocks.add(p);
 	}
 	return mocks;
@@ -216,4 +219,7 @@ public class Product {
 	return mockSearch(p_location);
     }
 
+    public static LinkedList<Product> findByRegex(String query) {
+	return Product.mockSearch(query);
+    }
 }
