@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.socialchef.service.helpers.Validator;
+
 public class Product {
 
     private String name, category, location, description, image;
@@ -221,5 +223,10 @@ public class Product {
 
     public static LinkedList<Product> findByRegex(String query) {
 	return Product.mockSearch(query);
+    }
+    
+    public static boolean validateProduct (Product p) {
+	return Validator.validateUniqueNames(p.name) &&
+		Validator.validateNames(p.category);
     }
 }

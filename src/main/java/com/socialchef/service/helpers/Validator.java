@@ -12,7 +12,7 @@ public class Validator {
 //	Ejemplo: "Apellido Apellido "
 //	Ejemplo: "Nombre"
 //	Ejemplo: "Apellido"
-	Pattern regex = Pattern.compile("\\A([ña-zA-z]{3,15}+\\s{0,1}){1,3}+\\z");
+	Pattern regex = Pattern.compile("\\A([ña-zA-ZÑ]{3,16}+ {0,1}){1,3}+\\z");
 	Matcher match = regex.matcher(name);
 	return match.matches();
     }
