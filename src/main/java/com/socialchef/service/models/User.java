@@ -15,6 +15,7 @@ public class User {
     private LinkedList<Product> products;
     private Date createdAt;
     private static AtomicLong incrementalId = new AtomicLong(0);
+    private static LinkedList<String> errors;
 
     // TESTING
     public static String[] names = { "Simon", "Edgardo", "Juan", "Camilo" };
@@ -142,10 +143,18 @@ public class User {
 	return mocks;
     }
 
+
     public static boolean validateUser (User u) {
-	return Validator.validateNames(u.name) &&
-		Validator.validateNames(u.lastName) &&
-		Validator.validateUniqueNames(u.userName);
+        synchronized (errors = new LinkedList<String>()) {
+            if ( !Validator.validateNames(u.name) )
+                errors.push("Invalid Name Format");
+            if ( !Validator.validateNames(u.lastName) )
+                errors.push("Invalid Last Name Format");
+            if ( !Validator.validateUniqueNames(u.userName) )
+                errors.push("Invalid Username Format");
+
+            return errors.isEmpty();
+        }
     }
     
     @Override

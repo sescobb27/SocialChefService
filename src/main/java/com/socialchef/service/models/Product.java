@@ -1,5 +1,6 @@
 package com.socialchef.service.models;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -7,8 +8,12 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import com.socialchef.service.helpers.Validator;
 
-public class Product {
+public class Product implements Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6546878420205932937L;
     private String name, category, location, description, image;
     private User chef;
     private float rate = 0.0f;

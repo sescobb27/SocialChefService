@@ -24,7 +24,7 @@ public class ProductsController {
     @RequestMapping(value = "/products/findby", method = RequestMethod.GET)
     @ResponseBody
     public LinkedList<Product> findBy(
-	    @RequestParam(value = "key", required = false, defaultValue = "match") String key,
+	    @RequestParam(value = "key", required = false, defaultValue = "") String key,
 	    @RequestParam(value = "search_value", required = false, defaultValue = "") String search_value) {
 	System.out.println("key: " + key);
 	System.out.println("search: " + search_value);
