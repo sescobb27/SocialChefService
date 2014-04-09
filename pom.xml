@@ -132,11 +132,16 @@
 		    <version>1.9.11</version>
 		</dependency>    
 		
-		<!-- HIBERNATE DB -->
-		<!--<dependency>
+		<!-- HIBERNATE DB 
+		<dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>4.3.5.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-annotations</artifactId>
+            <version>3.5.6-Final</version>
         </dependency> -->
         
         <!-- CUCUMBER-TEST -->
@@ -146,7 +151,7 @@
             <version>1.1.5</version>
             <scope>test</scope>
         </dependency>
-            <dependency>
+        <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-jvm-deps</artifactId>
             <version>1.0.3</version>
@@ -174,6 +179,11 @@
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-test</artifactId>
         	<version>1.0.0.RELEASE</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework.data</groupId>
+        	<artifactId>spring-data-commons</artifactId>
+        	<version>1.7.1.RELEASE</version>
         </dependency>
 	</dependencies>
     <build>
