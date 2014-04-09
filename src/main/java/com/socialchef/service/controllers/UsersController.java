@@ -18,8 +18,7 @@ public class UsersController {
     @RequestMapping(value = "/chefs", method = RequestMethod.GET)
     @ResponseBody
     public LinkedList<User> indexRoute() {
-	throw new InvalidDataException("Invalid Username Format");
-//	return User.mockUsers();
+	return User.mockUsers();
     }
 
     @RequestMapping(value = "/chefs/{username}", method = RequestMethod.GET)
@@ -31,9 +30,9 @@ public class UsersController {
     @RequestMapping(value="/chefs", method=RequestMethod.POST)
     @ResponseBody
     public User createNewUser(@RequestBody User user) {
-	if (User.validateUser(user)) {
+	if (user.validateUser()) {
 	    return user;
 	}
-	return null;
+	throw new InvalidDataException(user.getErrors());
     }
 }
