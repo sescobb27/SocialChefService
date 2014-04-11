@@ -17,15 +17,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = { InvalidDataException.class })
     public ResponseEntity<Object> handleConflict(
 	    final RuntimeException ex, final WebRequest request) {
-	InvalidDataException invalid_ex = (InvalidDataException) ex;
-	HttpHeaders headers = new HttpHeaders();
-	headers.setContentType(MediaType.APPLICATION_JSON);
-	
-	return handleExceptionInternal(ex,
-		invalid_ex.getErrors(),
-        	headers,
-        	HttpStatus.NOT_FOUND,
-        	request);
+		InvalidDataException invalid_ex = (InvalidDataException) ex;
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		
+		return handleExceptionInternal(ex,
+			invalid_ex.getErrors(),
+	        	headers,
+	        	HttpStatus.NOT_FOUND,
+	        	request);
     }
 //    @ExceptionHandler(value = 
 //	{ EntityNotFoundException.class, InvalidDataException.class })

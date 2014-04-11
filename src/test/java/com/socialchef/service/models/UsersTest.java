@@ -5,12 +5,12 @@ import org.junit.Test;
 
 public class UsersTest {
 
-    @Test
-    public void validUserstest() {
-	for(User u : User.mockUsers()) {
-	    Assert.assertTrue("User should be valid: "+u.toString(),
-		    u.validateUser());
+	@Test
+	public void validUserstest() {
+		for(User u : User.mockUsers()) {
+			Assert.assertTrue("User should be valid: "+u.toString(),
+					u.validateUser());
+		}
 	}
-    }
 
 }

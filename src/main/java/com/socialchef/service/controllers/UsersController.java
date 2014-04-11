@@ -15,24 +15,24 @@ import com.socialchef.service.models.User;
 @Controller
 public class UsersController {
 
-    @RequestMapping(value = "/chefs", method = RequestMethod.GET)
-    @ResponseBody
-    public LinkedList<User> indexRoute() {
-	return User.mockUsers();
-    }
-
-    @RequestMapping(value = "/chefs/{username}", method = RequestMethod.GET)
-    @ResponseBody
-    public User getUserByUsername(@PathVariable String username) {
-	return User.mockUsersAsHash().get(username);
-    }
-
-    @RequestMapping(value="/chefs", method=RequestMethod.POST)
-    @ResponseBody
-    public User createNewUser(@RequestBody User user) {
-	if (user.validateUser()) {
-	    return user;
+	@RequestMapping(value = "/chefs", method = RequestMethod.GET)
+	@ResponseBody
+	public LinkedList<User> indexRoute() {
+		return User.mockUsers();
 	}
-	throw new InvalidDataException(user.getErrors());
-    }
+
+	@RequestMapping(value = "/chefs/{username}", method = RequestMethod.GET)
+	@ResponseBody
+	public User getUserByUsername(@PathVariable String username) {
+		return User.mockUsersAsHash().get(username);
+	}
+
+	@RequestMapping(value="/chefs", method=RequestMethod.POST)
+	@ResponseBody
+	public User createNewUser(@RequestBody User user) {
+		if (user.validateUser()) {
+			return user;
+		}
+		throw new InvalidDataException(user.getErrors());
+	}
 }
