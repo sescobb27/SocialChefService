@@ -1,5 +1,7 @@
 package com.socialchef.service.models;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -9,11 +11,11 @@ import com.socialchef.service.helpers.Validator;
 
 public class User {
 
-	private String name, lastName, userName, email, picture;
+	private String name, lastName, userName, email, picture, password;
 	private long id;
 	private float rate = 0.0f;
 	private LinkedList<Product> products;
-	private Date createdAt;
+	private Timestamp createdAt;
 	private static AtomicLong incrementalId = new AtomicLong(0);
 	private LinkedList<String> errors;
 
@@ -28,14 +30,25 @@ public class User {
 
 	// END TESTING
 
-	public User(String name, String last_name, String username, String email,
-			String picture) {
+	public User(String name, String last_name, String username, String email) {
 		this.name = name.trim();
 		this.lastName = last_name.trim();
 		this.userName = username.trim();
 		this.email = email.trim();
 		this.picture = picture.trim();
 		this.products = new LinkedList<Product>();
+		this.id = User.incrementalId.incrementAndGet();
+	}
+
+	public User(String name, String last_name, String username, String email,
+			String password) {
+		this.name = name.trim();
+		this.lastName = last_name.trim();
+		this.userName = username.trim();
+		this.email = email.trim();
+		this.createdAt = new Timestamp( new Date().getTime() );
+		this.products = new LinkedList<Product>();
+		this.password = password;
 		this.id = User.incrementalId.incrementAndGet();
 	}
 
@@ -103,12 +116,12 @@ public class User {
 		return this.products;
 	}
 
-	public Date getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
 	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+		this.createdAt = new Timestamp(createdAt.getTime());
 	}
 
 	public boolean removeProduct(Product p) {
@@ -143,6 +156,13 @@ public class User {
 		return mocks;
 	}
 
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public boolean validateUser () {
 		errors = new LinkedList<String>();
