@@ -5,10 +5,15 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+    xmlns:repository="http://www.springframework.org/schema/data/repository"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd 
+		http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
@@ -17,6 +22,7 @@
 	<mvc:annotation-driven />
     <tx:annotation-driven />
     <context:annotation-config />
+
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
@@ -28,5 +34,6 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.socialchef.service" />
-	
+
+	<beans:import resource="classpath:/META-INF/application-context.xml"/>
 </beans:beans>
