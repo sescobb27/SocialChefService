@@ -1,74 +1,89 @@
 package com.socialchef.service.models;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.concurrent.atomic.AtomicLong;
+
+import javax.persistence.*;
 
 import com.socialchef.service.helpers.Validator;
 
+import java.sql.Timestamp;
+import java.util.LinkedList;
+import java.util.Set;
+
+
+/**
+ * The persistent class for the products database table.
+ *
+ */
+@Entity
+@Table(name="products")
+@NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
 public class Product implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6546878420205932937L;
-	private String name, category, location, description, image;
-	private User chef;
-	private float rate = 0.0f;
+	@Id
+	@SequenceGenerator(name="PRODUCTS_ID_GENERATOR", sequenceName="PRODUCTS_ID_SEQUENCE")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRODUCTS_ID_GENERATOR")
+	@Column(unique=true, nullable=false)
+	private Integer id;
+
+	@Column(name="created_at", nullable=false)
+	private Timestamp createdAt;
+
+	@Column(length=2147483647)
+	private String description;
+
+	@Column(nullable=false, length=50)
+	private String name;
+
+	@Column(nullable=false)
 	private double price;
-	private Date deliveryTime, disponibilityTime, createdAt;
-	private static AtomicLong incrementalId = new AtomicLong(0);
-	private long id;
-	// TESTING
-	public static String[] names = { "Plato1", "Plato2", "Plato3" };
-	public static String[] categories = { "pastas", "carne", "ensalada" };
-	public static String[] locations = { "Poblado", "Laureles", "Envigado" };
-	public static String[] descriptions = { "Descripcion1", "Descripcion2",
-	"Descripcion3" };
-	public static float[] prices = { 18500.0f, 12300.0f, 5000.0f };
-	public static String[] images = { "images/default.png",
-		"images/default.png", "images/default.png" };
 
-	// END TESTING
-	public Product(String name, String category, String location,
-			String description, String image, User chef, double price,
-			Date delivery_time, Date disponibility_time) {
-		this.name = name;
-		this.category = category;
-		this.location = location;
-		this.description = description;
-		this.image = image;
-		this.chef = chef;
-		this.price = price;
-		this.deliveryTime = delivery_time;
-		this.disponibilityTime = disponibility_time;
-		this.id = Product.incrementalId.incrementAndGet();
+	@Column(nullable=false)
+	private float rate;
+
+	//bi-directional many-to-one association to User
+	@ManyToOne
+	@JoinColumn(name="chef_id", nullable=false)
+	private User user;
+
+	//bi-directional many-to-one association to ProductsCategory
+	@OneToMany(mappedBy="product")
+	private Set<ProductsCategory> categories;
+
+	//bi-directional many-to-one association to ProductsDiscount
+	@OneToMany(mappedBy="product")
+	private Set<ProductsDiscount> discounts;
+
+	//bi-directional many-to-one association to ProductsLocation
+	@OneToMany(mappedBy="product")
+	private Set<ProductsLocation> locations;
+
+	//bi-directional many-to-one association to ProductsPaymentType
+	@OneToMany(mappedBy="product")
+	private Set<ProductsPaymentType> paymentTypes;
+
+	//bi-directional many-to-one association to PurchasesProduct
+	@OneToMany(mappedBy="product")
+	private Set<PurchasesProduct> purchasesProducts;
+
+	public Product() {
 	}
 
-	public String getName() {
-		return this.name;
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getCategory() {
-		return this.category;
+	public Timestamp getCreatedAt() {
+		return this.createdAt;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public String getLocation() {
-		return this.location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public String getDescription() {
@@ -79,28 +94,12 @@ public class Product implements Serializable {
 		this.description = description;
 	}
 
-	public String getImage() {
-		return this.image;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public User getChef() {
-		return this.chef;
-	}
-
-	public void setChef(User chef) {
-		this.chef = chef;
-	}
-
-	public float getRate() {
-		return this.rate;
-	}
-
-	public void setRate(float rate) {
-		this.rate = rate;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public double getPrice() {
@@ -111,127 +110,161 @@ public class Product implements Serializable {
 		this.price = price;
 	}
 
-	public Date getDeliveryTime() {
-		return this.deliveryTime;
+	public float getRate() {
+		return this.rate;
 	}
 
-	public void setDeliveryTime(Date delivery_time) {
-		this.deliveryTime = delivery_time;
+	public void setRate(float rate) {
+		this.rate = rate;
 	}
 
-	public Date getDisponibilityTime() {
-		return this.disponibilityTime;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setDisponibilityTime(Date disponibility_time) {
-		this.disponibilityTime = disponibility_time;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
+	public Set<ProductsCategory> getProductsCategories() {
+		return this.categories;
 	}
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+	public void setProductsCategories(Set<ProductsCategory> categories) {
+		this.categories = categories;
 	}
 
-	public long getId() {
-		return id;
+	public ProductsCategory addProductsCategory(ProductsCategory productsCategory) {
+		getProductsCategories().add(productsCategory);
+		productsCategory.setProduct(this);
+
+		return productsCategory;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public ProductsCategory removeProductsCategory(ProductsCategory productsCategory) {
+		getProductsCategories().remove(productsCategory);
+		productsCategory.setProduct(null);
+
+		return productsCategory;
 	}
 
-	public static LinkedList<Product> mockProducts() {
-		LinkedList<Product> mocks = new LinkedList<Product>();
-		for (int i = 0; i < Product.names.length; ++i) {
-			String u_name = User.names[i];
-			String u_last_name = User.last_names[i];
-			String u_username = User.usernames[i];
-			String u_email = User.emails[i];
-
-			User u = new User(u_name, u_last_name, u_username, u_email, "");
-			String p_name = Product.names[i];
-			String p_category = Product.categories[i];
-			String p_location = Product.locations[i];
-			String p_description = Product.descriptions[i];
-			float p_price = Product.prices[i];
-			String p_image = Product.images[i];
-
-			Product p = new Product(p_name, p_category, p_location,
-					p_description, p_image, u, p_price, null, null);
-			mocks.add(p);
-		}
-		return mocks;
+	public Set<ProductsDiscount> getProductsDiscounts() {
+		return this.discounts;
 	}
 
-	public static HashMap<String, Product> mockProductsAsHash() {
-		HashMap<String, Product> mocks = new HashMap<String, Product>();
-		for (int i = 0; i < Product.names.length; ++i) {
-			String u_name = User.names[i];
-			String u_last_name = User.last_names[i];
-			String u_username = User.usernames[i];
-			String u_email = User.emails[i];
-
-			User u = new User(u_name, u_last_name, u_username, u_email, "");
-			String p_name = Product.names[i];
-			String p_category = Product.categories[i];
-			String p_location = Product.locations[i];
-			String p_description = Product.descriptions[i];
-			float p_price = Product.prices[i];
-
-			Product p = new Product(p_name, p_category, p_location,
-					p_description, "", u, p_price, null, null);
-			mocks.put(p.name, p);
-		}
-		return mocks;
+	public void setProductsDiscounts(Set<ProductsDiscount> discounts) {
+		this.discounts = discounts;
 	}
 
-	private static LinkedList<Product> mockSearch(String query) {
-		LinkedList<Product> mocks = Product.mockProducts();
-		LinkedList<Product> results = new LinkedList<Product>();
-		for (Product p : mocks) {
-			if (p.name.contains(query) 
-					|| p.category.contains(query)
-					|| p.chef.getUsername().contains(query)
-					|| p.location.contains(query)) {
-				results.add(p);
-			}
-		}
-		return results;
+	public ProductsDiscount addProductsDiscount(ProductsDiscount productsDiscount) {
+		getProductsDiscounts().add(productsDiscount);
+		productsDiscount.setProduct(this);
+
+		return productsDiscount;
+	}
+
+	public ProductsDiscount removeProductsDiscount(ProductsDiscount productsDiscount) {
+		getProductsDiscounts().remove(productsDiscount);
+		productsDiscount.setProduct(null);
+
+		return productsDiscount;
+	}
+
+	public Set<ProductsLocation> getProductsLocations() {
+		return this.locations;
+	}
+
+	public void setProductsLocations(Set<ProductsLocation> locations) {
+		this.locations = locations;
+	}
+
+	public ProductsLocation addProductsLocation(ProductsLocation productsLocation) {
+		getProductsLocations().add(productsLocation);
+		productsLocation.setProduct(this);
+
+		return productsLocation;
+	}
+
+	public ProductsLocation removeProductsLocation(ProductsLocation productsLocation) {
+		getProductsLocations().remove(productsLocation);
+		productsLocation.setProduct(null);
+
+		return productsLocation;
+	}
+
+	public Set<ProductsPaymentType> getProductsPaymentTypes() {
+		return this.paymentTypes;
+	}
+
+	public void setProductsPaymentTypes(Set<ProductsPaymentType> paymentTypes) {
+		this.paymentTypes = paymentTypes;
+	}
+
+	public ProductsPaymentType addProductsPaymentType(ProductsPaymentType productsPaymentType) {
+		getProductsPaymentTypes().add(productsPaymentType);
+		productsPaymentType.setProduct(this);
+
+		return productsPaymentType;
+	}
+
+	public ProductsPaymentType removeProductsPaymentType(ProductsPaymentType productsPaymentType) {
+		getProductsPaymentTypes().remove(productsPaymentType);
+		productsPaymentType.setProduct(null);
+
+		return productsPaymentType;
+	}
+
+	public Set<PurchasesProduct> getPurchasesProducts() {
+		return this.purchasesProducts;
+	}
+
+	public void setPurchasesProducts(Set<PurchasesProduct> purchasesProducts) {
+		this.purchasesProducts = purchasesProducts;
+	}
+
+	public PurchasesProduct addPurchasesProduct(PurchasesProduct purchasesProduct) {
+		getPurchasesProducts().add(purchasesProduct);
+		purchasesProduct.setProduct(this);
+
+		return purchasesProduct;
+	}
+
+	public PurchasesProduct removePurchasesProduct(PurchasesProduct purchasesProduct) {
+		getPurchasesProducts().remove(purchasesProduct);
+		purchasesProduct.setProduct(null);
+
+		return purchasesProduct;
 	}
 
 	public static LinkedList<Product> findByName(String p_name) {
 		// TODO
 		// SEARCH QUERY
-		return mockSearch(p_name);
+		return null;
 	}
 
 	public static LinkedList<Product> findByCategory(String p_category) {
 		// TODO
 		// SEARCH QUERY
-		return mockSearch(p_category);
+		return null;
 	}
 
 	public static LinkedList<Product> findByPrice(String p_price) {
 		// TODO
 		// SEARCH QUERY
-		return mockSearch(p_price);
+		return null;
 	}
 
 	public static LinkedList<Product> findByLocation(String p_location) {
 		// TODO
 		// SEARCH QUERY
-		return mockSearch(p_location);
+		return null;
 	}
 
 	public static LinkedList<Product> findByRegex(String query) {
-		return Product.mockSearch(query);
+		return null;
 	}
 
 	public static boolean validateProduct (Product p) {
-		return Validator.validateUniqueNames(p.name) &&
-				Validator.validateNames(p.category);
+		return Validator.validateUniqueNames(p.name);
 	}
 }
