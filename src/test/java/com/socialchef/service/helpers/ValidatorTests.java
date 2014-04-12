@@ -35,8 +35,7 @@ public class ValidatorTests {
 				"pepitoperezperez 1234","!\"#$&","pepitoperezperez pepitoperezperez pepitoperezperezperez",
 				"pepitoperezperez p","pepitoperezperez pe","pepitoperezperez pepitoperezperez p",
 				"pepitoperezperez pepitoperezperez pe", "p pepitoperezperez",
-				"pe pepitoperezperez",
-		"<script> alert('fuckyou'); </script>"};
+				"pe pepitoperezperez", "<script> alert('fuckyou'); </script>"};
 		for (String name : iNames) {
 			Assert.assertFalse("Name should be invalid",
 					Validator.validateNames(name));

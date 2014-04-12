@@ -6,11 +6,11 @@ import com.socialchef.service.models.User;
 
 public interface UserService {
 
-	public User findOne(String query);
-	public User findOneById(Long id);
-	public List<User> findAll(String query);
-	public List<User> findAll(List<Long> ids);
-	public boolean delete(Long id);
-	public User create(User user);
-	public User update(User user);
+	public User findOne(String query) throws Exception;
+	public User findOneById(Long id) throws Exception;
+	public List<User> findAll(String query) throws Exception;
+	public List<User> findAll(List<Long> ids) throws Exception;
+	public boolean delete(Long id) throws Exception;
+	public User create(User user) throws Exception;
+	public User update(User user) throws Exception;
 }

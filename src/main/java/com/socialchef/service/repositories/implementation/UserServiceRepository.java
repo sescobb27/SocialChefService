@@ -27,11 +27,17 @@ public class UserServiceRepository implements UserService {
 
 	@Transactional
 	@Override
-	public User findOneById(Long id) {
-		if (id != null) {
+	public User findOneById(Long id) throws Exception {
+		if (id == null) {
+			throw new NullPointerException("Id is null");
+		} else if (id < 0) {
+			throw new IllegalArgumentException("Id is less than 0");
+		} else if (id > Long.MAX_VALUE) {
+			throw new Exception("Id is bigger than the max possible value");
+		} else {
 			return userRepo.findOne(id);
 		}
-		throw new NullPointerException("Id is null");
+		
 	}
 
 	@Transactional
