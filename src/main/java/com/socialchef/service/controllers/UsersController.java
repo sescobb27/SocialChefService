@@ -2,9 +2,7 @@ package com.socialchef.service.controllers;
 
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.logging.Logger;
 
-import org.hibernate.usertype.LoggableUserType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

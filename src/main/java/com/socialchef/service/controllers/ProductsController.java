@@ -16,8 +16,9 @@ public class ProductsController {
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody
     public LinkedList<Product> getAllProducts() {
-    	LinkedList<Product> mocks = Product.mockProducts();
-    	return mocks;
+//    	LinkedList<Product> mocks = Product.mockProducts();
+//    	return mocks;
+    	return null;
     }
     
     // /products/findby?key=category&search_value=carne
