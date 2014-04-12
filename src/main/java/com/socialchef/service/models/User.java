@@ -31,7 +31,7 @@ public class User implements Serializable {
 	@Column(name="created_at", nullable=false)
 	private Timestamp createdAt;
 
-	@Column(name="email", nullable=false, length=50)
+	@Column(name="email", nullable=false, length=50, unique=true)
 	private String email;
 
 	@Column(name="lastname", nullable=false, length=50)
@@ -46,7 +46,7 @@ public class User implements Serializable {
 	@Column(name="rate", nullable=false)
 	private float rate;
 
-	@Column(name="username", nullable=false, length=20)
+	@Column(name="username", nullable=false, length=20, unique=true)
 	private String username;
 
 	//bi-directional many-to-one association to Discount

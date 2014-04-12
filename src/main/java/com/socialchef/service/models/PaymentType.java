@@ -21,7 +21,7 @@ public class PaymentType implements Serializable {
 	@Column(unique=true, nullable=false)
 	private Integer id;
 
-	@Column(nullable=false, length=20)
+	@Column(nullable=false, length=20, unique=true)
 	private String name;
 
 	//bi-directional many-to-one association to ProductsPaymentType

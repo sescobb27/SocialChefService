@@ -21,7 +21,7 @@ public class Location implements Serializable {
 	@Column(unique=true, nullable=false)
 	private Integer id;
 
-	@Column(nullable=false, length=50)
+	@Column(nullable=false, length=50, unique=true)
 	private String name;
 
 	//bi-directional many-to-one association to ProductsLocation
