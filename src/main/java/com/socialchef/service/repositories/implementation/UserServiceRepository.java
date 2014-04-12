@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.socialchef.service.helpers.Validator;
 import com.socialchef.service.models.User;
 import com.socialchef.service.repositories.UserRepository;
 import com.socialchef.service.repositories.services.UserService;
@@ -70,17 +71,20 @@ public class UserServiceRepository implements UserService {
 
 	@Transactional
 	public User findByUsername(String username) {
-		// TODO Auto-generated method stub
-		if (username != null && !username.equals("")) {
-			return userRepo.findByUsername(username);
+		String tmp_username = username.trim().toLowerCase();
+		if (tmp_username != null && Validator.validateUniqueNames(tmp_username)) {
+			return userRepo.findByUsername(tmp_username);
 		}
 		throw new NullPointerException("Id is null");
 	}
 
 	@Transactional
 	public User findByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		String tmp_email = email.trim().toLowerCase();
+		if (tmp_email != null && Validator.validateUniqueNames(tmp_email)) {
+			return userRepo.findByEmail(tmp_email);
+		}
+		throw new NullPointerException("Id is null");
 	}
 	
     /**
