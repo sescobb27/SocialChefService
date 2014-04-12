@@ -86,8 +86,8 @@ public class User implements Serializable {
 			String passwordHash) {
 		this.name = name.trim();
 		this.lastName = last_name.trim();
-		this.username = username.trim();
-		this.email = email.trim();
+		this.username = username.trim().toLowerCase();
+		this.email = email.trim().toLowerCase();
 		this.products = new LinkedList<Product>();
 		this.passwordHash = passwordHash;
 	}
