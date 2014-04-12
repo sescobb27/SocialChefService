@@ -46,4 +46,15 @@ public class ValidatorTests {
 					Validator.validateNames(iname_lastname));
 		}
 	}
+	
+	@Test
+	public void validEmails() {
+		String[] emails = {"pepe27@gmail.com", "pep@adu.co",
+				"john@server.department.company.com", "pepepepepe@example.com",
+				"pep.27.pepe8@example.net", "org.org.org@example.org",
+				"DangerImp@mailinator.com", "SPAM@spamgoes.in", "CaMeLsPaM@spamgoes.in"};
+		for (String email : emails) {
+			Assert.assertTrue("Email Should be Valid", Validator.validateEmail(email));
+		}
+	}
 }

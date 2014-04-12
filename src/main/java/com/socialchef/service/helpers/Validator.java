@@ -22,4 +22,13 @@ public class Validator {
 		Matcher match = regex.matcher(unique_name);
 		return match.matches();
     }
+    
+    public static boolean validateEmail(String email) {
+    	
+    	String key = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*";
+		String domain = "@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+    	Pattern regex = Pattern.compile(key+domain,Pattern.CASE_INSENSITIVE);
+		Matcher match = regex.matcher(email);
+		return match.matches();
+    }
 }
