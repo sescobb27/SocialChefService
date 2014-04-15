@@ -4,32 +4,34 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="persUnit" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>com.socialchef.service.models.Category</class>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.socialchef.service.models.UserType</class>
+        <class>com.socialchef.service.models.User</class>
         <class>com.socialchef.service.models.Discount</class>
-        <class>com.socialchef.service.models.Location</class>
+        <class>com.socialchef.service.models.Category</class>
         <class>com.socialchef.service.models.PaymentType</class>
+        <class>com.socialchef.service.models.Location</class>
         <class>com.socialchef.service.models.Product</class>
+        <class>com.socialchef.service.models.Purchase</class>
         <class>com.socialchef.service.models.ProductsCategory</class>
         <class>com.socialchef.service.models.ProductsDiscount</class>
         <class>com.socialchef.service.models.ProductsLocation</class>
         <class>com.socialchef.service.models.ProductsPaymentType</class>
-        <class>com.socialchef.service.models.Purchase</class>
-        <class>com.socialchef.service.models.PurchasesDiscount</class>
         <class>com.socialchef.service.models.PurchasesProduct</class>
-        <class>com.socialchef.service.models.UserType</class>
-        <class>com.socialchef.service.models.User</class>
+        <class>com.socialchef.service.models.PurchasesDiscount</class>
         <class>com.socialchef.service.models.UsersUserType</class>
 		<properties>
-			<property name="hibernate.connection.username" value=""/>
-			<property name="hibernate.connection.password" value=""/>
+			<property name="hibernate.connection.username" value="kiro"/>
+			<property name="hibernate.connection.password" value="vpmSFP41::;;"/>
 			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/socialchef_test"/>
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="create-update" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
             <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.order_updates" value="true" />
+            <property name="hibernate.cglib.use_reflection_optimizer" value="true" />
             <property name="hibernate.connection.pool_size" value="10" />
-            <property name="hibernate.connection.autocommit" value="true" />
 		</properties>
 	</persistence-unit>
 </persistence>
