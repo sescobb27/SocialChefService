@@ -49,11 +49,11 @@ public class PurchasesProduct implements Serializable {
 		this.product = product;
 	}
 
-	public Purchase getPurchas() {
+	public Purchase getPurchase() {
 		return this.purchase;
 	}
 
-	public void setPurchas(Purchase purchase) {
+	public void setPurchase(Purchase purchase) {
 		this.purchase = purchase;
 	}
 

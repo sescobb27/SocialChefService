@@ -30,16 +30,16 @@ public class Product implements Serializable {
 	@Column(name="created_at", nullable=false)
 	private Timestamp createdAt;
 
-	@Column(length=2147483647)
+	@Column(name="description", length=1000)
 	private String description;
 
-	@Column(nullable=false, length=50)
+	@Column(name="name", nullable=false, length=50)
 	private String name;
 
-	@Column(nullable=false)
+	@Column(name="price", nullable=false)
 	private double price;
 
-	@Column(nullable=false)
+	@Column(name="rate", nullable=false)
 	private float rate;
 
 	//bi-directional many-to-one association to User

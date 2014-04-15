@@ -21,10 +21,10 @@ public class Category implements Serializable {
 	@Column(unique=true, nullable=false)
 	private Integer id;
 
-	@Column(nullable=false, length=2147483647)
+	@Column(name="description", nullable=false, length=1000)
 	private String description;
 
-	@Column(nullable=false, length=50, unique=true)
+	@Column(name="name", nullable=false, length=50, unique=true)
 	private String name;
 
 	//bi-directional many-to-one association to ProductsCategory

@@ -109,14 +109,14 @@ public class Purchase implements Serializable {
 
 	public PurchasesProduct addPurchasesProduct(PurchasesProduct purchasesProduct) {
 		getPurchasesProducts().add(purchasesProduct);
-		purchasesProduct.setPurchas(this);
+		purchasesProduct.setPurchase(this);
 
 		return purchasesProduct;
 	}
 
 	public PurchasesProduct removePurchasesProduct(PurchasesProduct purchasesProduct) {
 		getPurchasesProducts().remove(purchasesProduct);
-		purchasesProduct.setPurchas(null);
+		purchasesProduct.setPurchase(null);
 
 		return purchasesProduct;
 	}

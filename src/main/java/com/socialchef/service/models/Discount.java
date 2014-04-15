@@ -22,24 +22,22 @@ public class Discount implements Serializable {
 	@Column(unique=true, nullable=false)
 	private Integer id;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name="created_at", nullable=false)
 	private Date createdAt;
 
-	@Column(nullable=false, length=2147483647)
+	@Column(name="description", nullable=false, length=1000)
 	private String description;
 
 	@Column(name="discount_percent")
 	private float discountPercent;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name="finish_at", nullable=false)
 	private Date finishAt;
 
-	@Column(nullable=false)
-	private Boolean finished;
+	@Column(name="finished", nullable=false)
+	private Boolean finished = false;
 
-	@Column(length=100)
+	@Column(name="title", length=100, nullable=false)
 	private String title;
 
 	//bi-directional many-to-one association to User

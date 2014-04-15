@@ -1,6 +1,7 @@
 package com.socialchef.service.models;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 
 import javax.persistence.*;
 
@@ -9,6 +10,7 @@ import org.bouncycastle.util.encoders.Hex;
 import com.socialchef.service.helpers.Validator;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
@@ -247,16 +249,24 @@ public class User implements Serializable {
 		return usersUserType;
 	}
 	
-	public void makePasswordSalt() throws Exception {
+	public void makePasswordSalt() {
 		this.passwordHash = encryptPassword(this.passwordHash);
 	}
 	
-	private String encryptPassword(String pass) throws Exception {
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
-		md.update(pass.getBytes("UTF-8"));
-		md.update(this.createdAt.toString().getBytes());
-		byte[] digest = md.digest();
-		return new String(Hex.encode(digest));
+	private String encryptPassword(String pass) {
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+			md.update(pass.getBytes("UTF-8"));
+			md.update(this.createdAt.toString().getBytes("UTF-8"));
+			byte[] digest = md.digest();
+			return new String(Hex.encode(digest));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return pass;
 	}
 
 	public static LinkedList<User> mockUsers () {
@@ -304,5 +314,13 @@ public class User implements Serializable {
 
 	public LinkedList<String> getErrors() {
 		return this.errors;
+	}
+	
+	public boolean hasErrors() {
+		return this.errors.size() != 0;
+	}
+	
+	public void addError(String error) {
+		this.errors.push(error);
 	}
 }
