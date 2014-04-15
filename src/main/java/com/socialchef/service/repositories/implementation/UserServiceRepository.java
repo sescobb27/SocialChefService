@@ -18,7 +18,7 @@ public class UserServiceRepository implements UserService {
 	@Resource
 	private UserRepository userRepo;
 	
-	@Transactional
+	@Transactional()
 	@Override
 	public User findOne(String query) {
 		// TODO Auto-generated method stub
