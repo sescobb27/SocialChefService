@@ -37,7 +37,6 @@ public class UserServiceRepository implements UserService {
 		} else {
 			return userRepo.findOne(id);
 		}
-		
 	}
 
 	@Transactional
@@ -49,9 +48,17 @@ public class UserServiceRepository implements UserService {
 
 	@Transactional
 	@Override
-	public boolean delete(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean delete(Long id) throws Exception {
+		if (id == null) {
+			throw new NullPointerException("Id is null");
+		} else if (id < 0) {
+			throw new IllegalArgumentException("Id is less than 0");
+		} else if (id > Long.MAX_VALUE) {
+			throw new Exception("Id is bigger than the max possible value");
+		} else {
+			userRepo.delete(id);
+			return !userRepo.exists(id);
+		}
 	}
 
 	@Transactional

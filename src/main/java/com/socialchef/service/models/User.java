@@ -4,9 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.bouncycastle.util.encoders.Hex;
+
 import com.socialchef.service.helpers.Validator;
 
+import java.security.MessageDigest;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -75,6 +79,8 @@ public class User implements Serializable {
 	"jcmejia" };
 	public static String[] emails = { "sescob@gmail.com", "easierra@gmail.com",
 		"jknore@gmail.com", "jcmejia@gmail.com" };
+	public static String[] passwords = {"qwerty", "123456", "AeIoU!@",
+		"S3CUR3P455W0RD!\"#$%&/()="};
 
 	// END TESTING
 
@@ -90,6 +96,7 @@ public class User implements Serializable {
 		this.email = email.trim().toLowerCase();
 		this.products = new LinkedList<Product>();
 		this.passwordHash = passwordHash;
+		this.createdAt = new Timestamp(new Date().getTime());
 	}
 
 	public Integer getId() {
@@ -132,12 +139,12 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
-	public String getPasswordHash() {
+	public String getPassword() {
 		return this.passwordHash;
 	}
 
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
+	public void setPassword(String password) throws Exception {
+		this.passwordHash = encryptPassword(password);
 	}
 
 	public float getRate() {
@@ -239,6 +246,18 @@ public class User implements Serializable {
 
 		return usersUserType;
 	}
+	
+	public void makePasswordSalt() throws Exception {
+		this.passwordHash = encryptPassword(this.passwordHash);
+	}
+	
+	private String encryptPassword(String pass) throws Exception {
+		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		md.update(pass.getBytes("UTF-8"));
+		md.update(this.createdAt.toString().getBytes());
+		byte[] digest = md.digest();
+		return new String(Hex.encode(digest));
+	}
 
 	public static LinkedList<User> mockUsers () {
 		LinkedList<User> mocks = new LinkedList<User>();
@@ -248,8 +267,9 @@ public class User implements Serializable {
 			String last_name = User.last_names[i];
 			String username = User.usernames[i];
 			String email = User.emails[i];
+			String password = User.passwords[i];
 
-			mocks.add(new User(name, last_name, username, email, ""));
+			mocks.add(new User(name, last_name, username, email, password));
 		}
 		return mocks;
 	}
@@ -262,8 +282,10 @@ public class User implements Serializable {
 			String last_name = User.last_names[i];
 			String username = User.usernames[i];
 			String email = User.emails[i];
-
-			mocks.put(username, new User(name, last_name, username, email, ""));
+			String password = User.passwords[i];
+			
+			mocks.put(username,
+					new User(name, last_name, username, email, password));
 		}
 		return mocks;
 	}
