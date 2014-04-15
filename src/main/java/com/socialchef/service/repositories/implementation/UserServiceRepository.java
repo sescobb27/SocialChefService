@@ -63,9 +63,19 @@ public class UserServiceRepository implements UserService {
 
 	@Transactional
 	@Override
-	public User create(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean create(User user) {
+		if (user.validateUser()) {
+			if (findByUsername(user.getUsername()) != null) {
+				user.addError("User with that username already exists");
+				return false;
+			} else if (findByEmail(user.getEmail())!= null) {
+				user.addError("User with that email already exists");
+				return false;
+			}
+			userRepo.save(user);
+			return true;
+		}
+		return false;
 	}
 
 	@Transactional

@@ -11,6 +11,6 @@ public interface UserService {
 	public List<User> findAll(String query) throws Exception;
 	public List<User> findAll(List<Long> ids) throws Exception;
 	public boolean delete(Long id) throws Exception;
-	public User create(User user) throws Exception;
+	public boolean create(User user) throws Exception;
 	public User update(User user) throws Exception;
 }
