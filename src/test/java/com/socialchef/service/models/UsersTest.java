@@ -22,7 +22,7 @@ public class UsersTest {
 		for(User u : User.mockUsers()) {
 			String old_pass = u.getPassword();
 			md.update(u.getPassword().getBytes("UTF-8"));
-			md.update(u.getCreatedAt().toString().getBytes());
+			md.update(u.getCreatedAt().toString().getBytes("UTF-8"));
 			byte[] digest = md.digest();
 			md.reset();
 			u.makePasswordSalt();
