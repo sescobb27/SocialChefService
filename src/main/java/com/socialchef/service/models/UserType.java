@@ -1,13 +1,15 @@
 package com.socialchef.service.models;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
-import java.util.List;
+
+import java.util.Set;
 
 
 /**
  * The persistent class for the user_types database table.
- * 
+ *
  */
 @Entity
 @Table(name="user_types")
@@ -26,7 +28,7 @@ public class UserType implements Serializable {
 
 	//bi-directional many-to-one association to UsersUserType
 	@OneToMany(mappedBy="userType")
-	private List<UsersUserType> usersUserTypes;
+	private Set<UsersUserType> usersUserTypes;
 
 	public UserType() {
 	}
@@ -47,11 +49,11 @@ public class UserType implements Serializable {
 		this.name = name;
 	}
 
-	public List<UsersUserType> getUsersUserTypes() {
+	public Set<UsersUserType> getUsersUserTypes() {
 		return this.usersUserTypes;
 	}
 
-	public void setUsersUserTypes(List<UsersUserType> usersUserTypes) {
+	public void setUsersUserTypes(Set<UsersUserType> usersUserTypes) {
 		this.usersUserTypes = usersUserTypes;
 	}
 
@@ -67,6 +69,12 @@ public class UserType implements Serializable {
 		usersUserType.setUserType(null);
 
 		return usersUserType;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		UserType ut = (UserType) obj;
+		return ut.getName().equalsIgnoreCase(this.name);
 	}
 
 }

@@ -1,13 +1,15 @@
 package com.socialchef.service.models;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
-import java.util.List;
+
+import java.util.Set;
 
 
 /**
  * The persistent class for the categories database table.
- * 
+ *
  */
 @Entity
 @Table(name="categories")
@@ -29,7 +31,7 @@ public class Category implements Serializable {
 
 	//bi-directional many-to-one association to ProductsCategory
 	@OneToMany(mappedBy="category")
-	private List<ProductsCategory> productsCategories;
+	private Set<ProductsCategory> productsCategories;
 
 	public Category() {
 	}
@@ -58,11 +60,11 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-	public List<ProductsCategory> getProductsCategories() {
+	public Set<ProductsCategory> getProductsCategories() {
 		return this.productsCategories;
 	}
 
-	public void setProductsCategories(List<ProductsCategory> productsCategories) {
+	public void setProductsCategories(Set<ProductsCategory> productsCategories) {
 		this.productsCategories = productsCategories;
 	}
 
@@ -78,6 +80,13 @@ public class Category implements Serializable {
 		productsCategory.setCategory(null);
 
 		return productsCategory;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Category c = (Category) obj;
+		return c.getName().equalsIgnoreCase(this.name) ||
+				c.getDescription().equalsIgnoreCase(this.description);
 	}
 
 }

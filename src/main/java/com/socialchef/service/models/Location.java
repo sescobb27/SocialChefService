@@ -1,13 +1,15 @@
 package com.socialchef.service.models;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
-import java.util.List;
+
+import java.util.Set;
 
 
 /**
  * The persistent class for the locations database table.
- * 
+ *
  */
 @Entity
 @Table(name="locations")
@@ -26,7 +28,7 @@ public class Location implements Serializable {
 
 	//bi-directional many-to-one association to ProductsLocation
 	@OneToMany(mappedBy="location")
-	private List<ProductsLocation> productsLocations;
+	private Set<ProductsLocation> productsLocations;
 
 	public Location() {
 	}
@@ -47,11 +49,11 @@ public class Location implements Serializable {
 		this.name = name;
 	}
 
-	public List<ProductsLocation> getProductsLocations() {
+	public Set<ProductsLocation> getProductsLocations() {
 		return this.productsLocations;
 	}
 
-	public void setProductsLocations(List<ProductsLocation> productsLocations) {
+	public void setProductsLocations(Set<ProductsLocation> productsLocations) {
 		this.productsLocations = productsLocations;
 	}
 
@@ -67,6 +69,12 @@ public class Location implements Serializable {
 		productsLocation.setLocation(null);
 
 		return productsLocation;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Location l = (Location) obj;
+		return l.getName().equalsIgnoreCase(this.name);
 	}
 
 }

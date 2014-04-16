@@ -1,14 +1,16 @@
 package com.socialchef.service.models;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 
 /**
  * The persistent class for the discounts database table.
- * 
+ *
  */
 @Entity
 @Table(name="discounts")
@@ -47,11 +49,11 @@ public class Discount implements Serializable {
 
 	//bi-directional many-to-one association to ProductsDiscount
 	@OneToMany(mappedBy="discount")
-	private List<ProductsDiscount> productsDiscounts;
+	private Set<ProductsDiscount> productsDiscounts;
 
 	//bi-directional many-to-one association to PurchasesDiscount
 	@OneToMany(mappedBy="discount")
-	private List<PurchasesDiscount> purchasesDiscounts;
+	private Set<PurchasesDiscount> purchasesDiscounts;
 
 	public Discount() {
 	}
@@ -120,11 +122,11 @@ public class Discount implements Serializable {
 		this.user = user;
 	}
 
-	public List<ProductsDiscount> getProductsDiscounts() {
+	public Set<ProductsDiscount> getProductsDiscounts() {
 		return this.productsDiscounts;
 	}
 
-	public void setProductsDiscounts(List<ProductsDiscount> productsDiscounts) {
+	public void setProductsDiscounts(Set<ProductsDiscount> productsDiscounts) {
 		this.productsDiscounts = productsDiscounts;
 	}
 
@@ -142,11 +144,11 @@ public class Discount implements Serializable {
 		return productsDiscount;
 	}
 
-	public List<PurchasesDiscount> getPurchasesDiscounts() {
+	public Set<PurchasesDiscount> getPurchasesDiscounts() {
 		return this.purchasesDiscounts;
 	}
 
-	public void setPurchasesDiscounts(List<PurchasesDiscount> purchasesDiscounts) {
+	public void setPurchasesDiscounts(Set<PurchasesDiscount> purchasesDiscounts) {
 		this.purchasesDiscounts = purchasesDiscounts;
 	}
 
@@ -162,6 +164,13 @@ public class Discount implements Serializable {
 		purchasesDiscount.setDiscount(null);
 
 		return purchasesDiscount;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Discount dis = (Discount) obj;
+		return dis.getCreatedAt().equals(this.createdAt) &&
+				dis.getTitle().equalsIgnoreCase(this.title);
 	}
 
 }

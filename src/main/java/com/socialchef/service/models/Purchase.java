@@ -2,7 +2,7 @@ package com.socialchef.service.models;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -36,11 +36,11 @@ public class Purchase implements Serializable {
 
 	//bi-directional many-to-one association to PurchasesDiscount
 	@OneToMany(mappedBy="purchase")
-	private List<PurchasesDiscount> purchasesDiscounts;
+	private Set<PurchasesDiscount> purchasesDiscounts;
 
 	//bi-directional many-to-one association to PurchasesProduct
 	@OneToMany(mappedBy="purchase")
-	private List<PurchasesProduct> purchasesProducts;
+	private Set<PurchasesProduct> purchasesProducts;
 
 	public Purchase() {
 	}
@@ -77,11 +77,11 @@ public class Purchase implements Serializable {
 		this.purchaser = purchaser;
 	}
 
-	public List<PurchasesDiscount> getPurchasesDiscounts() {
+	public Set<PurchasesDiscount> getPurchasesDiscounts() {
 		return this.purchasesDiscounts;
 	}
 
-	public void setPurchasesDiscounts(List<PurchasesDiscount> purchasesDiscounts) {
+	public void setPurchasesDiscounts(Set<PurchasesDiscount> purchasesDiscounts) {
 		this.purchasesDiscounts = purchasesDiscounts;
 	}
 
@@ -99,11 +99,11 @@ public class Purchase implements Serializable {
 		return purchasesDiscount;
 	}
 
-	public List<PurchasesProduct> getPurchasesProducts() {
+	public Set<PurchasesProduct> getPurchasesProducts() {
 		return this.purchasesProducts;
 	}
 
-	public void setPurchasesProducts(List<PurchasesProduct> purchasesProducts) {
+	public void setPurchasesProducts(Set<PurchasesProduct> purchasesProducts) {
 		this.purchasesProducts = purchasesProducts;
 	}
 
