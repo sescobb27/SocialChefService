@@ -7,9 +7,9 @@ import javax.persistence.*;
 import com.socialchef.service.helpers.Validator;
 
 import java.sql.Timestamp;
-import java.util.LinkedList;
+import java.util.Date;
 import java.util.Set;
-
+import java.util.LinkedList;
 
 /**
  * The persistent class for the products database table.
@@ -20,6 +20,7 @@ import java.util.Set;
 @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private static final float MAX_RATE = 5.0f;
 
 	@Id
 	@SequenceGenerator(name="PRODUCTS_ID_GENERATOR", sequenceName="PRODUCTS_ID_SEQUENCE")
@@ -67,7 +68,19 @@ public class Product implements Serializable {
 	@OneToMany(mappedBy="product")
 	private Set<PurchasesProduct> purchasesProducts;
 
+	@Transient
+	private LinkedList<String> errors;
+
 	public Product() {
+	}
+
+	public Product(String name, String description, double price) {
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.createdAt = new Timestamp(new Date().getTime());
+		this.rate = 0.0f;
+		this.errors = new LinkedList<String>();
 	}
 
 	public Integer getId() {
@@ -236,35 +249,32 @@ public class Product implements Serializable {
 		return purchasesProduct;
 	}
 
-	public static LinkedList<Product> findByName(String p_name) {
-		// TODO
-		// SEARCH QUERY
-		return null;
+	public boolean validateProduct () {
+		if ( Validator.validateUniqueNames(this.name) )
+			addError("Invalid Product Name Format");
+		if ( this.price > 0.0f )
+			addError("Price Should be greater than 0");
+		if ( this.rate >= 0.0f && this.rate <= MAX_RATE )
+			addError("Rate should be between 0.0 and 5.0");
+		return hasErrors();
 	}
 
-	public static LinkedList<Product> findByCategory(String p_category) {
-		// TODO
-		// SEARCH QUERY
-		return null;
+	public LinkedList<String> getErrors() {
+		return this.errors;
 	}
 
-	public static LinkedList<Product> findByPrice(String p_price) {
-		// TODO
-		// SEARCH QUERY
-		return null;
+	public boolean hasErrors() {
+		return this.errors.size() != 0;
 	}
 
-	public static LinkedList<Product> findByLocation(String p_location) {
-		// TODO
-		// SEARCH QUERY
-		return null;
+	public void addError(String error) {
+		this.errors.push(error);
 	}
 
-	public static LinkedList<Product> findByRegex(String query) {
-		return null;
-	}
-
-	public static boolean validateProduct (Product p) {
-		return Validator.validateUniqueNames(p.name);
+	@Override
+	public boolean equals(Object obj) {
+		Product p = (Product) obj;
+		return p.getUser().equals(this.user) &&
+				p.getName().equalsIgnoreCase(this.name);
 	}
 }
