@@ -99,6 +99,7 @@ public class User implements Serializable {
 		this.products = new LinkedList<Product>();
 		this.passwordHash = passwordHash;
 		this.createdAt = new Timestamp(new Date().getTime());
+		this.errors = new LinkedList<String>();
 	}
 
 	public Integer getId() {
@@ -264,6 +265,7 @@ public class User implements Serializable {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
+			addError("Unsupported characters at password");
 			e.printStackTrace();
 		}
 		return pass;
@@ -301,13 +303,12 @@ public class User implements Serializable {
 	}
 
 	public boolean validateUser () {
-		errors = new LinkedList<String>();
 		if ( !Validator.validateNames(this.name) )
-			errors.push("Invalid Name Format");
+			addError("Invalid Name Format");
 		if ( !Validator.validateNames(this.lastName) )
-			errors.push("Invalid Last Name Format");
+			addError("Invalid Last Name Format");
 		if ( !Validator.validateUniqueNames(this.username) )
-			errors.push("Invalid Username Format");
+			addError("Invalid Username Format");
 
 		return errors.isEmpty();
 	}

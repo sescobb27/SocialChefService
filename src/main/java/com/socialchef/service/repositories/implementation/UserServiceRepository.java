@@ -104,7 +104,7 @@ public class UserServiceRepository implements UserService {
 	@Transactional
 	public User findByEmail(String email) {
 		String tmp_email = email.trim().toLowerCase();
-		if (tmp_email != null && Validator.validateUniqueNames(tmp_email)) {
+		if (tmp_email != null && Validator.validateEmail(email)) {
 			return userRepo.findByEmail(tmp_email);
 		}
 		throw new NullPointerException("Id is null");
