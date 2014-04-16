@@ -14,8 +14,9 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.LinkedList;
-import java.util.List;
 
 
 /**
@@ -57,19 +58,19 @@ public class User implements Serializable {
 
 	//bi-directional many-to-one association to Discount
 	@OneToMany(mappedBy="user")
-	private List<Discount> discounts;
+	private Set<Discount> discounts;
 
 	//bi-directional many-to-one association to Product
 	@OneToMany(mappedBy="user")
-	private List<Product> products;
+	private Set<Product> products;
 
 	//bi-directional many-to-one association to Purchase
 	@OneToMany(mappedBy="chef")
-	private List<Purchase> purchases;
+	private Set<Purchase> purchases;
 
 	//bi-directional many-to-one association to UsersUserType
 	@OneToMany(mappedBy="user")
-	private List<UsersUserType> usersUserTypes;
+	private Set<UsersUserType> usersUserTypes;
 
 	@Transient
 	private LinkedList<String> errors;
@@ -90,13 +91,13 @@ public class User implements Serializable {
 
 	}
 
-	public User(String name, String last_name, String username, String email, 
+	public User(String name, String last_name, String username, String email,
 			String passwordHash) {
 		this.name = name.trim();
 		this.lastName = last_name.trim();
 		this.username = username.trim().toLowerCase();
 		this.email = email.trim().toLowerCase();
-		this.products = new LinkedList<Product>();
+		this.products = new HashSet<Product>();
 		this.passwordHash = passwordHash;
 		this.createdAt = new Timestamp(new Date().getTime());
 		this.errors = new LinkedList<String>();
@@ -166,11 +167,11 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
-	public List<Discount> getDiscounts() {
+	public Set<Discount> getDiscounts() {
 		return this.discounts;
 	}
 
-	public void setDiscounts(List<Discount> discounts) {
+	public void setDiscounts(Set<Discount> discounts) {
 		this.discounts = discounts;
 	}
 
@@ -188,11 +189,11 @@ public class User implements Serializable {
 		return discount;
 	}
 
-	public List<Product> getProducts() {
+	public Set<Product> getProducts() {
 		return this.products;
 	}
 
-	public void setProducts(List<Product> products) {
+	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
 
@@ -210,7 +211,7 @@ public class User implements Serializable {
 		return product;
 	}
 
-	public List<Purchase> getPurchases() {
+	public Set<Purchase> getPurchases() {
 		return this.purchases;
 	}
 
@@ -228,11 +229,11 @@ public class User implements Serializable {
 		return chef;
 	}
 
-	public List<UsersUserType> getUsersUserTypes() {
+	public Set<UsersUserType> getUsersUserTypes() {
 		return this.usersUserTypes;
 	}
 
-	public void setUsersUserTypes(List<UsersUserType> usersUserTypes) {
+	public void setUsersUserTypes(Set<UsersUserType> usersUserTypes) {
 		this.usersUserTypes = usersUserTypes;
 	}
 
@@ -249,11 +250,11 @@ public class User implements Serializable {
 
 		return usersUserType;
 	}
-	
+
 	public void makePasswordSalt() {
 		this.passwordHash = encryptPassword(this.passwordHash);
 	}
-	
+
 	private String encryptPassword(String pass) {
 		MessageDigest md;
 		try {
@@ -295,7 +296,7 @@ public class User implements Serializable {
 			String username = User.usernames[i];
 			String email = User.emails[i];
 			String password = User.passwords[i];
-			
+
 			mocks.put(username,
 					new User(name, last_name, username, email, password));
 		}
@@ -309,19 +310,28 @@ public class User implements Serializable {
 			addError("Invalid Last Name Format");
 		if ( !Validator.validateUniqueNames(this.username) )
 			addError("Invalid Username Format");
+		if ( !Validator.validateEmail(this.email) )
+			addError("Invalid Email Format");
 
-		return errors.isEmpty();
+		return hasErrors();
 	}
 
 	public LinkedList<String> getErrors() {
 		return this.errors;
 	}
-	
+
 	public boolean hasErrors() {
-		return this.errors.size() != 0;
+		return this.errors.isEmpty();
 	}
-	
+
 	public void addError(String error) {
 		this.errors.push(error);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		User u = (User) obj;
+		return u.getUsername().equalsIgnoreCase(this.username) ||
+				u.getEmail().equalsIgnoreCase(this.email);
 	}
 }
