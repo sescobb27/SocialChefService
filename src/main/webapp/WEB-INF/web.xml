@@ -37,7 +37,10 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value></param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+        <load-on-startup>1</load-on-startup>
+        <multipart-config>
+            <max-file-size>10240</max-file-size>
+        </multipart-config>
 	</servlet>
 		
 	<servlet-mapping>
