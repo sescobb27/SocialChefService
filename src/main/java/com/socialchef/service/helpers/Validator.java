@@ -18,7 +18,8 @@ public class Validator {
     }
     
     public static boolean validateUniqueNames(String unique_name) {
-		Pattern regex = Pattern.compile("\\A\\w{4,10}\\z");
+		Pattern regex = Pattern.compile("\\A\\w{4,10}\\z",
+				Pattern.CASE_INSENSITIVE);
 		Matcher match = regex.matcher(unique_name);
 		return match.matches();
     }
@@ -27,7 +28,8 @@ public class Validator {
     	
     	String key = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*";
 		String domain = "@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
-    	Pattern regex = Pattern.compile(key+domain,Pattern.CASE_INSENSITIVE);
+    	Pattern regex = Pattern.compile(key+domain,
+    			Pattern.CASE_INSENSITIVE);
 		Matcher match = regex.matcher(email);
 		return match.matches();
     }
