@@ -97,34 +97,42 @@ public class UsersController {
 			@RequestParam(value = "price",
 				required = true, defaultValue = "0.0") String price,
 			@RequestParam(value = "image") MultipartFile image) {
-		
-		String imagePath;
-		if( image != null && !image.isEmpty() )
-			imagePath = saveImage(image);
-		synchronized (session) {
-			String uname = (String) session.getAttribute(session_id);
-			if( username == null || username.length() == 0 ||
-					uname == null || !username.equalsIgnoreCase(uname) ) {
-				throw new SocialChefException("Necesitas iniciar sesion para agregar un producto");
-			}
+
+		String uname = (String) session.getAttribute(session_id);
+		if( username == null || username.length() == 0 ||
+				uname == null || !username.equalsIgnoreCase(uname) ) {
+			throw new SocialChefException(
+					"Necesitas iniciar sesion para agregar un producto");
 		}
-		Product p = new Product(productname, "", Double.parseDouble(price));
+		String imagePath = null;
+		if( image != null && !image.isEmpty() ) {
+			imagePath = saveImage(username, image);
+		} else {
+			throw new SocialChefException(
+					"El producto que deseas Subir necesita una imagen");
+		}
+		Product p = new Product(productname, "", Double.parseDouble(price),
+				imagePath);
 		p.setUser(userRepo.findByUsername(username));
 		if ( productRepo.create(p) )
 			throw new SocialChefException(p.getErrors());
 	}
 	
-	private String saveImage(MultipartFile image) {
+	private String saveImage(String username, MultipartFile image) {
 		MessageDigest md;
 		String name;
 		try {
+//			get unique name from Time.now and image content with MD5
 			md = MessageDigest.getInstance("MD5");
 			Timestamp now = new Timestamp(new Date().getTime());
 			md.update(image.getName().getBytes("UTF-8"));
 			md.update(now.toString().getBytes("UTF-8"));
 			byte[] digest = md.digest();
+//			name is Unique
 			name =  new String(Hex.encode(digest));
-			File file = new File(name+".jpg");
+			String format = "%s_%s.jpg";
+//			File name is username_UNIQUENAME.jpg
+			File file = new File(String.format(format, username, name));
 //			try with resource
 			try ( FileOutputStream stream = new FileOutputStream(file) ) {
 				stream.write(image.getBytes());
@@ -143,6 +151,7 @@ public class UsersController {
 	}
 
 	@RequestMapping(value="/chefs/listproducts", method=RequestMethod.GET)
+	@ResponseBody
 	public Set<Product> listProducts(@CookieValue(value="session_id",
 			defaultValue="", required=true) String session_id,
 			HttpSession session) {
@@ -150,7 +159,8 @@ public class UsersController {
 		synchronized (session) {
 			username = (String) session.getAttribute(session_id);
 			if( username == null || username.length() == 0 ) {
-				throw new SocialChefException("Necesitas iniciar sesion para agregar un producto");
+				throw new SocialChefException(
+						"Necesitas iniciar sesion para listar tus productos");
 			}
 		}
 		return productRepo.findByUserName(username);
@@ -172,5 +182,34 @@ public class UsersController {
 			e.printStackTrace();
 		}
 		return "";
+	}
+	
+	@RequestMapping(value="/chefs/login", method=RequestMethod.POST)
+	public String login(@CookieValue(value="session_id",
+			defaultValue="", required=true) String session_id,
+			HttpServletResponse response, HttpServletRequest request, 
+			HttpSession session, @RequestBody Map<String, String> body) {
+		String uname = body.get("username");
+		String username = (String) session.getAttribute(session_id);
+		
+		if (uname == null || uname.length() == 0) {
+			throw new SocialChefException("Usuario Invalido");
+		} else if( username == null || username.length() == 0 ||
+				!username.equalsIgnoreCase(uname) ) {
+			String password = body.get("password");
+			if ( userRepo.validateLogin(uname, password) ) {
+				session_id = makeSessionId(request);
+				Cookie cookie = new Cookie("session_id", session_id);
+//				cookie.setSecure(true);
+				cookie.setMaxAge(1200); // 20min
+				response.addCookie(cookie);
+				session.setAttribute(session_id, uname);
+				session.setMaxInactiveInterval(1200);
+				return uname;
+			}
+		} else if ( username.equalsIgnoreCase(uname) ) {
+			return username;
+		}
+		return null;
 	}
 }
