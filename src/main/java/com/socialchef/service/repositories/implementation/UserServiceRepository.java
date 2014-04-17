@@ -1,5 +1,6 @@
 package com.socialchef.service.repositories.implementation;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -7,6 +8,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.socialchef.service.exceptions.SocialChefException;
+import com.socialchef.service.helpers.Encryption;
 import com.socialchef.service.helpers.Validator;
 import com.socialchef.service.models.User;
 import com.socialchef.service.repositories.UserRepository;
@@ -63,10 +66,10 @@ public class UserServiceRepository implements UserService {
 	public boolean create(User user) {
 		if (user.validateUser()) {
 			if (findByUsername(user.getUsername()) != null) {
-				user.addError("User with that username already exists");
+				user.addError("El usuario ya existe");
 				return false;
 			} else if (findByEmail(user.getEmail())!= null) {
-				user.addError("User with that email already exists");
+				user.addError("Ya existe un usuario con ese correo");
 				return false;
 			}
 			userRepo.save(user);
@@ -93,7 +96,7 @@ public class UserServiceRepository implements UserService {
 		if (tmp_username != null && Validator.validateUniqueNames(tmp_username)) {
 			return userRepo.findByUsername(tmp_username);
 		}
-		throw new NullPointerException("Id is null");
+		throw new SocialChefException("Usuario Invalido");
 	}
 
 	public User findByEmail(String email) {
@@ -101,7 +104,19 @@ public class UserServiceRepository implements UserService {
 		if (tmp_email != null && Validator.validateEmail(email)) {
 			return userRepo.findByEmail(tmp_email);
 		}
-		throw new NullPointerException("Id is null");
+		throw new SocialChefException("Correo Invalido");
+	}
+	
+	public boolean validateLogin(String username, String password) {
+		User u = findByUsername(username);
+		try {
+			String []encrypt = {password,u.getCreatedAt().toString()};
+			String new_pass = Encryption.encryptSHA256(encrypt);
+			return new_pass.equalsIgnoreCase(u.getPassword());
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
     /**
