@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.socialchef.service.exceptions.InvalidDataException;
+import com.socialchef.service.exceptions.SocialChefException;
 import com.socialchef.service.helpers.Validator;
 import com.socialchef.service.models.Product;
 import com.socialchef.service.repositories.ProductRepository;
@@ -68,7 +68,7 @@ public class ProductServiceRepository implements ProductService {
 		if	(username != null && Validator.validateUniqueNames(username)) {
 			return productRepo.findByUserName(username);
 		}
-		throw new InvalidDataException();
+		throw new SocialChefException();
 	}
 
 }

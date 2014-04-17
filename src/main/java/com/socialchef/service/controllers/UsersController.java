@@ -1,6 +1,5 @@
 package com.socialchef.service.controllers;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,15 +12,12 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.util.encoders.Hex;
-import org.hibernate.SessionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -35,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.socialchef.service.exceptions.InvalidDataException;
+import com.socialchef.service.exceptions.SocialChefException;
 import com.socialchef.service.models.Product;
 import com.socialchef.service.models.User;
 import com.socialchef.service.repositories.implementation.ProductServiceRepository;
@@ -85,7 +81,7 @@ public class UsersController {
 			}
 			return;
 		}else if (user.hasErrors()) {
-			throw new InvalidDataException(user.getErrors());
+			throw new SocialChefException(user.getErrors());
 		}
 	}
 	
@@ -105,17 +101,17 @@ public class UsersController {
 		String imagePath;
 		if( image != null && !image.isEmpty() )
 			imagePath = saveImage(image);
-//		synchronized (session) {
-//			username = (String) session.getAttribute(session_id);
-//			if( username == null || username.length() == 0 ||
-//					uname == null || !username.equalsIgnoreCase(uname) ) {
-//				throw new SessionException("Necesitas iniciar sesion para agregar un producto");
-//			}
-//		}
+		synchronized (session) {
+			String uname = (String) session.getAttribute(session_id);
+			if( username == null || username.length() == 0 ||
+					uname == null || !username.equalsIgnoreCase(uname) ) {
+				throw new SocialChefException("Necesitas iniciar sesion para agregar un producto");
+			}
+		}
 		Product p = new Product(productname, "", Double.parseDouble(price));
 		p.setUser(userRepo.findByUsername(username));
 		if ( productRepo.create(p) )
-			throw new InvalidDataException(p.getErrors());
+			throw new SocialChefException(p.getErrors());
 	}
 	
 	private String saveImage(MultipartFile image) {
@@ -154,7 +150,7 @@ public class UsersController {
 		synchronized (session) {
 			username = (String) session.getAttribute(session_id);
 			if( username == null || username.length() == 0 ) {
-				throw new SessionException("Necesitas iniciar sesion para agregar un producto");
+				throw new SocialChefException("Necesitas iniciar sesion para agregar un producto");
 			}
 		}
 		return productRepo.findByUserName(username);

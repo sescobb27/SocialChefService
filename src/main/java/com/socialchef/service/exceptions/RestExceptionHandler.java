@@ -14,10 +14,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ResponseStatus(HttpStatus.CONFLICT)  // 409
-    @ExceptionHandler(value = { InvalidDataException.class })
+    @ExceptionHandler(value = { SocialChefException.class })
     public ResponseEntity<Object> handleConflict(
 	    final RuntimeException ex, final WebRequest request) {
-		InvalidDataException invalid_ex = (InvalidDataException) ex;
+    	SocialChefException invalid_ex = (SocialChefException) ex;
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		
