@@ -42,6 +42,9 @@ public class Product implements Serializable {
 
 	@Column(name="rate", nullable=false)
 	private float rate;
+	
+	@Column(name="image", nullable=false)
+	private String image = "images/default.png";
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
@@ -74,13 +77,16 @@ public class Product implements Serializable {
 	public Product() {
 	}
 
-	public Product(String name, String description, double price) {
+	public Product(String name, String description, double price,
+			String image) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.createdAt = new Timestamp(new Date().getTime());
 		this.rate = 0.0f;
 		this.errors = new LinkedList<String>();
+		if (image != null && image.length() != 0)
+			this.image = image; 
 	}
 
 	public Integer getId() {
@@ -247,6 +253,14 @@ public class Product implements Serializable {
 		purchasesProduct.setProduct(null);
 
 		return purchasesProduct;
+	}
+	
+	public String getImage() {
+		return this.image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public boolean validateProduct () {
