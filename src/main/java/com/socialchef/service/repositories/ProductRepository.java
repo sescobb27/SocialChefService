@@ -24,6 +24,10 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
     public Set<Product> findByLocation(@Param("location") String location);
 	
 //	======
+	@Query("SELECT p FROM Product p INNER JOIN p.user u WHERE LOWER(u.username) = LOWER(:username)")
+	public Set<Product> findByUserName(@Param("username") String username);
+	
+//	======
 //	@Query("")
 //    public LinkedHashSet<Product> findByPrice(@Param("price") double price);
 	

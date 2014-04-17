@@ -18,14 +18,12 @@ public class UserServiceRepository implements UserService {
 	@Resource
 	private UserRepository userRepo;
 	
-	@Transactional()
 	@Override
 	public User findOne(String query) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Transactional
 	@Override
 	public User findOneById(Long id) throws Exception {
 		if (id == null) {
@@ -39,7 +37,6 @@ public class UserServiceRepository implements UserService {
 		}
 	}
 
-	@Transactional
 	@Override
 	public List<User> findAll(String query) {
 		// TODO Auto-generated method stub
@@ -85,14 +82,12 @@ public class UserServiceRepository implements UserService {
 		return null;
 	}
 
-	@Transactional
 	@Override
 	public List<User> findAll(List<Long> ids) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Transactional
 	public User findByUsername(String username) {
 		String tmp_username = username.trim().toLowerCase();
 		if (tmp_username != null && Validator.validateUniqueNames(tmp_username)) {
@@ -101,7 +96,6 @@ public class UserServiceRepository implements UserService {
 		throw new NullPointerException("Id is null");
 	}
 
-	@Transactional
 	public User findByEmail(String email) {
 		String tmp_email = email.trim().toLowerCase();
 		if (tmp_email != null && Validator.validateEmail(email)) {
