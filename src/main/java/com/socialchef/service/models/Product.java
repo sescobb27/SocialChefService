@@ -250,11 +250,11 @@ public class Product implements Serializable {
 	}
 
 	public boolean validateProduct () {
-		if ( Validator.validateUniqueNames(this.name) )
+		if ( !Validator.validateUniqueNames(this.name) )
 			addError("Invalid Product Name Format");
-		if ( this.price > 0.0f )
+		if ( this.price < 0.0 )
 			addError("Price Should be greater than 0");
-		if ( this.rate >= 0.0f && this.rate <= MAX_RATE )
+		if ( this.rate < 0.0f && this.rate > MAX_RATE )
 			addError("Rate should be between 0.0 and 5.0");
 		return hasErrors();
 	}
