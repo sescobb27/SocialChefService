@@ -1,10 +1,9 @@
 package com.socialchef.service.models;
 
-import java.security.MessageDigest;
-
-import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.socialchef.service.helpers.Encryption;
 
 public class UsersTest {
 
@@ -18,18 +17,15 @@ public class UsersTest {
 	
 	@Test
 	public void passwordHashTest() throws Exception {
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		for(User u : User.mockUsers()) {
+			String []encrypt = {u.getPassword(), u.getCreatedAt().toString()};
 			String old_pass = u.getPassword();
-			md.update(u.getPassword().getBytes("UTF-8"));
-			md.update(u.getCreatedAt().toString().getBytes("UTF-8"));
-			byte[] digest = md.digest();
-			md.reset();
 			u.makePasswordSalt();
-			String new_pass = new String(Hex.encode(digest));
+			String new_pass = Encryption.encryptSHA256(encrypt); 
 			Assert.assertFalse("Disgest should produce a different password",
 					old_pass.equalsIgnoreCase(new_pass));
-			Assert.assertTrue("Password's Salt should be equals"+" Digest: "+new_pass+" Pass: "+u.getPassword(),
+			Assert.assertTrue("Password's Salt should be equals"+" Digest: "+
+					new_pass+" Pass: "+u.getPassword(),
 					new_pass.equals(u.getPassword()));
 		}
 	}

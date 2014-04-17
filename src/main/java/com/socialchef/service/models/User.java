@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 import org.bouncycastle.util.encoders.Hex;
 
+import com.socialchef.service.helpers.Encryption;
 import com.socialchef.service.helpers.Validator;
 
 import java.security.MessageDigest;
@@ -256,15 +257,9 @@ public class User implements Serializable {
 	}
 
 	private String encryptPassword(String pass) {
-		MessageDigest md;
+		String [] encrypt = {pass, this.createdAt.toString()};
 		try {
-			md = MessageDigest.getInstance("SHA-256");
-			md.update(pass.getBytes("UTF-8"));
-			md.update(this.createdAt.toString().getBytes("UTF-8"));
-			byte[] digest = md.digest();
-			return new String(Hex.encode(digest));
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			return Encryption.encryptSHA256(encrypt);
 		} catch (UnsupportedEncodingException e) {
 			addError("Unsupported characters at password");
 			e.printStackTrace();
