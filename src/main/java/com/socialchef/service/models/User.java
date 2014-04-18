@@ -5,19 +5,14 @@ import java.io.UnsupportedEncodingException;
 
 import javax.persistence.*;
 
-import org.bouncycastle.util.encoders.Hex;
-
 import com.socialchef.service.helpers.Encryption;
 import com.socialchef.service.helpers.Validator;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.LinkedList;
+import java.util.List;
 
 
 /**
@@ -59,19 +54,19 @@ public class User implements Serializable {
 
 	//bi-directional many-to-one association to Discount
 	@OneToMany(mappedBy="user")
-	private Set<Discount> discounts;
+	private List<Discount> discounts;
 
 	//bi-directional many-to-one association to Product
 	@OneToMany(mappedBy="user")
-	private Set<Product> products;
+	private List<Product> products;
 
 	//bi-directional many-to-one association to Purchase
 	@OneToMany(mappedBy="chef")
-	private Set<Purchase> purchases;
+	private List<Purchase> purchases;
 
 	//bi-directional many-to-one association to UsersUserType
 	@OneToMany(mappedBy="user")
-	private Set<UsersUserType> usersUserTypes;
+	private List<UsersUserType> usersUserTypes;
 
 	@Transient
 	private LinkedList<String> errors;
@@ -98,7 +93,7 @@ public class User implements Serializable {
 		this.lastName = last_name.trim();
 		this.username = username.trim().toLowerCase();
 		this.email = email.trim().toLowerCase();
-		this.products = new HashSet<Product>();
+		this.products = new LinkedList<Product>();
 		this.passwordHash = passwordHash;
 		this.createdAt = new Timestamp(new Date().getTime());
 		this.errors = new LinkedList<String>();
@@ -168,11 +163,11 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
-	public Set<Discount> getDiscounts() {
+	public List<Discount> getDiscounts() {
 		return this.discounts;
 	}
 
-	public void setDiscounts(Set<Discount> discounts) {
+	public void setDiscounts(List<Discount> discounts) {
 		this.discounts = discounts;
 	}
 
@@ -190,11 +185,11 @@ public class User implements Serializable {
 		return discount;
 	}
 
-	public Set<Product> getProducts() {
+	public List<Product> getProducts() {
 		return this.products;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 
@@ -212,7 +207,7 @@ public class User implements Serializable {
 		return product;
 	}
 
-	public Set<Purchase> getPurchases() {
+	public List<Purchase> getPurchases() {
 		return this.purchases;
 	}
 
@@ -230,11 +225,11 @@ public class User implements Serializable {
 		return chef;
 	}
 
-	public Set<UsersUserType> getUsersUserTypes() {
+	public List<UsersUserType> getUsersUserTypes() {
 		return this.usersUserTypes;
 	}
 
-	public void setUsersUserTypes(Set<UsersUserType> usersUserTypes) {
+	public void setUsersUserTypes(List<UsersUserType> usersUserTypes) {
 		this.usersUserTypes = usersUserTypes;
 	}
 
@@ -250,6 +245,10 @@ public class User implements Serializable {
 		usersUserType.setUser(null);
 
 		return usersUserType;
+	}
+
+	public void setPurchases(List<Purchase> purchases) {
+		this.purchases = purchases;
 	}
 
 	public void makePasswordSalt() {

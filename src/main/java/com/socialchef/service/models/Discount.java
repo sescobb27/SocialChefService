@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -49,11 +49,11 @@ public class Discount implements Serializable {
 
 	//bi-directional many-to-one association to ProductsDiscount
 	@OneToMany(mappedBy="discount")
-	private Set<ProductsDiscount> productsDiscounts;
+	private List<ProductsDiscount> productsDiscounts;
 
 	//bi-directional many-to-one association to PurchasesDiscount
 	@OneToMany(mappedBy="discount")
-	private Set<PurchasesDiscount> purchasesDiscounts;
+	private List<PurchasesDiscount> purchasesDiscounts;
 
 	public Discount() {
 	}
@@ -122,11 +122,11 @@ public class Discount implements Serializable {
 		this.user = user;
 	}
 
-	public Set<ProductsDiscount> getProductsDiscounts() {
+	public List<ProductsDiscount> getProductsDiscounts() {
 		return this.productsDiscounts;
 	}
 
-	public void setProductsDiscounts(Set<ProductsDiscount> productsDiscounts) {
+	public void setProductsDiscounts(List<ProductsDiscount> productsDiscounts) {
 		this.productsDiscounts = productsDiscounts;
 	}
 
@@ -144,11 +144,11 @@ public class Discount implements Serializable {
 		return productsDiscount;
 	}
 
-	public Set<PurchasesDiscount> getPurchasesDiscounts() {
+	public List<PurchasesDiscount> getPurchasesDiscounts() {
 		return this.purchasesDiscounts;
 	}
 
-	public void setPurchasesDiscounts(Set<PurchasesDiscount> purchasesDiscounts) {
+	public void setPurchasesDiscounts(List<PurchasesDiscount> purchasesDiscounts) {
 		this.purchasesDiscounts = purchasesDiscounts;
 	}
 

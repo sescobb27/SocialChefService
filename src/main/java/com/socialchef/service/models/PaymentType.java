@@ -2,7 +2,7 @@ package com.socialchef.service.models;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -26,7 +26,7 @@ public class PaymentType implements Serializable {
 
 	//bi-directional many-to-one association to ProductsPaymentType
 	@OneToMany(mappedBy="paymentType")
-	private Set<ProductsPaymentType> productsPaymentTypes;
+	private List<ProductsPaymentType> productsPaymentTypes;
 
 	public PaymentType() {
 	}
@@ -47,11 +47,11 @@ public class PaymentType implements Serializable {
 		this.name = name;
 	}
 
-	public Set<ProductsPaymentType> getProductsPaymentTypes() {
+	public List<ProductsPaymentType> getProductsPaymentTypes() {
 		return this.productsPaymentTypes;
 	}
 
-	public void setProductsPaymentTypes(Set<ProductsPaymentType> productsPaymentTypes) {
+	public void setProductsPaymentTypes(List<ProductsPaymentType> productsPaymentTypes) {
 		this.productsPaymentTypes = productsPaymentTypes;
 	}
 

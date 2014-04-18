@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -31,7 +31,7 @@ public class Category implements Serializable {
 
 	//bi-directional many-to-one association to ProductsCategory
 	@OneToMany(mappedBy="category")
-	private Set<ProductsCategory> productsCategories;
+	private List<ProductsCategory> productsCategories;
 
 	public Category() {
 	}
@@ -60,11 +60,11 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-	public Set<ProductsCategory> getProductsCategories() {
+	public List<ProductsCategory> getProductsCategories() {
 		return this.productsCategories;
 	}
 
-	public void setProductsCategories(Set<ProductsCategory> productsCategories) {
+	public void setProductsCategories(List<ProductsCategory> productsCategories) {
 		this.productsCategories = productsCategories;
 	}
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -28,7 +28,7 @@ public class UserType implements Serializable {
 
 	//bi-directional many-to-one association to UsersUserType
 	@OneToMany(mappedBy="userType")
-	private Set<UsersUserType> usersUserTypes;
+	private List<UsersUserType> usersUserTypes;
 
 	public UserType() {
 	}
@@ -49,11 +49,11 @@ public class UserType implements Serializable {
 		this.name = name;
 	}
 
-	public Set<UsersUserType> getUsersUserTypes() {
+	public List<UsersUserType> getUsersUserTypes() {
 		return this.usersUserTypes;
 	}
 
-	public void setUsersUserTypes(Set<UsersUserType> usersUserTypes) {
+	public void setUsersUserTypes(List<UsersUserType> usersUserTypes) {
 		this.usersUserTypes = usersUserTypes;
 	}
 

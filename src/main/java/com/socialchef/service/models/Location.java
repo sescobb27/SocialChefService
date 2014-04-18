@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -28,7 +28,7 @@ public class Location implements Serializable {
 
 	//bi-directional many-to-one association to ProductsLocation
 	@OneToMany(mappedBy="location")
-	private Set<ProductsLocation> productsLocations;
+	private List<ProductsLocation> productsLocations;
 
 	public Location() {
 	}
@@ -49,11 +49,11 @@ public class Location implements Serializable {
 		this.name = name;
 	}
 
-	public Set<ProductsLocation> getProductsLocations() {
+	public List<ProductsLocation> getProductsLocations() {
 		return this.productsLocations;
 	}
 
-	public void setProductsLocations(Set<ProductsLocation> productsLocations) {
+	public void setProductsLocations(List<ProductsLocation> productsLocations) {
 		this.productsLocations = productsLocations;
 	}
 

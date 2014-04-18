@@ -8,8 +8,8 @@ import com.socialchef.service.helpers.Validator;
 
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Set;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * The persistent class for the products database table.
@@ -42,7 +42,7 @@ public class Product implements Serializable {
 
 	@Column(name="rate", nullable=false)
 	private float rate;
-	
+
 	@Column(name="image", nullable=false)
 	private String image = "images/default.png";
 
@@ -53,23 +53,23 @@ public class Product implements Serializable {
 
 	//bi-directional many-to-one association to ProductsCategory
 	@OneToMany(mappedBy="product")
-	private Set<ProductsCategory> categories;
+	private List<ProductsCategory> categories;
 
 	//bi-directional many-to-one association to ProductsDiscount
 	@OneToMany(mappedBy="product")
-	private Set<ProductsDiscount> discounts;
+	private List<ProductsDiscount> discounts;
 
 	//bi-directional many-to-one association to ProductsLocation
 	@OneToMany(mappedBy="product")
-	private Set<ProductsLocation> locations;
+	private List<ProductsLocation> locations;
 
 	//bi-directional many-to-one association to ProductsPaymentType
 	@OneToMany(mappedBy="product")
-	private Set<ProductsPaymentType> paymentTypes;
+	private List<ProductsPaymentType> paymentTypes;
 
 	//bi-directional many-to-one association to PurchasesProduct
 	@OneToMany(mappedBy="product")
-	private Set<PurchasesProduct> purchasesProducts;
+	private List<PurchasesProduct> purchasesProducts;
 
 	@Transient
 	private LinkedList<String> errors;
@@ -79,14 +79,14 @@ public class Product implements Serializable {
 
 	public Product(String name, String description, double price,
 			String image) {
-		this.name = name;
-		this.description = description;
+		this.name = name.trim();
+		this.description = description.trim();
 		this.price = price;
 		this.createdAt = new Timestamp(new Date().getTime());
 		this.rate = 0.0f;
 		this.errors = new LinkedList<String>();
 		if (image != null && image.length() != 0)
-			this.image = image; 
+			this.image = image;
 	}
 
 	public Integer getId() {
@@ -145,11 +145,11 @@ public class Product implements Serializable {
 		this.user = user;
 	}
 
-	public Set<ProductsCategory> getProductsCategories() {
+	public List<ProductsCategory> getProductsCategories() {
 		return this.categories;
 	}
 
-	public void setProductsCategories(Set<ProductsCategory> categories) {
+	public void setProductsCategories(List<ProductsCategory> categories) {
 		this.categories = categories;
 	}
 
@@ -167,11 +167,11 @@ public class Product implements Serializable {
 		return productsCategory;
 	}
 
-	public Set<ProductsDiscount> getProductsDiscounts() {
+	public List<ProductsDiscount> getProductsDiscounts() {
 		return this.discounts;
 	}
 
-	public void setProductsDiscounts(Set<ProductsDiscount> discounts) {
+	public void setProductsDiscounts(List<ProductsDiscount> discounts) {
 		this.discounts = discounts;
 	}
 
@@ -189,11 +189,11 @@ public class Product implements Serializable {
 		return productsDiscount;
 	}
 
-	public Set<ProductsLocation> getProductsLocations() {
+	public List<ProductsLocation> getProductsLocations() {
 		return this.locations;
 	}
 
-	public void setProductsLocations(Set<ProductsLocation> locations) {
+	public void setProductsLocations(List<ProductsLocation> locations) {
 		this.locations = locations;
 	}
 
@@ -211,11 +211,11 @@ public class Product implements Serializable {
 		return productsLocation;
 	}
 
-	public Set<ProductsPaymentType> getProductsPaymentTypes() {
+	public List<ProductsPaymentType> getProductsPaymentTypes() {
 		return this.paymentTypes;
 	}
 
-	public void setProductsPaymentTypes(Set<ProductsPaymentType> paymentTypes) {
+	public void setProductsPaymentTypes(List<ProductsPaymentType> paymentTypes) {
 		this.paymentTypes = paymentTypes;
 	}
 
@@ -233,11 +233,11 @@ public class Product implements Serializable {
 		return productsPaymentType;
 	}
 
-	public Set<PurchasesProduct> getPurchasesProducts() {
+	public List<PurchasesProduct> getPurchasesProducts() {
 		return this.purchasesProducts;
 	}
 
-	public void setPurchasesProducts(Set<PurchasesProduct> purchasesProducts) {
+	public void setPurchasesProducts(List<PurchasesProduct> purchasesProducts) {
 		this.purchasesProducts = purchasesProducts;
 	}
 
@@ -254,7 +254,7 @@ public class Product implements Serializable {
 
 		return purchasesProduct;
 	}
-	
+
 	public String getImage() {
 		return this.image;
 	}
@@ -278,7 +278,7 @@ public class Product implements Serializable {
 	}
 
 	public boolean hasErrors() {
-		return this.errors.size() != 0;
+		return this.errors.isEmpty();
 	}
 
 	public void addError(String error) {
