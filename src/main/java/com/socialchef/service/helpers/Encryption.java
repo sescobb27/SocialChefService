@@ -23,4 +23,20 @@ public class Encryption {
 		}
 		return null;
 	}
+	
+	public static String encryptMD5(String []words)
+			throws UnsupportedEncodingException {
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("MD5");
+			for (String word : words) {
+				md.update(word.getBytes("UTF-8"));
+			}
+			byte[] digest = md.digest();
+			return new String(Hex.encode(digest));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
