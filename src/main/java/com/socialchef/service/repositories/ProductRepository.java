@@ -1,7 +1,7 @@
 package com.socialchef.service.repositories;
 
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,25 +13,25 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 
 //	======
 	@Query("SELECT p FROM Product p RIGHT JOIN FETCH p.user WHERE LOWER(p.name) = LOWER(:name)")
-    public Set<Product> findByName(@Param("name") String name);
-	
+    public List<Product> findByName(@Param("name") String name);
+
 //	======
-	@Query("SELECT p FROM Product p INNER JOIN p.categories pc INNER JOIN pc.category c WHERE LOWER(c.name) = LOWER(:category)")
-    public Set<Product> findByCategory(@Param("category") String category);
-	
+	@Query("SELECT p FROM Product p INNER JOIN FETCH p.categories pc INNER JOIN pc.category c WHERE LOWER(c.name) = LOWER(:category)")
+    public List<Product> findByCategory(@Param("category") String category);
+
 //	======
-	@Query("SELECT p FROM Product p INNER JOIN p.locations pl INNER JOIN pl.location l WHERE LOWER(l.name) = LOWER(:location)")
-    public Set<Product> findByLocation(@Param("location") String location);
-	
+	@Query("SELECT p FROM Product p INNER JOIN FETCH p.locations pl INNER JOIN pl.location l WHERE LOWER(l.name) = LOWER(:location)")
+    public List<Product> findByLocation(@Param("location") String location);
+
 //	======
-	@Query("SELECT p FROM Product p INNER JOIN p.user u WHERE LOWER(u.username) = LOWER(:username)")
-	public Set<Product> findByUserName(@Param("username") String username);
-	
-//	======
-//	@Query("")
-//    public LinkedHashSet<Product> findByPrice(@Param("price") double price);
-	
+	@Query("SELECT p FROM Product p INNER JOIN FETCH p.user u WHERE LOWER(u.username) = LOWER(:username)")
+	public List<Product> findByUserName(@Param("username") String username);
+
 //	======
 //	@Query("")
-//    public LinkedHashSet<Product> findByRegex(@Param("regex") String regex);
+//    public List<Product> findByPrice(@Param("price") double price);
+
+//	======
+//	@Query("")
+//    public List<Product> findByRegex(@Param("regex") String regex);
 }
