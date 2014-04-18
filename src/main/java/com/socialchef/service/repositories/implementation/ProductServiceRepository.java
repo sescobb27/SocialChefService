@@ -1,6 +1,6 @@
 package com.socialchef.service.repositories.implementation;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -19,36 +19,41 @@ public class ProductServiceRepository implements ProductService {
 	@Resource
 	private ProductRepository productRepo;
 
+	@Transactional
 	@Override
-	public Set<Product> findByName(String name) throws Exception {
+	public List<Product> findByName(String name) throws Exception {
 		if (name != null && !name.isEmpty() &&
 				Validator.validateUniqueNames(name))
 			return productRepo.findByName(name);
 		return null;
 	}
 
+	@Transactional
 	@Override
-	public Set<Product> findByCategory(String category)
+	public List<Product> findByCategory(String category)
 			throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Transactional
 	@Override
-	public Set<Product> findByLocation(String location)
+	public List<Product> findByLocation(String location)
 			throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Transactional
 	@Override
-	public Set<Product> findByPrice(double price) throws Exception {
+	public List<Product> findByPrice(double price) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Transactional
 	@Override
-	public Set<Product> findByRegex(String regex) throws Exception {
+	public List<Product> findByRegex(String regex) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -63,12 +68,25 @@ public class ProductServiceRepository implements ProductService {
 		return false;
 	}
 
+	@Transactional
 	@Override
-	public Set<Product> findByUserName(String username) {
+	public List<Product> findByUserName(String username) {
 		if	(username != null && Validator.validateUniqueNames(username)) {
-			return productRepo.findByUserName(username);
+			List<Product> result = productRepo.findByUserName(username);
+			for (Product p : result) {
+				p.getUser().setDiscounts(null);
+				p.getUser().setProducts(null);
+				p.getUser().setUsersUserTypes(null);
+				p.getUser().setPurchases(null);
+				p.setProductsCategories(null);
+				p.setProductsDiscounts(null);
+				p.setProductsLocations(null);
+				p.setProductsPaymentTypes(null);
+				p.setPurchasesProducts(null);
+			}
+			return result;
 		}
-		throw new SocialChefException();
+		throw new SocialChefException("Usuario Invalido");
 	}
 
 }
