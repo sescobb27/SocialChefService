@@ -8,9 +8,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.socialchef.service.exceptions.SocialChefException;
+import com.socialchef.service.helpers.Encryption;
 import com.socialchef.service.models.Product;
 import com.socialchef.service.models.User;
 import com.socialchef.service.repositories.implementation.ProductServiceRepository;
@@ -44,10 +44,10 @@ public class UsersController {
 	private UserServiceRepository userRepo;
 	@Autowired
 	private ProductServiceRepository productRepo;
-	
+
 	@RequestMapping(value = "/chefs", method = RequestMethod.GET)
 	@ResponseBody
-	public LinkedList<User> indexRoute() {
+	public List<User> indexRoute() {
 		return User.mockUsers();
 	}
 
@@ -84,11 +84,11 @@ public class UsersController {
 			throw new SocialChefException(user.getErrors());
 		}
 	}
-	
+
 	@RequestMapping(value="/chefs/addproduct", method=RequestMethod.POST)
 	@ResponseBody
 	public void addProduct(HttpSession session,
-			@CookieValue(value="session_id", 
+			@CookieValue(value="session_id",
 				defaultValue="", required=true) String session_id,
 			@RequestParam(value = "username",
 				required = true, defaultValue = "") String username,
@@ -114,10 +114,10 @@ public class UsersController {
 		Product p = new Product(productname, "", Double.parseDouble(price),
 				imagePath);
 		p.setUser(userRepo.findByUsername(username));
-		if ( productRepo.create(p) )
+		if ( !productRepo.create(p) )
 			throw new SocialChefException(p.getErrors());
 	}
-	
+
 	private String saveImage(String username, MultipartFile image) {
 		MessageDigest md;
 		String name;
@@ -152,7 +152,7 @@ public class UsersController {
 
 	@RequestMapping(value="/chefs/listproducts", method=RequestMethod.GET)
 	@ResponseBody
-	public Set<Product> listProducts(@CookieValue(value="session_id",
+	public List<Product> listProducts(@CookieValue(value="session_id",
 			defaultValue="", required=true) String session_id,
 			HttpSession session) {
 		String username;
@@ -165,33 +165,27 @@ public class UsersController {
 		}
 		return productRepo.findByUserName(username);
 	}
-	
+
 	private String makeSessionId(HttpServletRequest request) {
-		MessageDigest md;
 		String IP = request.getRemoteAddr();
+		Timestamp now = new Timestamp(new Date().getTime());
+		String []data = {IP, now.toString()};
 		try {
-			md = MessageDigest.getInstance("SHA-256");
-			Timestamp now = new Timestamp(new Date().getTime());
-			md.update(IP.getBytes("UTF-8"));
-			md.update(now.toString().getBytes("UTF-8"));
-			byte[] digest = md.digest();
-			return new String(Hex.encode(digest));
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			return Encryption.encryptMD5(data);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		return "";
 	}
-	
+
 	@RequestMapping(value="/chefs/login", method=RequestMethod.POST)
 	public String login(@CookieValue(value="session_id",
 			defaultValue="", required=true) String session_id,
-			HttpServletResponse response, HttpServletRequest request, 
+			HttpServletResponse response, HttpServletRequest request,
 			HttpSession session, @RequestBody Map<String, String> body) {
 		String uname = body.get("username");
 		String username = (String) session.getAttribute(session_id);
-		
+
 		if (uname == null || uname.length() == 0) {
 			throw new SocialChefException("Usuario Invalido");
 		} else if( username == null || username.length() == 0 ||

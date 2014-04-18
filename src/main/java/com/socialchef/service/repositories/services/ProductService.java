@@ -1,16 +1,16 @@
 package com.socialchef.service.repositories.services;
 
-import java.util.Set;
+import java.util.List;
 
 import com.socialchef.service.models.Product;
 
 public interface ProductService {
 
-    public Set<Product> findByName(String name) throws Exception;
-    public Set<Product> findByCategory(String category) throws Exception;
-    public Set<Product> findByLocation(String location) throws Exception;
-    public Set<Product> findByPrice(double price) throws Exception;
-    public Set<Product> findByRegex(String regex) throws Exception;
+    public List<Product> findByName(String name) throws Exception;
+    public List<Product> findByCategory(String category) throws Exception;
+    public List<Product> findByLocation(String location) throws Exception;
+    public List<Product> findByPrice(double price) throws Exception;
+    public List<Product> findByRegex(String regex) throws Exception;
     public boolean create(Product product) throws Exception;
-    public Set<Product> findByUserName(String username) throws Exception;
+    public List<Product> findByUserName(String username) throws Exception;
 }

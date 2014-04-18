@@ -1,7 +1,6 @@
 package com.socialchef.service.controllers;
 
-import java.util.Set;
-import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,16 +24,14 @@ public class ProductsController {
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody
-    public LinkedList<Product> getAllProducts() {
-//    	LinkedList<Product> mocks = Product.mockProducts();
-//    	return mocks;
+    public List<Product> getAllProducts() {
     	return null;
     }
 
     // /products/findby?key=category&search_value=carne
     @RequestMapping(value = "/products/findby", method = RequestMethod.GET)
     @ResponseBody
-    public Set<Product> findBy(
+    public List<Product> findBy(
 	    @RequestParam(value = "key", required = false, defaultValue = "") String key,
 	    @RequestParam(value = "search_value", required = false, defaultValue = "") String search_value) {
 		System.out.println("key: " + key);
