@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -179,13 +180,14 @@ public class UsersController {
 	}
 
 	@RequestMapping(value="/chefs/login", method=RequestMethod.POST)
-	public String login(@CookieValue(value="session_id",
+	@ResponseBody
+	public Map<String,String> login(@CookieValue(value="session_id",
 			defaultValue="", required=true) String session_id,
 			HttpServletResponse response, HttpServletRequest request,
 			HttpSession session, @RequestBody Map<String, String> body) {
 		String uname = body.get("username");
 		String username = (String) session.getAttribute(session_id);
-
+		Map<String, String> result;
 		if (uname == null || uname.length() == 0) {
 			throw new SocialChefException("Usuario Invalido");
 		} else if( username == null || username.length() == 0 ||
@@ -199,11 +201,15 @@ public class UsersController {
 				response.addCookie(cookie);
 				session.setAttribute(session_id, uname);
 				session.setMaxInactiveInterval(1200);
-				return uname;
+				result = new HashMap<>();
+				result.put("username", uname);
+				return result;
 			}
 		} else if ( username.equalsIgnoreCase(uname) ) {
-			return username;
+			result = new HashMap<>();
+			result.put("username", uname);
+			return result;
 		}
-		return null;
+		throw new SocialChefException("Usuario Invalido");
 	}
 }

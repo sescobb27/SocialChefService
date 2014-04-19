@@ -19,8 +19,6 @@ public class ProductsController {
 
 	@Autowired
 	private ProductServiceRepository productRepo;
-	@Autowired
-	private HttpSession session;
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody
