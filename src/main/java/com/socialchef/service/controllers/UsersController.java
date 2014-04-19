@@ -131,16 +131,18 @@ public class UsersController {
 			byte[] digest = md.digest();
 //			name is Unique
 			name =  new String(Hex.encode(digest));
-			String format = "%s_%s.jpg";
+			String assets_dir = "socialchef/images/";
+			String file_name =
+					String.format("%s_%s", username, name);
 //			File name is username_UNIQUENAME.jpg
-			File file = new File(String.format(format, username, name));
+			File file = new File(
+					String.format("%s%s", assets_dir, file_name));
 //			try with resource
 			try ( FileOutputStream stream = new FileOutputStream(file) ) {
 				stream.write(image.getBytes());
 			}
-			String path = file.getPath();
-			String abPath = file.getAbsolutePath();
-			return file.getPath();
+			String host_dir = "http://localhost:3000/";
+			return host_dir + file_name;
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {

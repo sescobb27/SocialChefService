@@ -26,5 +26,13 @@ http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd">
         class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
     </bean>
     
+    <bean id="uploadDirResource" 
+        class="org.springframework.core.io.FileSystemResource">
+        <constructor-arg>
+            <value>socialchef/images</value>
+        </constructor-arg>
+    </bean>
+    
+    
     <jpa:repositories base-package="com.socialchef.service.repositories"/>
 </beans>
