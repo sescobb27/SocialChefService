@@ -24,7 +24,9 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
     public List<Product> findByLocation(@Param("location") String location);
 
 //	======
-	@Query("SELECT p FROM Product p INNER JOIN FETCH p.user u WHERE LOWER(u.username) = LOWER(:username)")
+	@Query("SELECT new Product(p.name, p.description, p.price, p.image)"
+			+ "FROM Product p INNER JOIN p.user u "
+			+ "WHERE LOWER(u.username) = LOWER(:username)")
 	public List<Product> findByUserName(@Param("username") String username);
 
 //	======

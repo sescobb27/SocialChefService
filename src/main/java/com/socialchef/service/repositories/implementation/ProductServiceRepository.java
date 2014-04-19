@@ -73,17 +73,6 @@ public class ProductServiceRepository implements ProductService {
 	public List<Product> findByUserName(String username) {
 		if	(username != null && Validator.validateUniqueNames(username)) {
 			List<Product> result = productRepo.findByUserName(username);
-			for (Product p : result) {
-				p.getUser().setDiscounts(null);
-				p.getUser().setProducts(null);
-				p.getUser().setUsersUserTypes(null);
-				p.getUser().setPurchases(null);
-				p.setProductsCategories(null);
-				p.setProductsDiscounts(null);
-				p.setProductsLocations(null);
-				p.setProductsPaymentTypes(null);
-				p.setPurchasesProducts(null);
-			}
 			return result;
 		}
 		throw new SocialChefException("Usuario Invalido");
