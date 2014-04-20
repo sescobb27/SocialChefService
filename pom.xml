@@ -161,7 +161,7 @@
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-core</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -173,21 +173,27 @@
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-spring</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
             <scope>test</scope>
         </dependency>
+        <!-- SELENIUM -->
+<!--         <dependency> -->
+<!--             <groupId>org.seleniumhq.selenium</groupId> -->
+<!--             <artifactId>selenium-java</artifactId> -->
+<!--             <version>2.40.0</version> -->
+<!--         </dependency> -->
         <!-- MOCKITO TEST -->
         <dependency>
             <groupId>org.mockito</groupId>
@@ -235,6 +241,11 @@
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>1.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-batch</artifactId>
+            <version>1.0.0.RELEASE</version>
         </dependency>
 	</dependencies>
     <build>
