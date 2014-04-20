@@ -25,42 +25,39 @@ public class ProductServiceRepository implements ProductService {
 
 	@Transactional
 	@Override
-	public List<Product> findByName(String name) throws Exception {
+	public List<Product> findByName(String name) {
 		if (name != null && !name.isEmpty() &&
 				Validator.validateSearch(name)) {
-			return productRepo.findByName(name);
+			return productRepo.findByName(name.toLowerCase());
 		}
-		return null;
+		throw new SocialChefException("Nombre del Producto Invalido");
 	}
 
 	@Transactional
 	@Override
-	public List<Product> findByCategory(String category)
-			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Product> findByCategory(String category) {
+		if (category != null && !category.isEmpty() &&
+				Validator.validateSearch(category))
+			return productRepo.findByCategory(category);
+		throw new SocialChefException("Categoria Invalida");
 	}
 
 	@Transactional
 	@Override
-	public List<Product> findByLocation(String location)
-			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Product> findByLocation(String location) {
+		if (location != null && !location.isEmpty() &&
+				Validator.validateSearch(location))
+			return productRepo.findByLocation(location);
+		throw new SocialChefException("Ubicacion Invalido");
 	}
 
 	@Transactional
 	@Override
-	public List<Product> findByPrice(double price) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Transactional
-	@Override
-	public List<Product> findByRegex(String regex) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Product> findByPrice(double bottom, double top) {
+		if	(bottom > 0.0 && bottom <= Double.MAX_VALUE && 
+				top > 0.0 && top <= Double.MAX_VALUE)
+			return productRepo.findByPrice(bottom, top);
+		throw new SocialChefException("Precio Invalido");
 	}
 
 	@Transactional

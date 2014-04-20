@@ -35,10 +35,10 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	public List<Product> findByUserName(@Param("username") String username);
 
 //	======
-//	@Query("")
-//    public List<Product> findByPrice(@Param("price") double price);
+	@Query("SELECT new Product(p.name, p.description, p.price, p.image) "
+			+ "FROM Product p WHERE p.price >= :bottom AND p.price <= :top "
+			+ "ORDER BY p.price ASC")
+    public List<Product> findByPrice(@Param("bottom") double bottom, 
+    		@Param("top") double top);
 
-//	======
-//	@Query("")
-//    public List<Product> findByRegex(@Param("regex") String regex);
 }

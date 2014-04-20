@@ -1,5 +1,6 @@
 package com.socialchef.service.controllers;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -30,27 +31,15 @@ public class ProductsController {
     @RequestMapping(value = "/products/findby", method = RequestMethod.GET)
     @ResponseBody
     public List<Product> findBy(
-	    @RequestParam(value = "key", required = false, defaultValue = "") String key,
-	    @RequestParam(value = "search_value", required = false, defaultValue = "") String search_value) {
-		System.out.println("key: " + key);
-		System.out.println("search: " + search_value);
-		try {
-			switch (key) {
-			case "name":
-			    return productRepo.findByName(search_value);
-			case "category":
-			    return productRepo.findByCategory(search_value);
-			case "location":
-			    return productRepo.findByLocation(search_value);
-			case "price":
-			    return productRepo.findByPrice(Float.parseFloat(search_value));
-			default:
-				return productRepo.findByName(search_value);
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return null;
+    		@RequestParam(value = "search_value", required = false, defaultValue = "") 
+    		String search_value) {
+    	
+    	List<Product> result;
+		result = productRepo.findByName(search_value);
+	    result.addAll(productRepo.findByCategory(search_value));
+	    result.addAll(productRepo.findByLocation(search_value));
+	    result.addAll(productRepo.findByName(search_value));
+	    return result;
     }
 
 }
