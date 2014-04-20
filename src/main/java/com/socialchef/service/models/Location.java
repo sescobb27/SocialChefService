@@ -32,6 +32,10 @@ public class Location implements Serializable {
 
 	public Location() {
 	}
+	
+	public Location(String name) {
+		this.name = name;
+	}
 
 	public Integer getId() {
 		return this.id;

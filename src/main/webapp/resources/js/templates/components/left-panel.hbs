@@ -36,7 +36,9 @@
           </div>
           <div id="collapseThree" class="panel-collapse collapse">
               <div class="panel-body">
-                  Ubicación ...
+                  {{#each locations}}
+                      <p>{{this}}</p>
+                  {{/each}}
               </div>
           </div>
       </div>
@@ -50,7 +52,9 @@
           </div>
           <div id="collapseFour" class="panel-collapse collapse">
               <div class="panel-body">
-                  Categorias ...
+                  {{#each categories}}
+                      <p>{{this}}</p>
+                  {{/each}}
               </div>
           </div>
       </div>

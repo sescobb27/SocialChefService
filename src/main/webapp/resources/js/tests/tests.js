@@ -97,7 +97,7 @@ test('I should see an error when submit an empty login', function() {
     .click('#login_btn')
     .then(function() {
         equal(server.requests.length, 1, "");
-        equal(server.requests[0].url, "http://localhost:8080/login", "");
+        equal(server.requests[0].url, "http://localhost:8080/chefs/login", "");
     });
 });
 
