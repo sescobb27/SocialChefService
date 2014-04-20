@@ -23,6 +23,9 @@ SocialChef.LeftPanelComponent = Ember.Component.extend({
       get: function() {
           this.getCategories();
           this.getLocations();
+      },
+      search: function(query) {
+          alert(query);
       }
     },
     getCategories: function() {

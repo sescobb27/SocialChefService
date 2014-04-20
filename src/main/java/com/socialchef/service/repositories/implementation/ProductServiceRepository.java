@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,14 @@ public class ProductServiceRepository implements ProductService {
 	private ProductRepository productRepo;
 	@Autowired
 	private EntityManager entity;
+	
+	public List<Product> findByRate() {
+		Query q = entity.createQuery(
+				"SELECT new Product(p.name, p.description, p.price, p.image, p.rate) "
+				+ "FROM Product p "
+				+ "ORDER BY p.rate DESC");
+		return q.getResultList();
+	}
 
 	@Transactional
 	@Override

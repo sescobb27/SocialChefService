@@ -88,6 +88,17 @@ public class Product implements Serializable {
 		if (image != null && image.length() != 0)
 			this.image = image;
 	}
+	
+	public Product(String name, String description, double price,
+			String image, float rate) {
+		this.name = name.trim();
+		this.description = description.trim();
+		this.price = price;
+		this.rate = rate;
+		this.errors = new LinkedList<String>();
+		if (image != null && image.length() != 0)
+			this.image = image;
+	}
 
 	public Integer getId() {
 		return this.id;

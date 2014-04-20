@@ -1,9 +1,7 @@
 package com.socialchef.service.controllers;
 
-import java.util.LinkedList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +22,7 @@ public class ProductsController {
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody
     public List<Product> getAllProducts() {
-    	return null;
+    	return productRepo.findByRate();
     }
 
     // /products/findby?key=category&search_value=carne

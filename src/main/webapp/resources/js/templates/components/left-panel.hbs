@@ -30,14 +30,14 @@
           <div class="panel-heading">
               <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                      Ubicación
+                      Ubicaci&oacute;n
                    </a>
               </h4>
           </div>
           <div id="collapseThree" class="panel-collapse collapse">
               <div class="panel-body">
                   {{#each locations}}
-                      <p>{{this}}</p>
+                      <a {{action search this}}>{{this}}</a>
                   {{/each}}
               </div>
           </div>
@@ -53,7 +53,7 @@
           <div id="collapseFour" class="panel-collapse collapse">
               <div class="panel-body">
                   {{#each categories}}
-                      <p>{{this}}</p>
+                      <a {{action search this}}>{{this}}</a>
                   {{/each}}
               </div>
           </div>

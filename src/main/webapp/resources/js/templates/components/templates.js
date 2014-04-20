@@ -11,19 +11,21 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 Ember.TEMPLATES["components/left-panel"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, self=this;
+  var buffer = '', stack1, escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\n                      <p>");
+  data.buffer.push("\n                      <a ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "search", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["ID","ID"],data:data})));
+  data.buffer.push(">");
   stack1 = helpers._triageMustache.call(depth0, "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</p>\n                  ");
+  data.buffer.push("</a>\n                  ");
   return buffer;
   }
 
-  data.buffer.push("<p class=\"lead\">Buscar Por</p>\n  <div class=\"panel-group\" id=\"accordion\">\n      <div class=\"panel panel-default\">\n          <div class=\"panel-heading\">\n              <h4 class=\"panel-title\">\n                  <a href=\"#collapseOne\" data-toggle=\"collapse\" data-parent=\"#accordion\"> Populares </a>\n              </h4>\n          </div>\n          <div id=\"collapseOne\" class=\"panel-collapse collapse in\">\n              <div class=\"panel-body\">\n                  Populares ...\n              </div>\n          </div>\n      </div>\n      <div class=\"panel panel-default\">\n          <div class=\"panel-heading\">\n              <h4 class=\"panel-title\">\n                  <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseTwo\">\n                      Nuevos\n                   </a>\n              </h4>\n          </div>\n          <div id=\"collapseTwo\" class=\"panel-collapse collapse\">\n              <div class=\"panel-body\">\n                  Nuevos ...\n              </div>\n          </div>\n      </div>\n      <div class=\"panel panel-default\">\n          <div class=\"panel-heading\">\n              <h4 class=\"panel-title\">\n                  <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseThree\">\n                      Ubicación\n                   </a>\n              </h4>\n          </div>\n          <div id=\"collapseThree\" class=\"panel-collapse collapse\">\n              <div class=\"panel-body\">\n                  ");
+  data.buffer.push("<p class=\"lead\">Buscar Por</p>\n  <div class=\"panel-group\" id=\"accordion\">\n      <div class=\"panel panel-default\">\n          <div class=\"panel-heading\">\n              <h4 class=\"panel-title\">\n                  <a href=\"#collapseOne\" data-toggle=\"collapse\" data-parent=\"#accordion\"> Populares </a>\n              </h4>\n          </div>\n          <div id=\"collapseOne\" class=\"panel-collapse collapse in\">\n              <div class=\"panel-body\">\n                  Populares ...\n              </div>\n          </div>\n      </div>\n      <div class=\"panel panel-default\">\n          <div class=\"panel-heading\">\n              <h4 class=\"panel-title\">\n                  <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseTwo\">\n                      Nuevos\n                   </a>\n              </h4>\n          </div>\n          <div id=\"collapseTwo\" class=\"panel-collapse collapse\">\n              <div class=\"panel-body\">\n                  Nuevos ...\n              </div>\n          </div>\n      </div>\n      <div class=\"panel panel-default\">\n          <div class=\"panel-heading\">\n              <h4 class=\"panel-title\">\n                  <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseThree\">\n                      Ubicaci&oacute;n\n                   </a>\n              </h4>\n          </div>\n          <div id=\"collapseThree\" class=\"panel-collapse collapse\">\n              <div class=\"panel-body\">\n                  ");
   stack1 = helpers.each.call(depth0, "locations", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n              </div>\n          </div>\n      </div>\n      <div class=\"panel panel-default\">\n          <div class=\"panel-heading\">\n              <h4 class=\"panel-title\">\n                  <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseFour\">\n                      Categorias\n                   </a>\n              </h4>\n          </div>\n          <div id=\"collapseFour\" class=\"panel-collapse collapse\">\n              <div class=\"panel-body\">\n                  ");
