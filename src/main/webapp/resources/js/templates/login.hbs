@@ -1,0 +1,33 @@
+<div class="row">
+    {{#if loginFailed}}
+        <div id="error_msg" class="alert alert-danger">
+            Invalid username or password.
+        </div>
+    {{/if}}
+    {{#if isSlowConnection}}
+        <div id="info_msg" class="alert alert-info">
+            The request seems to be taking more time than usual, please wait.
+        </div>
+    {{/if}}
+    <form {{action 'login' on='submit'}}
+                class="form-horizontal form-group"
+                method="post"
+                accept-charset="utf-8"
+                id="loginForm"
+                role="form">
+        <div class="col-xs-6">
+            {{input type="text" id="user_name"
+                placeholder="Usuario"
+                value=username
+                class="form-control col-xs-3"}}
+            {{input type="password" id="user_password"
+                placeholder="Contraseña"
+                value=password
+                class="form-control col-xs-3"}}
+            <button id="login_btn"
+                            class="submit btn btn-primary"
+                            {{bind-attr disabled="isProcessing"}}
+                            type="submit">Aceptar</button>
+        </div>
+    </form>
+</div>

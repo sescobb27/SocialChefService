@@ -1,0 +1,22 @@
+  .nav li:hover {
+    background: #888;
+    opacity: 0.5;
+  }
+
+  @font-face {
+    font-family: "SmartOutFont";
+    src: url('../fonts/Channel_Slanted1.ttf') format('truetype');
+  }
+
+  h1 {
+    font-family: "SmartOutFont";
+    font-size: 40px;
+    opacity: 0.8;
+    margin-top: 25px;
+    text-align: center;
+  }
+#appname, .lead{
+  font-family: "SmartOutFont";
+  font-size: 20px;
+  opacity: 0.8;
+}

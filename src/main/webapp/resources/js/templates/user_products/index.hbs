@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-12">
+        {{#each product in model}}
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="thumbnail">
+                        <img  {{bind-attr src='product.image'}}>
+                        <div class="caption">
+                            <h4 class="pull-right">$ {{product.price}}</h4>
+                            <h4>{{#link-to 'product' product.name class='btn btn-success' tagName='button'}}{{product.name}}{{/link-to}}</h4>
+                            <p>{{product.description}}</p>
+                        </div>
+                    </div>
+                    <div class="ratings">
+                        <p class="pull-right">18 reviews</p>
+                        <p>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                        </p>
+                    </div>
+                </div>
+        {{/each}}
+    </div>
+</div>

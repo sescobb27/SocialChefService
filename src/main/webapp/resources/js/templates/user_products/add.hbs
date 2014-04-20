@@ -1,0 +1,33 @@
+<div class="row">
+    <form {{action 'validate' on='submit'}}
+                class="form-horizontal form-group"
+                method="post"
+                accept-charset="utf-8"
+                id="addUseProductForm"
+                role="form">
+        {{#if errors}}
+            {{#each error in errors}}
+                <div id="error_msg" class="alert alert-danger">
+                    {{error}}
+                </div>
+            {{/each}}
+        {{/if}}
+        <div class="col-xs-6">
+            {{input type="text" id="product_name"
+                placeholder="Nombre del Plato"
+                value=product_name
+                class="form-control col-xs-3"}}
+            {{input type="number" id="product_price"
+                placeholder="Precio ($Pesos) ejemplo 7250"
+                value=price
+                class="form-control col-xs-3"}}
+            {{view SocialChef.UploadFile name="product_image" file=product_image}}
+            <div id="logo" class="thumbnail">
+                <img id="image_thumbnail" alt="Imagen Plato">
+            </div>
+            <button class="submit btn btn-primary"
+                {{action "validate"}}
+                {{bind-attr disabled="isProcessing"}}>Aceptar</button>
+        </div>
+    </form>
+</div>
