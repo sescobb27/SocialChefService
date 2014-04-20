@@ -24,6 +24,13 @@ public class Validator {
 		return match.matches();
     }
     
+    public static boolean validateSearch(String unique_name) {
+		Pattern regex = Pattern.compile("\\A\\w+\\z",
+				Pattern.CASE_INSENSITIVE);
+		Matcher match = regex.matcher(unique_name);
+		return match.matches();
+    }
+    
     public static boolean validateEmail(String email) {
     	
     	String key = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*";

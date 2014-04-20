@@ -45,10 +45,10 @@ public class ProductsController {
 			case "price":
 			    return productRepo.findByPrice(Float.parseFloat(search_value));
 			default:
-			    return productRepo.findByRegex(search_value);
+				return productRepo.findByName(search_value);
 			}
 		} catch (Exception ex) {
-
+			ex.printStackTrace();
 		}
 		return null;
     }

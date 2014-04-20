@@ -12,15 +12,20 @@ import com.socialchef.service.models.Product;
 public interface ProductRepository extends JpaRepository<Product, Long>{
 
 //	======
-	@Query("SELECT p FROM Product p RIGHT JOIN FETCH p.user WHERE LOWER(p.name) = LOWER(:name)")
+	@Query("SELECT new Product(p.name, p.description, p.price, p.image) "
+			+ "FROM Product p WHERE LOWER(p.name) LIKE %:name%")
     public List<Product> findByName(@Param("name") String name);
 
 //	======
-	@Query("SELECT p FROM Product p INNER JOIN FETCH p.categories pc INNER JOIN pc.category c WHERE LOWER(c.name) = LOWER(:category)")
+	@Query("SELECT new Product(p.name, p.description, p.price, p.image) "
+			+ "FROM Product p INNER JOIN p.categories pc INNER JOIN pc.category c "
+			+ "WHERE LOWER(c.name) = LOWER(:category)")
     public List<Product> findByCategory(@Param("category") String category);
 
 //	======
-	@Query("SELECT p FROM Product p INNER JOIN FETCH p.locations pl INNER JOIN pl.location l WHERE LOWER(l.name) = LOWER(:location)")
+	@Query("SELECT new Product(p.name, p.description, p.price, p.image) "
+			+ "FROM Product p INNER JOIN p.locations pl INNER JOIN pl.location l "
+			+ "WHERE LOWER(l.name) = LOWER(:location)")
     public List<Product> findByLocation(@Param("location") String location);
 
 //	======

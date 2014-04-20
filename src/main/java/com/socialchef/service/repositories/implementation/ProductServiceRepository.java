@@ -3,8 +3,10 @@ package com.socialchef.service.repositories.implementation;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.socialchef.service.exceptions.SocialChefException;
@@ -18,13 +20,16 @@ public class ProductServiceRepository implements ProductService {
 
 	@Resource
 	private ProductRepository productRepo;
+	@Autowired
+	private EntityManager entity;
 
 	@Transactional
 	@Override
 	public List<Product> findByName(String name) throws Exception {
 		if (name != null && !name.isEmpty() &&
-				Validator.validateUniqueNames(name))
+				Validator.validateSearch(name)) {
 			return productRepo.findByName(name);
+		}
 		return null;
 	}
 
