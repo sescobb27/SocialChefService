@@ -123,19 +123,97 @@ func makeProducts() {
 	}
 }
 
-func restore() {
+type Category struct {
+	Id                int
+	Name, Description string
+}
+
+func insertCaterories(c *Category) {
+	query := `insert into categories (id, description, name)
+	  values ($1,$2,$3)`
 	db, err := stablishConnection()
 	assertNoError(err)
 	defer db.Close()
 
-	_, err = db.Exec("truncate table users restart identity CASCADE")
+	_, err = db.Exec(query, c.Id, c.Description, c.Name)
 	assertNoError(err)
-	_, err = db.Exec("truncate table products restart identity CASCADE")
+}
+
+func makeCategories() {
+	categories := []string{"pastas", "carne", "ensalada", "bandeja"}
+	descriptions := []string{"Ricas Pastas", "Ricas Carnes", "Ricas Ensaladas", "Ricas Bandejas"}
+	for i := 0; i < 4; i++ {
+		c := &Category{i, categories[i], descriptions[i]}
+		insertCaterories(c)
+	}
+}
+
+type Location struct {
+	Id   int
+	Name string
+}
+
+func insertLocations(l *Location) {
+	query := `insert into locations (id, name) values ($1,$2)`
+	db, err := stablishConnection()
 	assertNoError(err)
+	defer db.Close()
+
+	_, err = db.Exec(query, l.Id, l.Name)
+	assertNoError(err)
+}
+
+func makeLocations() {
+	locations := []string{"poblado", "laureles", "envigado", "caldas"}
+	for i := 0; i < 4; i++ {
+		l := &Location{i, locations[i]}
+		insertLocations(l)
+	}
+}
+
+func insertProductsLocations() {
+	db, err := stablishConnection()
+	assertNoError(err)
+	defer db.Close()
+
+	query := `insert into products_locations (id, location_id, product_id)
+	values ($1,$2, $3)`
+	for i := 0; i < 4; i++ {
+		_, err = db.Exec(query, i, i, i)
+		assertNoError(err)
+	}
+}
+
+func insertProductsCategories() {
+	db, err := stablishConnection()
+	assertNoError(err)
+	defer db.Close()
+
+	query := `insert into products_categories (id, category_id, product_id)
+	values ($1,$2, $3)`
+	for i := 0; i < 4; i++ {
+		_, err = db.Exec(query, i, i, i)
+		assertNoError(err)
+	}
+}
+
+func restore() {
+	db, err := stablishConnection()
+	assertNoError(err)
+	defer db.Close()
+	tables := []string{"users", "categories", "locations", "products"}
+	for _, t := range tables {
+		_, err = db.Exec("truncate table " + t + " restart identity CASCADE")
+		assertNoError(err)
+	}
 }
 
 func main() {
 	restore()
 	makeUsers()
+	makeCategories()
+	makeLocations()
 	makeProducts()
+	insertProductsCategories()
+	insertProductsLocations()
 }
