@@ -36,9 +36,13 @@
           </div>
           <div id="collapseThree" class="panel-collapse collapse">
               <div class="panel-body">
-                  {{#each locations}}
-                      {{#link-to "search.results" this}}{{this}}{{/link-to}}
-                  {{/each}}
+                  <ul class="list-group">
+                      {{#each locations}}
+                          <li class="list-group-item">
+                              {{#link-to "search.results" this}}{{this}}{{/link-to}}
+                          </li>
+                      {{/each}}
+                  </ul>
               </div>
           </div>
       </div>
@@ -52,9 +56,13 @@
           </div>
           <div id="collapseFour" class="panel-collapse collapse">
               <div class="panel-body">
-                  {{#each categories}}
-                      {{#link-to "search.results" this}}{{this}}{{/link-to}}
-                  {{/each}}
+                  <ul class="list-group">
+                      {{#each categories}}
+                          <li class="list-group-item">
+                              {{#link-to "search.results" this}}{{this}}{{/link-to}}
+                          </li>
+                      {{/each}}
+                  </ul>
               </div>
           </div>
       </div>
