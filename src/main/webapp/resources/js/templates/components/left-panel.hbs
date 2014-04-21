@@ -37,7 +37,7 @@
           <div id="collapseThree" class="panel-collapse collapse">
               <div class="panel-body">
                   {{#each locations}}
-                      <a {{action search this}}>{{this}}</a>
+                      {{#link-to "search.results" this}}{{this}}{{/link-to}}
                   {{/each}}
               </div>
           </div>
@@ -53,7 +53,7 @@
           <div id="collapseFour" class="panel-collapse collapse">
               <div class="panel-body">
                   {{#each categories}}
-                      <a {{action search this}}>{{this}}</a>
+                      {{#link-to "search.results" this}}{{this}}{{/link-to}}
                   {{/each}}
               </div>
           </div>
