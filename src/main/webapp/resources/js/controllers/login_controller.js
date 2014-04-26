@@ -45,14 +45,14 @@ SocialChef.LoginController = Ember.ObjectController.extend({
     },
 
     success: function(username) {
-        this.reset();
         var controller = SocialChef.__container__.lookup("controller:application");
         controller.send('loggedIn', username);
         this.transitionToRoute('user', username);
+        this.reset();
     },
 
     failure: function() {
-        this.reset();
+        this.resetState();
         this.set("loginFailed", true);
     },
 
@@ -62,7 +62,7 @@ SocialChef.LoginController = Ember.ObjectController.extend({
         }
     },
 
-    reset: function() {
+    resetState: function() {
         clearTimeout(this.get("timeout"));
         this.setProperties({
             isProcessing: false,

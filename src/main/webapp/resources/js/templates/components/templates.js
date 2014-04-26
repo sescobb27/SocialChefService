@@ -259,10 +259,15 @@ function program1(depth0,data) {
   data.buffer.push("</h4>\n            <h4>");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "product", "product.name", options) : helperMissing.call(depth0, "link-to", "product", "product.name", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</h4>\n            <p>");
+  data.buffer.push("</h4>\n            <button class='btn btn-success' ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "buy", "product", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push(">Comprar</button>\n            <p>");
   stack1 = helpers._triageMustache.call(depth0, "product.description", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</p>\n        </div>\n    </div>\n    <div class=\"ratings\">\n        <p class=\"pull-right\">18 reviews</p>\n        <p>\n            <span class=\"glyphicon glyphicon-star\"></span>\n            <span class=\"glyphicon glyphicon-star\"></span>\n            <span class=\"glyphicon glyphicon-star\"></span>\n            <span class=\"glyphicon glyphicon-star\"></span>\n            <span class=\"glyphicon glyphicon-star-empty\"></span>\n        </p>\n    </div>\n</div>");
+  data.buffer.push("</p>\n        </div>\n    </div>\n    <div class=\"ratings\">\n        <p class=\"pull-right\">");
+  stack1 = helpers._triageMustache.call(depth0, "product.rate", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</p>\n        <p>\n            <span class=\"glyphicon glyphicon-star\"></span>\n            <span class=\"glyphicon glyphicon-star\"></span>\n            <span class=\"glyphicon glyphicon-star\"></span>\n            <span class=\"glyphicon glyphicon-star\"></span>\n            <span class=\"glyphicon glyphicon-star-empty\"></span>\n        </p>\n    </div>\n</div>");
   return buffer;
   
 });
@@ -288,10 +293,15 @@ function program1(depth0,data) {
     'tagName': ("button")
   },hashTypes:{'class': "STRING",'tagName': "STRING"},hashContexts:{'class': depth0,'tagName': depth0},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "product", "product.name", options) : helperMissing.call(depth0, "link-to", "product", "product.name", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</h4>\n                            <p>");
+  data.buffer.push("</h4>\n                            <button class='btn btn-success' ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "buy", "product", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push(">Comprar</button>\n                            <p>");
   stack1 = helpers._triageMustache.call(depth0, "product.description", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</p>\n                        </div>\n                    </div>\n                    <div class=\"ratings\">\n                        <p class=\"pull-right\">18 reviews</p>\n                        <p>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star-empty\"></span>\n                        </p>\n                    </div>\n                </div>\n        ");
+  data.buffer.push("</p>\n                        </div>\n                    </div>\n                    <div class=\"ratings\">\n                        <p class=\"pull-right\">");
+  stack1 = helpers._triageMustache.call(depth0, "product.rate", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</p>\n                        <p>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star-empty\"></span>\n                        </p>\n                    </div>\n                </div>\n        ");
   return buffer;
   }
 function program2(depth0,data) {
@@ -306,6 +316,29 @@ function program2(depth0,data) {
   stack1 = helpers.each.call(depth0, "product", "in", "model", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n    </div>\n</div>");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES["purchase"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1, escapeExpression=this.escapeExpression;
+
+
+  data.buffer.push("<h1>Factura</h1>\n<form ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "purchase", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(" method=\"post\" accept-charset=\"utf-8\">\n   <h3>");
+  stack1 = helpers._triageMustache.call(depth0, "product.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</h3>\n   <h3>");
+  stack1 = helpers._triageMustache.call(depth0, "product.price", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</h3>\n   <button ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "purchase", {hash:{
+    'on': ("submit")
+  },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(" type='submit'>Aceptar</button>\n</form>");
   return buffer;
   
 });
@@ -423,10 +456,15 @@ function program1(depth0,data) {
     'tagName': ("button")
   },hashTypes:{'class': "STRING",'tagName': "STRING"},hashContexts:{'class': depth0,'tagName': depth0},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "product", "product.name", options) : helperMissing.call(depth0, "link-to", "product", "product.name", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</h4>\n                            <p>");
+  data.buffer.push("</h4>\n                            <button class='btn btn-success' ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "buy", "product", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push(">Comprar</button>\n                            <p>");
   stack1 = helpers._triageMustache.call(depth0, "product.description", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</p>\n                        </div>\n                    </div>\n                    <div class=\"ratings\">\n                        <p class=\"pull-right\">18 reviews</p>\n                        <p>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star-empty\"></span>\n                        </p>\n                    </div>\n                </div>\n        ");
+  data.buffer.push("</p>\n                        </div>\n                    </div>\n                    <div class=\"ratings\">\n                        <p class=\"pull-right\">");
+  stack1 = helpers._triageMustache.call(depth0, "product.rate", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</p>\n                        <p>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star\"></span>\n                            <span class=\"glyphicon glyphicon-star-empty\"></span>\n                        </p>\n                    </div>\n                </div>\n        ");
   return buffer;
   }
 function program2(depth0,data) {
@@ -437,7 +475,10 @@ function program2(depth0,data) {
   else { data.buffer.push(''); }
   }
 
-  data.buffer.push("<div class=\"row\">\n    <div class=\"col-md-12\">\n        ");
+  data.buffer.push("<div class=\"row\">\n    <div class=\"col-md-12\">\n        <h1>");
+  stack1 = helpers._triageMustache.call(depth0, "title", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</h1>\n        ");
   stack1 = helpers.each.call(depth0, "product", "in", "controller", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n    </div>\n</div>");

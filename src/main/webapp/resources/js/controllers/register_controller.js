@@ -80,5 +80,6 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
         var controller = SocialChef.__container__.lookup("controller:application");
         controller.send('loggedIn', this.get('username'));
         this.transitionToRoute('user', this.get('username'));
+        this.reset();
     }
 });

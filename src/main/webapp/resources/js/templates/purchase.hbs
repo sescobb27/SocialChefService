@@ -1,0 +1,6 @@
+<h1>Factura</h1>
+<form {{action "purchase"}} method="post" accept-charset="utf-8">
+   <h3>{{product.name}}</h3>
+   <h3>{{product.price}}</h3>
+   <button {{action "purchase" on='submit'}} type='submit'>Aceptar</button>
+</form>

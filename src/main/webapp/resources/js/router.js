@@ -18,6 +18,7 @@ SocialChef.Router.map(function() {
     this.resource('search', function(){
         this.route('results', {path: ':query'});
     });
+    this.resource('purchase', {path: '/purchase/:product'});
 });
 
 SocialChef.UsersRoute = Ember.Route.extend({
@@ -25,6 +26,17 @@ SocialChef.UsersRoute = Ember.Route.extend({
         console.log(params);
     }
 });
+
+SocialChef.PurchaseRoute = Ember.Route.extend({
+  // activate: function() {},
+  // deactivate: function() {},
+  setupController: function(controller, model) {},
+  // renderTemplate: function() {},
+  // beforeModel: function() {},
+  // afterModel: function() {},
+  // model: function() {}
+});
+
 
 SocialChef.UserRoute = Ember.Route.extend({
     // activate: function() {},
@@ -73,6 +85,7 @@ SocialChef.SearchResultsRoute = Ember.Route.extend({
       Ember.$.getJSON("http://localhost:8080/products/findby", {search_value: model.query})
           .then(function(products) {
                   controller.set('model', products);
+                  controller.set('title', model.query);
           });
   }
 });

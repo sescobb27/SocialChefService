@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-md-12">
+        <h1>{{title}}</h1>
         {{#each product in controller}}
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <div class="thumbnail">
@@ -7,11 +8,12 @@
                         <div class="caption">
                             <h4 class="pull-right">$ {{product.price}}</h4>
                             <h4>{{#link-to 'product' product.name class='btn btn-success' tagName='button'}}{{product.name}}{{/link-to}}</h4>
+                            <button class='btn btn-success' {{action "buy" product}}>Comprar</button>
                             <p>{{product.description}}</p>
                         </div>
                     </div>
                     <div class="ratings">
-                        <p class="pull-right">18 reviews</p>
+                        <p class="pull-right">{{product.rate}}</p>
                         <p>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>

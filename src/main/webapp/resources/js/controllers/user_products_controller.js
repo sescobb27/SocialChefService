@@ -73,6 +73,7 @@ SocialChef.UserProductsAddController = Ember.ObjectController.extend({
   },
   success: function() {
       this.transitionToRoute('user', this.get('application').get('username'));
+      this.reset();
   }
 });
 

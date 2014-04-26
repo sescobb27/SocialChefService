@@ -4,11 +4,12 @@
         <div class="caption">
             <h4 class="pull-right">$ {{product.price}}</h4>
             <h4>{{#link-to 'product' product.name}}{{product.name}}{{/link-to}}</h4>
+            <button class='btn btn-success' {{action "buy" product}}>Comprar</button>
             <p>{{product.description}}</p>
         </div>
     </div>
     <div class="ratings">
-        <p class="pull-right">18 reviews</p>
+        <p class="pull-right">{{product.rate}}</p>
         <p>
             <span class="glyphicon glyphicon-star"></span>
             <span class="glyphicon glyphicon-star"></span>
