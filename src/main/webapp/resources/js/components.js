@@ -28,7 +28,7 @@ SocialChef.LeftPanelComponent = Ember.Component.extend({
     getCategories: function() {
         var self = this;
         var categories_promise = Ember.$
-            .getJSON("http://localhost:8080/categories");
+            .getJSON("/categories");
         categories_promise.success(function(response){
             Ember.run(function(){
                 self.success("categories", response);
@@ -43,7 +43,7 @@ SocialChef.LeftPanelComponent = Ember.Component.extend({
     getLocations: function() {
         var self = this;
         var locations_promise = Ember.$
-            .getJSON("http://localhost:8080/locations");
+            .getJSON("/locations");
         locations_promise.success(function(response){
             Ember.run(function(){
                 self.success("locations", response);

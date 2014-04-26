@@ -46,10 +46,6 @@ SocialChef.UserRoute = Ember.Route.extend({
     // beforeModel: function() {},
     // afterModel: function() {},
     setupController: function(controller, model) {
-        // Ember.$.getJSON("http://localhost:8080/", {search_value: model.query})
-        //     .then(function(products) {
-        //             controller.set('model', products);
-        //     });
     }
 });
 
@@ -82,7 +78,7 @@ SocialChef.SearchResultsRoute = Ember.Route.extend({
   setupController: function(controller, model) {
       var context = this;
       console.log('Query: '+ model.query);
-      Ember.$.getJSON("http://localhost:8080/products/findby", {search_value: model.query})
+      Ember.$.getJSON("/products/findby", {search_value: model.query})
           .then(function(products) {
                   controller.set('model', products);
                   controller.set('title', model.query);
@@ -105,7 +101,7 @@ SocialChef.SearchResultsController = Ember.ArrayController.extend({
 SocialChef.ProductsRoute = Ember.Route.extend({
     setupController: function(productsController) {
         console.log("Fetching Products");
-        Ember.$.getJSON("http://localhost:8080/products").then(function(products) {
+        Ember.$.getJSON("/products").then(function(products) {
                 productsController.set('model', products);
         });
     }
@@ -161,7 +157,7 @@ SocialChef.UserProductsIndexRoute = Em.Route.extend({
   // activate: function() {},
   // deactivate: function() {},
   setupController: function(controller, model) {
-      Ember.$.getJSON("http://localhost:8080/chefs/listproducts").then(function(products) {
+      Ember.$.getJSON("/chefs/listproducts").then(function(products) {
               controller.set('model', products);
       });
   },

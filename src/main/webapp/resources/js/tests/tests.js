@@ -62,8 +62,8 @@ test('I should by able to search products by name', function () {
       .fillIn('input#products-search', "Plato 1")
       .click('#search-btn')
       .then(function () {
-          equal(server.requests.length, 1, "");
-          equal(server.requests[0].url, "http://localhost:8080/products/findby?search_value=Plato+1", "");
+          equal(server.requests.length, 3, "");
+          equal(server.requests[2].url, "/products/findby?search_value=Plato+1", "");
       });
 });
 
@@ -73,8 +73,8 @@ test('I should by able to search products by category', function () {
     .fillIn('input#products-search', "Carne")
     .click('#search-btn')
     .then(function () {
-        equal(server.requests.length, 1, "");
-        equal(server.requests[0].url, "http://localhost:8080/products/findby?search_value=Carne", "");
+        equal(server.requests.length, 3, "");
+        equal(server.requests[2].url, "/products/findby?search_value=Carne", "");
     });
 });
 
@@ -84,20 +84,20 @@ test('I should by able to search products by chef', function () {
     .fillIn('input#products-search', "Jacinto")
     .click('#search-btn')
     .then(function () {
-        equal(server.requests.length, 1, "");
-        equal(server.requests[0].url, "http://localhost:8080/products/findby?search_value=Jacinto", "");
+        equal(server.requests.length, 3, "");
+        equal(server.requests[2].url, "/products/findby?search_value=Jacinto", "");
     });
 });
 
 test('I should see an error when submit an empty login', function() {
-    server.respondWith("post", "http://localhost:8080/login");
+    server.respondWith("post", "http://localhost:8080/chefs/login");
     visit('/login')
     .fillIn("input#user_name","")
     .fillIn("input#user_password","")
     .click('#login_btn')
     .then(function() {
-        equal(server.requests.length, 1, "");
-        equal(server.requests[0].url, "http://localhost:8080/chefs/login", "");
+        equal(server.requests.length, 3, "");
+        equal(server.requests[2].url, "/chefs/login", "");
     });
 });
 
