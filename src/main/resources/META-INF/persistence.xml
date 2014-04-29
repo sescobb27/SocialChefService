@@ -20,6 +20,7 @@
         <class>com.socialchef.service.models.PurchasesProduct</class>
         <class>com.socialchef.service.models.PurchasesDiscount</class>
         <class>com.socialchef.service.models.UsersUserType</class>
+        <class>com.socialchef.service.models.Bill</class>
 		<properties>
 			<property name="hibernate.connection.username" value="postgres"/>
 			<property name="hibernate.connection.password" value="abcDEF25#$"/>
