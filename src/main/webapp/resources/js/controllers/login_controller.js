@@ -36,9 +36,9 @@ SocialChef.LoginController = Ember.ObjectController.extend({
                     self.success(response['username']);
                 });
             });
-            promise.fail(function(){
+            promise.fail(function(response){
                 Ember.run(function(){
-                    self.failure();
+                    self.failure(response);
                 });
              });
         }
@@ -51,7 +51,7 @@ SocialChef.LoginController = Ember.ObjectController.extend({
         this.reset();
     },
 
-    failure: function() {
+    failure: function(response) {
         this.resetState();
         this.set("loginFailed", true);
     },

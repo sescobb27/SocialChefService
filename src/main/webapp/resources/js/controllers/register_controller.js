@@ -57,9 +57,9 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
                     self.success();
                 });
             });
-            promise.fail(function(){
+            promise.fail(function(response){
                 Ember.run(function(){
-                    self.set('isProcessing', false);
+                    self.failure(response);
                 });
              });
         }
@@ -81,5 +81,8 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
         controller.send('loggedIn', this.get('username'));
         this.transitionToRoute('user', this.get('username'));
         this.reset();
+    },
+    failure: function(response) {
+        this.set('isProcessing', false);
     }
 });

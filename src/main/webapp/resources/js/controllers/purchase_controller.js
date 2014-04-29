@@ -27,5 +27,8 @@ SocialChef.PurchaseController = Ember.ObjectController.extend({
   },
   success: function() {
 
+  },
+  failure: function(response) {
+      this.set('isProcessing', false);
   }
 });

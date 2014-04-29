@@ -49,9 +49,9 @@ SocialChef.LeftPanelComponent = Ember.Component.extend({
                 self.success("locations", response);
             });
         });
-        locations_promise.fail(function(){
+        locations_promise.fail(function(response){
             Ember.run(function(){
-                self.failure();
+                self.failure(response);
             });
          });
     },
@@ -62,6 +62,6 @@ SocialChef.LeftPanelComponent = Ember.Component.extend({
         });
     },
 
-    failure: function() {
+    failure: function(response) {
     },
 });
