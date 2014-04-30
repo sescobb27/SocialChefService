@@ -3,8 +3,15 @@
         <img  {{bind-attr src='product.image'}}>
         <div class="caption">
             <h4 class="pull-right">$ {{product.price}}</h4>
-            <h4>{{#link-to 'product' product.name}}{{product.name}}{{/link-to}}</h4>
-            <button class='btn btn-success' {{action "buy" product}}>Comprar</button>
+            <h4>
+                {{#link-to 'product' product.name}}
+                    {{product.name}}
+                {{/link-to}}
+            </h4>
+            <button class='btn btn-success'
+                {{action "buy" product}}>
+                Comprar
+            </button>
             <p>{{product.description}}</p>
         </div>
     </div>

@@ -1,12 +1,13 @@
 <div class="row">
+    <h1>Inicio de Sesión</h1>
     {{#if loginFailed}}
         <div id="error_msg" class="alert alert-danger">
-            Invalid username or password.
+            Nombre de Usuario o Contraseña Invalidos.
         </div>
     {{/if}}
     {{#if isSlowConnection}}
         <div id="info_msg" class="alert alert-info">
-            The request seems to be taking more time than usual, please wait.
+            Espera porfavor el envio de los datos se esta demorando un poco.
         </div>
     {{/if}}
     <form {{action 'login' on='submit'}}
@@ -17,7 +18,7 @@
                 role="form">
         <div class="col-xs-6">
             {{input type="text" id="user_name"
-                placeholder="Usuario"
+                placeholder="Usuario o Correo"
                 value=username
                 class="form-control col-xs-3"}}
             {{input type="password" id="user_password"
