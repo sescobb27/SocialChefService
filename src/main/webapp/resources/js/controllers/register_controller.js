@@ -8,6 +8,9 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
     email: '',
     password: '',
     confirm_password: '',
+    address: '',
+    cellphone: '',
+    telephone: '',
     isProcessing: false,
     errors: Ember.A([]),
     // ==========================================================================
@@ -23,7 +26,11 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
             var email = $.trim(this.get('email'));
             var pass = $.trim(this.get('password'));
             var confirm = $.trim(this.get('confirm_password'));
+            var address = $.trim(this.get('address'));
+            var cellphone = $.trim(this.get('cellphone'));
+            var telephone = $.trim(this.get('telephone'));
             var errors = this.get('errors');
+            errors.clear();
             if (!this.empty(pass) && !this.empty(confirm)) {
                 if (pass !== confirm) {
                     errors.pushObject
@@ -48,6 +55,16 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
 
             if (this.empty(email)) {
                 errors.pushObject("El Campo Correo No puede estar vacio");
+            }
+
+            if (this.empty(address)) {
+                errors.pushObject("El Campo Dirección No puede estar vacio");
+            }
+            if (this.empty(cellphone)) {
+                errors.pushObject("El Campo Celular No puede estar vacio");
+            }
+            if (this.empty(telephone)) {
+                errors.pushObject("El Campo Telefono No puede estar vacio");
             }
 
             if (this.get('errors').length !== 0) {
