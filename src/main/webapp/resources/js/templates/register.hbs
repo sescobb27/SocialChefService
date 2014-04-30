@@ -1,6 +1,6 @@
 <div class="row">
     <form {{action 'validate' on='submit'}}
-                class="form-horizontal form-group"
+                class="form-horizontal"
                 method="post"
                 accept-charset="utf-8"
                 id="registerForm"
@@ -10,34 +10,121 @@
                 la contraseña y la confirmación de la contraseña no concuerdan
             </div>
         {{/if}}
-        <div class="col-xs-6">
-            {{input type="text" id="user_name"
-                placeholder="Nombre"
-                value=name
-                class="form-control col-xs-3"}}
-            {{input type="text" id="user_last_name"
-                placeholder="Apellido"
-                value=last_name
-                class="form-control col-xs-3"}}
-            {{input type="text" id="username"
-                placeholder="Usuario"
-                value=username
-                class="form-control col-xs-3"}}
-            {{input type="email" id="email"
-                placeholder="Correo"
-                value=email
-                class="form-control col-xs-3"}}
-            {{input type="password" id="user_password"
-                placeholder="Contraseña"
-                value=password
-                class="form-control col-xs-3"}}
-            {{input type="password" id="confirm_password"
-                placeholder="Confirmacion Contraseña"
-                value=confirm_password
-                class="form-control col-xs-3"}}
-            <button class="submit btn btn-primary"
-                {{action "validate"}}
+        <div class="form-group">
+            <label for="user_name" class="col-sm-2 control-label">
+                Nombre
+            </label>
+            <div class="col-sm-10">
+                {{input type="text"
+                    id="user_name"
+                    placeholder="Nombre"
+                    value=name
+                    class="form-control"}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="user_last_name" class="col-sm-2 control-label">
+                Apellido
+            </label>
+            <div class="col-sm-10">
+                {{input type="text"
+                    id="user_last_name"
+                    placeholder="Apellido"
+                    value=last_name
+                    class="form-control"}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username" class="col-sm-2 control-label">
+                Usuario
+            </label>
+            <div class="col-sm-10">
+                {{input type="text"
+                    id="username"
+                    placeholder="Usuario"
+                    value=username
+                    class="form-control"}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">
+                Correo
+            </label>
+            <div class="col-sm-10">
+                {{input type="email"
+                    id="email"
+                    placeholder="Correo"
+                    value=email
+                    class="form-control"}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="user_password" class="col-sm-2 control-label">
+                Contraseña
+            </label>
+            <div class="col-sm-10">
+                {{input type="password"
+                    id="user_password"
+                    placeholder="Contraseña"
+                    value=password
+                    class="form-control"}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirm_password" class="col-sm-2 control-label">
+                Confirmaci&oacute;n Contraseña
+            </label>
+            <div class="col-sm-10">
+                {{input type="password"
+                    id="confirm_password"
+                    placeholder="Confirmacion Contraseña"
+                    value=confirm_password
+                    class="form-control"}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="address" class="col-sm-2 control-label">
+                Direcci&oacute;n
+            </label>
+            <div class="col-sm-10">
+                {{input type="text"
+                    id="address"
+                    placeholder="Direcci&oacute;n"
+                    value=addres
+                    class="form-control"}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cellphone_number" class="col-sm-2 control-label">
+                Celular
+            </label>
+            <div class="col-sm-10">
+                {{input type="text"
+                    id="cellphone_number"
+                    placeholder="Celular"
+                    value=cellphone
+                    class="form-control"}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="telephone_number" class="col-sm-2 control-label">
+                Telefono
+            </label>
+            <div class="col-sm-10">
+                {{input type="text"
+                    id="telephone_number"
+                    placeholder="Telefono"
+                    value=telephone
+                    class="form-control"}}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary"
+                {{action "validate" on="submit"}}
                 {{bind-attr disabled="isProcessing"}}>Aceptar</button>
+            </div>
+        </div>
         </div>
     </form>
 </div>
