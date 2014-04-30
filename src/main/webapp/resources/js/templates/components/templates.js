@@ -357,8 +357,12 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
-  
-  data.buffer.push("\n            <div id=\"error_msg\" class=\"alert alert-danger\">\n                la contraseña y la confirmación de la contraseña no concuerdan\n            </div>\n        ");
+  var buffer = '', stack1;
+  data.buffer.push("\n            <div id=\"error_msg\" class=\"alert alert-danger\">\n                ");
+  stack1 = helpers._triageMustache.call(depth0, "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n            </div>\n        ");
+  return buffer;
   }
 
   data.buffer.push("<div class=\"row\">\n    <form ");
@@ -366,7 +370,7 @@ function program1(depth0,data) {
     'on': ("submit")
   },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0],types:["STRING"],data:data})));
   data.buffer.push("\n                class=\"form-horizontal\"\n                method=\"post\"\n                accept-charset=\"utf-8\"\n                id=\"registerForm\"\n                role=\"form\">\n        ");
-  stack1 = helpers['if'].call(depth0, "invalidPass", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers.each.call(depth0, "errors", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n        <div class=\"form-group\">\n            <label for=\"user_name\" class=\"col-sm-2 control-label\">\n                Nombre\n            </label>\n            <div class=\"col-sm-10\">\n                ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
@@ -374,72 +378,81 @@ function program1(depth0,data) {
     'id': ("user_name"),
     'placeholder': ("Nombre"),
     'value': ("name"),
-    'class': ("form-control")
-  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+    'class': ("form-control"),
+    'required': (true)
+  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING",'required': "BOOLEAN"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0,'required': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"user_last_name\" class=\"col-sm-2 control-label\">\n                Apellido\n            </label>\n            <div class=\"col-sm-10\">\n                ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("text"),
     'id': ("user_last_name"),
     'placeholder': ("Apellido"),
     'value': ("last_name"),
-    'class': ("form-control")
-  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+    'class': ("form-control"),
+    'required': (true)
+  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING",'required': "BOOLEAN"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0,'required': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"username\" class=\"col-sm-2 control-label\">\n                Usuario\n            </label>\n            <div class=\"col-sm-10\">\n                ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("text"),
     'id': ("username"),
     'placeholder': ("Usuario"),
     'value': ("username"),
-    'class': ("form-control")
-  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+    'class': ("form-control"),
+    'required': (true)
+  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING",'required': "BOOLEAN"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0,'required': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"email\" class=\"col-sm-2 control-label\">\n                Correo\n            </label>\n            <div class=\"col-sm-10\">\n                ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("email"),
     'id': ("email"),
     'placeholder': ("Correo"),
     'value': ("email"),
-    'class': ("form-control")
-  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+    'class': ("form-control"),
+    'required': (true)
+  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING",'required': "BOOLEAN"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0,'required': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"user_password\" class=\"col-sm-2 control-label\">\n                Contraseña\n            </label>\n            <div class=\"col-sm-10\">\n                ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("password"),
     'id': ("user_password"),
     'placeholder': ("Contraseña"),
     'value': ("password"),
-    'class': ("form-control")
-  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+    'class': ("form-control"),
+    'required': (true)
+  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING",'required': "BOOLEAN"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0,'required': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"confirm_password\" class=\"col-sm-2 control-label\">\n                Confirmaci&oacute;n Contraseña\n            </label>\n            <div class=\"col-sm-10\">\n                ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("password"),
     'id': ("confirm_password"),
     'placeholder': ("Confirmacion Contraseña"),
     'value': ("confirm_password"),
-    'class': ("form-control")
-  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+    'class': ("form-control"),
+    'required': (true)
+  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING",'required': "BOOLEAN"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0,'required': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"address\" class=\"col-sm-2 control-label\">\n                Direcci&oacute;n\n            </label>\n            <div class=\"col-sm-10\">\n                ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("text"),
     'id': ("address"),
     'placeholder': ("Direcci&oacute;n"),
     'value': ("addres"),
-    'class': ("form-control")
-  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+    'class': ("form-control"),
+    'required': (true)
+  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING",'required': "BOOLEAN"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0,'required': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"cellphone_number\" class=\"col-sm-2 control-label\">\n                Celular\n            </label>\n            <div class=\"col-sm-10\">\n                ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("text"),
     'id': ("cellphone_number"),
     'placeholder': ("Celular"),
     'value': ("cellphone"),
-    'class': ("form-control")
-  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+    'class': ("form-control"),
+    'required': (true)
+  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING",'required': "BOOLEAN"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0,'required': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"telephone_number\" class=\"col-sm-2 control-label\">\n                Telefono\n            </label>\n            <div class=\"col-sm-10\">\n                ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("text"),
     'id': ("telephone_number"),
     'placeholder': ("Telefono"),
     'value': ("telephone"),
-    'class': ("form-control")
-  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+    'class': ("form-control"),
+    'required': (true)
+  },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING",'required': "BOOLEAN"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0,'required': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <div class=\"col-sm-offset-2 col-sm-10\">\n            <button type=\"submit\" class=\"btn btn-primary\"\n                ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "validate", {hash:{
     'on': ("submit")

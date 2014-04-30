@@ -5,11 +5,11 @@
                 accept-charset="utf-8"
                 id="registerForm"
                 role="form">
-        {{#if invalidPass}}
+        {{#each errors}}
             <div id="error_msg" class="alert alert-danger">
-                la contraseña y la confirmación de la contraseña no concuerdan
+                {{this}}
             </div>
-        {{/if}}
+        {{/each}}
         <div class="form-group">
             <label for="user_name" class="col-sm-2 control-label">
                 Nombre
@@ -19,7 +19,8 @@
                     id="user_name"
                     placeholder="Nombre"
                     value=name
-                    class="form-control"}}
+                    class="form-control"
+                    required=true}}
             </div>
         </div>
         <div class="form-group">
@@ -31,7 +32,8 @@
                     id="user_last_name"
                     placeholder="Apellido"
                     value=last_name
-                    class="form-control"}}
+                    class="form-control"
+                    required=true}}
             </div>
         </div>
         <div class="form-group">
@@ -43,7 +45,8 @@
                     id="username"
                     placeholder="Usuario"
                     value=username
-                    class="form-control"}}
+                    class="form-control"
+                    required=true}}
             </div>
         </div>
         <div class="form-group">
@@ -55,7 +58,8 @@
                     id="email"
                     placeholder="Correo"
                     value=email
-                    class="form-control"}}
+                    class="form-control"
+                    required=true}}
             </div>
         </div>
         <div class="form-group">
@@ -67,7 +71,8 @@
                     id="user_password"
                     placeholder="Contraseña"
                     value=password
-                    class="form-control"}}
+                    class="form-control"
+                    required=true}}
             </div>
         </div>
         <div class="form-group">
@@ -79,7 +84,8 @@
                     id="confirm_password"
                     placeholder="Confirmacion Contraseña"
                     value=confirm_password
-                    class="form-control"}}
+                    class="form-control"
+                    required=true}}
             </div>
         </div>
         <div class="form-group">
@@ -91,7 +97,8 @@
                     id="address"
                     placeholder="Direcci&oacute;n"
                     value=addres
-                    class="form-control"}}
+                    class="form-control"
+                    required=true}}
             </div>
         </div>
         <div class="form-group">
@@ -103,7 +110,8 @@
                     id="cellphone_number"
                     placeholder="Celular"
                     value=cellphone
-                    class="form-control"}}
+                    class="form-control"
+                    required=true}}
             </div>
         </div>
         <div class="form-group">
@@ -115,7 +123,8 @@
                     id="telephone_number"
                     placeholder="Telefono"
                     value=telephone
-                    class="form-control"}}
+                    class="form-control"
+                    required=true}}
             </div>
         </div>
         <div class="form-group">
