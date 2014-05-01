@@ -16,9 +16,25 @@ const (
 	connection_format string = "user=%s dbname=%s sslmode=disable password=%s host=%s"
 )
 
+var (
+	categories = [16]string{"Pasta", "Carne", "Pollo", "Ensalada", "Desayuno",
+		"Almuerzo", "Postre", "Sopa", "Vegetariana", "Menu Infantil",
+		"Comida Rapida", "Almuerzo para 2", "Desayuno para 2", "Comida para 2",
+		"Ensalada de Frutas", "Gourmet"}
+	descriptions = [16]string{"Ricas Pasta", "Ricas Carnes", "Rico Pollo",
+		"Ricas Ensaladas", "Ricos Desayunos", "Ricos Almuerzos", "Ricos Postres",
+		"Ricas Sopas", "Rica Comida Vegetariana", "Ricos Menu Infantil",
+		"Rica Comida Rapida", "Ricos Almuerzo para 2", "Ricos Desayuno para 2",
+		"Ricas Comidas para 2", "Ricas Ensaladas de Frutas", "Ricas Comida Gourmet"}
+	locations = [14]string{"Poblado", "Laureles", "Envigado", "Caldas",
+		"Sabaneta", "Colores", "Estadio", "Calazans", "Bello", "Boston",
+		"Prado Centro", "Itagui", "Belen", "Guayabal"}
+)
+
 func assertNoError(err error) {
 	if err != nil {
 		log.Fatal(err)
+		panic(err)
 	}
 }
 
@@ -107,8 +123,6 @@ func insertProducts(p *Product) {
 
 func makeProducts() {
 	names := []string{"plato1", "plato2", "plato3", "plato4"}
-	// categories := []string{"pastas", "carne", "ensalada", "bandeja"}
-	// locations := []string{"Poblado", "Laureles", "Envigado", "Sabaneta"}
 	descriptions := []string{"Descripcion1", "Descripcion2",
 		"Descripcion3", "Descripcion4"}
 	prices := []float64{18500.0, 12300.0, 5000.0, 7300.0}
@@ -140,10 +154,8 @@ func insertCaterories(c *Category) {
 }
 
 func makeCategories() {
-	categories := []string{"pastas", "carne", "ensalada", "bandeja"}
-	descriptions := []string{"Ricas Pastas", "Ricas Carnes", "Ricas Ensaladas", "Ricas Bandejas"}
-	for i := 0; i < 4; i++ {
-		c := &Category{i, categories[i], descriptions[i]}
+	for i, category := range categories {
+		c := &Category{i, category, descriptions[i]}
 		insertCaterories(c)
 	}
 }
@@ -164,9 +176,8 @@ func insertLocations(l *Location) {
 }
 
 func makeLocations() {
-	locations := []string{"poblado", "laureles", "envigado", "caldas"}
-	for i := 0; i < 4; i++ {
-		l := &Location{i, locations[i]}
+	for i, location := range locations {
+		l := &Location{i, location}
 		insertLocations(l)
 	}
 }
@@ -178,8 +189,8 @@ func insertProductsLocations() {
 
 	query := `insert into products_locations (id, location_id, product_id)
 	values ($1,$2, $3)`
-	for i := 0; i < 4; i++ {
-		_, err = db.Exec(query, i, i, i)
+	for i, _ := range locations {
+		_, err = db.Exec(query, i, i, i%4)
 		assertNoError(err)
 	}
 }
@@ -191,8 +202,8 @@ func insertProductsCategories() {
 
 	query := `insert into products_categories (id, category_id, product_id)
 	values ($1,$2, $3)`
-	for i := 0; i < 4; i++ {
-		_, err = db.Exec(query, i, i, i)
+	for i, _ := range categories {
+		_, err = db.Exec(query, i, i, i%4)
 		assertNoError(err)
 	}
 }
