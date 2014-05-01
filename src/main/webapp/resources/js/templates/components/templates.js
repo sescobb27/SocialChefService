@@ -562,6 +562,34 @@ function program2(depth0,data) {
   return buffer;
   }
 
+function program4(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\n                    ");
+  stack1 = helpers._triageMustache.call(depth0, "category", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n                    ");
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'titleBinding': ("category")
+  },hashTypes:{'titleBinding': "STRING"},hashContexts:{'titleBinding': depth0},contexts:[depth0],types:["ID"],data:data})));
+  data.buffer.push("\n            ");
+  return buffer;
+  }
+
+function program6(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\n                    ");
+  stack1 = helpers._triageMustache.call(depth0, "location", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n                    ");
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'titleBinding': ("location")
+  },hashTypes:{'titleBinding': "STRING"},hashContexts:{'titleBinding': depth0},contexts:[depth0],types:["ID"],data:data})));
+  data.buffer.push("\n            ");
+  return buffer;
+  }
+
   data.buffer.push("<div class=\"row\">\n    <form ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "validate", {hash:{
     'on': ("submit")
@@ -586,6 +614,12 @@ function program2(depth0,data) {
     'class': ("form-control col-xs-3")
   },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\n            ");
+  stack1 = helpers.each.call(depth0, "category", "in", "categories", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n\n            ");
+  stack1 = helpers.each.call(depth0, "location", "in", "locations", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n\n            ");
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "SocialChef.UploadFile", {hash:{
     'name': ("product_image"),
     'file': ("product_image")

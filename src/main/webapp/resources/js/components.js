@@ -27,23 +27,21 @@ SocialChef.LeftPanelComponent = Ember.Component.extend({
     },
     getCategories: function() {
         var self = this;
-        var categories_promise = Ember.$
-            .getJSON("/categories");
+        var categories_promise = Ember.$.getJSON("/categories");
         categories_promise.success(function(response){
             Ember.run(function(){
                 self.success("categories", response);
             });
         });
-        categories_promise.fail(function(){
+        categories_promise.fail(function(response){
             Ember.run(function(){
-                self.failure();
+                self.failure(response);
             });
          });
     },
     getLocations: function() {
         var self = this;
-        var locations_promise = Ember.$
-            .getJSON("/locations");
+        var locations_promise = Ember.$.getJSON("/locations");
         locations_promise.success(function(response){
             Ember.run(function(){
                 self.success("locations", response);

@@ -6,17 +6,54 @@ SocialChef.UserProductsAddController = Ember.ObjectController.extend({
   product_image: '',
   isProcessing: false,
   file: null,
+  categories: Ember.A([]),
+  locations: Ember.A([]),
   errors: Ember.A([]),
-  didInsertElement: function() {
-    this.getCategories();
-    this.getLocations();
-  },
+
   getCategories: function() {
-
+      var self = this;
+      var categories_promise = Ember.$.getJSON("/categories");
+      categories_promise.success(function(response){
+          Ember.run(function(){
+              self.addToArray("categories", response);
+          });
+      });
+      categories_promise.fail(function(response){
+          Ember.run(function(){
+              self.failure(response);
+          });
+       });
   },
+
   getLocations: function() {
-
+      var self = this;
+      var locations_promise = Ember.$.getJSON("/locations");
+      locations_promise.success(function(response){
+          Ember.run(function(){
+              self.addToArray("locations", response);
+          });
+      });
+      locations_promise.fail(function(response){
+          Ember.run(function(){
+              self.failure(response);
+          });
+       });
   },
+
+  addToArray: function(array_type, response) {
+      var context = this;
+      $.each(response, function(index, val) {
+          context.get(array_type).pushObject(val.name);
+      });
+  },
+
+  failure: function(response) {
+    var context = this;
+    $.each(response, function(index, val) {
+        context.get('errors').pushObject(val);
+    });
+  },
+
   actions: {
       validate: function() {
           this.set('isProcessing', true);
@@ -39,6 +76,7 @@ SocialChef.UserProductsAddController = Ember.ObjectController.extend({
           }
           this.send('addProduct');
       },
+
       change: function(event) {
           var reader = new FileReader();
           var context = this;
@@ -53,9 +91,11 @@ SocialChef.UserProductsAddController = Ember.ObjectController.extend({
           return reader.readAsDataURL(event.target.files[0]);
       }
   },
+
   empty: function(obj) {
       return obj === "" || obj === null;
   },
+
   addProduct: function() {
       var self = this;
       var imageData = new FormData();
@@ -81,6 +121,7 @@ SocialChef.UserProductsAddController = Ember.ObjectController.extend({
           });
        });
   },
+
   success: function() {
       this.transitionToRoute('user', this.get('application').get('username'));
       this.reset();

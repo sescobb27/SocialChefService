@@ -117,7 +117,10 @@ SocialChef.ProductRoute = Ember.Route.extend({
 SocialChef.UserProductsAddRoute = Em.Route.extend({
   // activate: function() {},
   // deactivate: function() {},
-  // setupController: function(controller, model) {},
+  setupController: function(controller, model) {
+      controller.getCategories();
+      controller.getLocations();
+  },
   // renderTemplate: function() {},
   // beforeModel: function() {},
   // afterModel: function() {},

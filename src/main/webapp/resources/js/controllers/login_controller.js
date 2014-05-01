@@ -47,8 +47,12 @@ SocialChef.LoginController = Ember.ObjectController.extend({
     success: function(username) {
         var controller = SocialChef.__container__.lookup("controller:application");
         controller.send('loggedIn', username);
+        this.resetState();
+        this.setProperties({
+            username: '',
+            password: ''
+        })
         this.transitionToRoute('user', username);
-        this.reset();
     },
 
     failure: function(response) {
