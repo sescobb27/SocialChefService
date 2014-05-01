@@ -7,6 +7,16 @@ SocialChef.UserProductsAddController = Ember.ObjectController.extend({
   isProcessing: false,
   file: null,
   errors: Ember.A([]),
+  didInsertElement: function() {
+    this.getCategories();
+    this.getLocations();
+  },
+  getCategories: function() {
+
+  },
+  getLocations: function() {
+
+  },
   actions: {
       validate: function() {
           this.set('isProcessing', true);
