@@ -6,6 +6,7 @@ SocialChef.UserProductsAddController = Ember.ObjectController.extend({
   product_image: '',
   isProcessing: false,
   file: null,
+  product_info: Ember.A([]),
   categories: Ember.A([]),
   locations: Ember.A([]),
   errors: Ember.A([]),
@@ -89,7 +90,38 @@ SocialChef.UserProductsAddController = Ember.ObjectController.extend({
               });
           };
           return reader.readAsDataURL(event.target.files[0]);
+      },
+
+      addCategory: function(category) {
+          var p_info = this.get('product_info');
+          var btn = $('#'+category+'');
+          if (p_info.contains(category)) {
+              p_info.removeObject(category);
+              btn.disabled = false;
+              btn.removeClass('btn-success').addClass('btn-info');
+          } else {
+              p_info.pushObject(category);
+              btn.disabled = true;
+              btn.removeClass('btn-info').addClass('btn-success');
+          }
+          console.log(p_info);
+      },
+
+      addLocation: function(location) {
+            var p_info = this.get('product_info');
+            var btn = $('#'+location+'');
+            if (p_info.contains(location)) {
+                p_info.removeObject(location);
+                btn.disabled = false;
+                btn.removeClass('btn-success').addClass('btn-info');
+            } else {
+                p_info.pushObject(location);
+                btn.disabled = true;
+                btn.removeClass('btn-info').addClass('btn-success');
+            }
+            console.log(p_info);
       }
+
   },
 
   empty: function(obj) {

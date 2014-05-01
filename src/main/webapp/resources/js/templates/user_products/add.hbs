@@ -21,14 +21,21 @@
                 placeholder="Precio ($Pesos) ejemplo 7250"
                 value=price
                 class="form-control col-xs-3"}}
-            {{#each category in categories}}
-                    {{category}}
-                    {{view Ember.Checkbox titleBinding="category" }}
+            <h3>Categorias</h3>
+            {{#each categories}}
+                    <button type="button" class="btn btn-info category"
+                        {{action "addCategory" this}}
+                        {{bind-attr id=this}}>
+                        {{this}}
+                    </button>
             {{/each}}
-
-            {{#each location in locations}}
-                    {{location}}
-                    {{view Ember.Checkbox titleBinding="location" }}
+            <h3>Ubicaciones</h3>
+            {{#each locations}}
+                    <button type="button" class="btn btn-info location"
+                        {{action "addLocation" this}}
+                        {{bind-attr id=this}}>
+                        {{this}}
+                    </button>
             {{/each}}
 
             {{view SocialChef.UploadFile
