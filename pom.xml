@@ -247,6 +247,15 @@
             <artifactId>spring-boot-starter-batch</artifactId>
             <version>1.0.0.RELEASE</version>
         </dependency>
+         <!-- Itext -->
+        
+        <dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.0.6</version>
+		</dependency>
+		 <!-- Itext -->
+            
 	</dependencies>
     <build>
         <plugins>
