@@ -9,6 +9,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.bouncycastle.crypto.tls.ContentType;
 import org.bouncycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,10 +35,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.socialchef.service.exceptions.SocialChefException;
 import com.socialchef.service.helpers.Encryption;
+import com.socialchef.service.helpers.Validator;
+import com.socialchef.service.models.Category;
+import com.socialchef.service.models.Location;
 import com.socialchef.service.models.Product;
+import com.socialchef.service.models.ProductsCategory;
+import com.socialchef.service.models.ProductsLocation;
 import com.socialchef.service.models.User;
 import com.socialchef.service.repositories.implementation.ProductServiceRepository;
 import com.socialchef.service.repositories.implementation.UserServiceRepository;
+import com.socialchef.service.repositories.implementation.ValuesServiceRepository;
 
 @Controller
 public class UsersController {
@@ -45,6 +53,8 @@ public class UsersController {
 	private UserServiceRepository userRepo;
 	@Autowired
 	private ProductServiceRepository productRepo;
+	@Autowired
+	private ValuesServiceRepository valuesRepo;
 
 	@RequestMapping(value = "/chefs", method = RequestMethod.GET)
 	@ResponseBody
@@ -76,10 +86,8 @@ public class UsersController {
 //			cookie.setSecure(true);
 			cookie.setMaxAge(1200); // 20min
 			response.addCookie(cookie);
-			synchronized (session) {
-				session.setAttribute(session_id, userName);
-				session.setMaxInactiveInterval(1200);
-			}
+			session.setAttribute(session_id, userName);
+			session.setMaxInactiveInterval(1200);
 			return;
 		}else if (user.hasErrors()) {
 			throw new SocialChefException(user.getErrors());
@@ -97,7 +105,9 @@ public class UsersController {
 				required = true, defaultValue = "") String productname,
 			@RequestParam(value = "price",
 				required = true, defaultValue = "0.0") String price,
-			@RequestParam(value = "image") MultipartFile image) {
+			@RequestParam(value = "image") MultipartFile image,
+			@RequestParam(value= "categories") List<String> categories,
+			@RequestParam(value= "locations") List<String> locations ) {
 
 		String uname = (String) session.getAttribute(session_id);
 		if( username == null || username.length() == 0 ||
@@ -105,16 +115,41 @@ public class UsersController {
 			throw new SocialChefException(
 					"Necesitas iniciar sesion para agregar un producto");
 		}
+//======validate image existence and content type
 		String imagePath = null;
-		if( image != null && !image.isEmpty() ) {
+		if( image != null && !image.isEmpty() && 
+				Validator.validateImageContentType(image.getContentType())) {
+//======save image and return its path
 			imagePath = saveImage(username, image);
 		} else {
 			throw new SocialChefException(
-					"El producto que deseas Subir necesita una imagen");
+					"El producto que deseas subir necesita una imagen");
 		}
 		Product p = new Product(productname, "", Double.parseDouble(price),
 				imagePath);
+//======fecth logged user
 		p.setUser(userRepo.findByUsername(username));
+		
+//======fetch selected categories and locations
+		List<Category> p_categories =
+				valuesRepo.getCategoriesByName(categories);
+		List<Location> p_locations = 
+				valuesRepo.getLocationsByName(locations);
+		
+//======populate join tables
+		List<ProductsCategory> p_cat = new LinkedList<ProductsCategory>();
+		for (Category c : p_categories) {
+			p_cat.add(new ProductsCategory(c, p));
+		}
+		p.setProductsCategories(p_cat);
+		
+		List<ProductsLocation> p_loc = new LinkedList<ProductsLocation>();
+		for (Location l : p_locations) {
+			p_loc.add(new ProductsLocation(l, p));
+		}
+		p.setProductsLocations(p_loc);
+		
+//======create product
 		if ( !productRepo.create(p) )
 			throw new SocialChefException(p.getErrors());
 	}
