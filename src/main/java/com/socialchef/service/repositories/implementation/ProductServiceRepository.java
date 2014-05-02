@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import com.socialchef.service.exceptions.SocialChefException;
 import com.socialchef.service.helpers.Validator;
 import com.socialchef.service.models.Product;
+import com.socialchef.service.models.ProductsCategory;
+import com.socialchef.service.repositories.ProductCategoriesRepository;
+import com.socialchef.service.repositories.ProductLocationsRepository;
 import com.socialchef.service.repositories.ProductRepository;
 import com.socialchef.service.repositories.services.ProductService;
 
@@ -21,6 +24,10 @@ public class ProductServiceRepository implements ProductService {
 
 	@Resource
 	private ProductRepository productRepo;
+	@Resource
+	private ProductCategoriesRepository productCategoriesRepo;
+	@Resource
+	private ProductLocationsRepository productLocationsRepo;
 	@Autowired
 	private EntityManager entity;
 	
@@ -74,6 +81,8 @@ public class ProductServiceRepository implements ProductService {
 	public boolean create(Product product) {
 		if (product.validateProduct()) {
 			Product saved = productRepo.save(product);
+			productCategoriesRepo.save(product.getProductsCategories());
+			productLocationsRepo.save(product.getProductsLocations());
 			return saved != null;
 		}
 		return false;
