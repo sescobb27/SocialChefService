@@ -118,8 +118,12 @@ SocialChef.UserProductsAddRoute = Em.Route.extend({
   // activate: function() {},
   // deactivate: function() {},
   setupController: function(controller, model) {
-      controller.getCategories();
-      controller.getLocations();
+      if (controller.get('categories').length === 0){
+          controller.getCategories();
+      }
+      if (controller.get('locations').length === 0){
+          controller.getLocations();
+      }
   },
   // renderTemplate: function() {},
   // beforeModel: function() {},

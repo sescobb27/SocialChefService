@@ -1,3 +1,8 @@
+SocialChef.Category = Em.Object.extend({
+    name: '',
+    key: '',
+});
+
 SocialChef.UserProductsAddController = Ember.ObjectController.extend({
   needs: ['application'],
   application: Ember.computed.alias("controllers.application"),
@@ -25,17 +30,19 @@ SocialChef.UserProductsAddController = Ember.ObjectController.extend({
           var name = this.get('product_name');
           var price = parseFloat(this.get('price'));
           var image = this.get('product_image');
+          var errors = this.get('errors');
+          errors.clear();
           if (this.empty(name)) {
-              this.get('errors').pushObject('El nombre del plato no puede ser vacio');
+              errors.pushObject('El nombre del plato no puede ser vacio');
           }
           if (this.empty(image)) {
-              this.get('errors').pushObject('Debe de haber una imagen del producto que vas a vender');
+              errors.pushObject('Debe de haber una imagen del producto que vas a vender');
           }
           if (price <= 0 || isNaN(price)) {
-              this.get('errors').pushObject('El precio del plato no puede ser <= 0');
+              errors.pushObject('El precio del plato no puede ser <= 0');
           }
 
-          if(this.get('errors').length > 0) {
+          if(errors.length > 0) {
               this.set('isProcessing', false);
               return false;
           }
@@ -72,7 +79,8 @@ SocialChef.UserProductsAddController = Ember.ObjectController.extend({
       // ======================================================================
       addCategory: function(category) {
           var p_info = this.get('p_categories');
-          var btn = $('#'+category+'');
+          var _category = category.replace(/ /g, '-');
+          var btn = $('#'+_category+'');
           if (p_info.contains(category)) {
               p_info.removeObject(category);
               btn.disabled = false;
@@ -161,6 +169,24 @@ SocialChef.UserProductsAddController = Ember.ObjectController.extend({
 
 
   // ==========================================================================
+  // START FUNCTION RESET
+  // ==========================================================================
+  reset: function(){
+      this.set('product_name', '');
+      this.set('price', '');
+      this.set('product_image', '');
+      this.set('isProcessing', false);
+      this.set('file', null);
+      this.get('p_categories').clear();
+      this.get('p_locations').clear();
+      this.get('errors').clear();
+  },
+  // ==========================================================================
+  // END FUNCTION RESET
+  // ==========================================================================
+
+
+  // ==========================================================================
   // START FUNCTION SUCCESS
   // ==========================================================================
   success: function() {
@@ -222,7 +248,16 @@ SocialChef.UserProductsAddController = Ember.ObjectController.extend({
   addToArray: function(array_type, response) {
       var context = this;
       $.each(response, function(index, val) {
-          context.get(array_type).pushObject(val.name);
+          var object = val.name;
+          if ( array_type === "categories") {
+              object = SocialChef.Category.create({
+                  name: val.name,
+                  key: val.name.replace(/ /g, '-')
+              });
+          }
+          if(!context.get(array_type).contains(object)) {
+              context.get(array_type).pushObject(object);
+          }
       });
   },
   // ==========================================================================

@@ -24,9 +24,9 @@
             <h3>Categorias</h3>
             {{#each categories}}
                     <button type="button" class="btn btn-info category"
-                        {{action "addCategory" this}}
-                        {{bind-attr id=this}}>
-                        {{this}}
+                        {{action "addCategory" this.name}}
+                        {{bind-attr id=this.key}}>
+                        {{this.name}}
                     </button>
             {{/each}}
             <h3>Ubicaciones</h3>

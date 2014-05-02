@@ -566,13 +566,13 @@ function program4(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push("\n                    <button type=\"button\" class=\"btn btn-info category\"\n                        ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "addCategory", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "addCategory", "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
   data.buffer.push("\n                        ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
-    'id': ("")
+    'id': ("key")
   },hashTypes:{'id': "ID"},hashContexts:{'id': depth0},contexts:[],types:[],data:data})));
   data.buffer.push(">\n                        ");
-  stack1 = helpers._triageMustache.call(depth0, "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n                    </button>\n            ");
   return buffer;
