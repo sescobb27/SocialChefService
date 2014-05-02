@@ -24,6 +24,13 @@ public class Validator {
 		return match.matches();
     }
     
+    public static boolean validateProductName(String p_name) {
+		Pattern regex = Pattern.compile("\\A(\\w|\\s){4,30}\\z",
+				Pattern.CASE_INSENSITIVE);
+		Matcher match = regex.matcher(p_name);
+		return match.matches();
+    }
+    
     public static boolean validateSearch(String unique_name) {
 		Pattern regex = Pattern.compile("\\A\\w+\\z",
 				Pattern.CASE_INSENSITIVE);
@@ -39,5 +46,15 @@ public class Validator {
     			Pattern.CASE_INSENSITIVE);
 		Matcher match = regex.matcher(email);
 		return match.matches();
+    }
+    
+    public static boolean validateImageContentType(String content_type) {
+		String[] valid_contentTypes = {"image/png", "image/bmp", "image/jpeg",
+				"image/x-rgb", "image/png"};
+		for (String v_content_type : valid_contentTypes) {
+			if (content_type.equalsIgnoreCase(v_content_type))
+				return true;
+		}
+		return false;
     }
 }
