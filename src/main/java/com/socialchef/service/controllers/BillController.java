@@ -59,7 +59,10 @@ public class BillController {
 			}
 
 		}
-		printer(usersListBills.get(0));
+		 for(int x = 0; x<usersListBills.size();x++){
+			 printer(usersListBills.get(x));
+			 
+		 }
 		return usersListBills;
 
 	}
@@ -68,7 +71,7 @@ public class BillController {
 		
 		Document document = new Document();
 		try {
-			PdfWriter.getInstance(document, new FileOutputStream("prueba numero 1.pdf"));
+			PdfWriter.getInstance(document, new FileOutputStream(userBill.get(0).getChef_id().toString()+".pdf"));
 			document.open();
 			Paragraph paragraph  = new Paragraph();
 			paragraph.add("esto es la verga");
