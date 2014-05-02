@@ -52,8 +52,9 @@ public class BillController {
 			} else {
 				usersListBills.add(userListBill);
 				this.userListBill = new ArrayList<Bill>();
-				userListBill.add(bill);
+				userListBill.add(bill); //añado el nuevo
 				chef_id = (listBills.get(iterator).getChef_id());
+				iterator++;
 				continue;
 
 			}
@@ -74,7 +75,7 @@ public class BillController {
 			PdfWriter.getInstance(document, new FileOutputStream(userBill.get(0).getChef_id().toString()+".pdf"));
 			document.open();
 			Paragraph paragraph  = new Paragraph();
-			paragraph.add("esto es la verga");
+			
 			document.add(paragraph);
 			
             PdfPTable table = new PdfPTable(6); // 6 columns.
