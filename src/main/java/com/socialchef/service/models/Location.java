@@ -18,7 +18,8 @@ public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="LOCATIONS_ID_GENERATOR", sequenceName="LOCATIONS_ID_SEQUENCE")
+	@SequenceGenerator(name="LOCATIONS_ID_GENERATOR",
+		sequenceName="LOCATIONS_ID_SEQUENCE", initialValue=1, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LOCATIONS_ID_GENERATOR")
 	@Column(unique=true, nullable=false)
 	private Integer id;
@@ -34,7 +35,12 @@ public class Location implements Serializable {
 	}
 	
 	public Location(String name) {
-		this.name = name;
+		this.name = name.trim();
+	}
+	
+	public Location(Integer id, String name) {
+		this.id = id;
+		this.name = name.trim();
 	}
 
 	public Integer getId() {
