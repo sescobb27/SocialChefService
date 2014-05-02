@@ -15,7 +15,8 @@ public class ProductsLocation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRODUCTS_LOCATIONS_ID_GENERATOR", sequenceName="PRODUCTS_LOCATIONS_ID_SEQUENCE")
+	@SequenceGenerator(name="PRODUCTS_LOCATIONS_ID_GENERATOR",
+		sequenceName="PRODUCTS_LOCATIONS_ID_SEQUENCE", initialValue=1, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRODUCTS_LOCATIONS_ID_GENERATOR")
 	@Column(unique=true, nullable=false)
 	private Integer id;
@@ -33,6 +34,11 @@ public class ProductsLocation implements Serializable {
 	public ProductsLocation() {
 	}
 
+	public ProductsLocation(Location location, Product product) {
+		this.location = location;
+		this.product = product;
+	}
+	
 	public Integer getId() {
 		return this.id;
 	}

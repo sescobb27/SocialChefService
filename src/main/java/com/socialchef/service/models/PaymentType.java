@@ -16,7 +16,8 @@ public class PaymentType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PAYMENT_TYPES_ID_GENERATOR", sequenceName="PAYMENT_TYPES_ID_SEQUENCE")
+	@SequenceGenerator(name="PAYMENT_TYPES_ID_GENERATOR",
+		sequenceName="PAYMENT_TYPES_ID_SEQUENCE", initialValue=1, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PAYMENT_TYPES_ID_GENERATOR")
 	@Column(unique=true, nullable=false)
 	private Integer id;

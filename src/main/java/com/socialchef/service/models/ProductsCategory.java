@@ -15,22 +15,28 @@ public class ProductsCategory implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRODUCTS_CATEGORIES_ID_GENERATOR", sequenceName="PRODUCTS_CATEGORIES_ID_SEQUENCE")
+	@SequenceGenerator(name="PRODUCTS_CATEGORIES_ID_GENERATOR",
+		sequenceName="PRODUCTS_CATEGORIES_ID_SEQUENCE", initialValue=1, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRODUCTS_CATEGORIES_ID_GENERATOR")
 	@Column(unique=true, nullable=false)
 	private Integer id;
 
 	//bi-directional many-to-one association to Category
 	@ManyToOne
-	@JoinColumn(name="category_id", nullable=false)
+	@JoinColumn(name="category_id", nullable=false, insertable=true)
 	private Category category;
 
 	//bi-directional many-to-one association to Product
 	@ManyToOne
-	@JoinColumn(name="product_id", nullable=false)
+	@JoinColumn(name="product_id", nullable=false, insertable=true)
 	private Product product;
 
 	public ProductsCategory() {
+	}
+	
+	public ProductsCategory(Category category, Product product) {
+		this.category = category;
+		this.product = product;
 	}
 
 	public Integer getId() {

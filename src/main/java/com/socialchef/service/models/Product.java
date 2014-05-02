@@ -23,7 +23,8 @@ public class Product implements Serializable {
 	private static final float MAX_RATE = 5.0f;
 
 	@Id
-	@SequenceGenerator(name="PRODUCTS_ID_GENERATOR", sequenceName="PRODUCTS_ID_SEQUENCE")
+	@SequenceGenerator(name="PRODUCTS_ID_GENERATOR",
+		sequenceName="PRODUCTS_ID_SEQUENCE", initialValue=1, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRODUCTS_ID_GENERATOR")
 	@Column(unique=true, nullable=false)
 	private Integer id;
@@ -88,7 +89,7 @@ public class Product implements Serializable {
 		if (image != null && image.length() != 0)
 			this.image = image;
 	}
-	
+
 	public Product(String name, String description, double price,
 			String image, float rate) {
 		this.name = name.trim();
@@ -275,7 +276,7 @@ public class Product implements Serializable {
 	}
 
 	public boolean validateProduct () {
-		if ( !Validator.validateUniqueNames(this.name) )
+		if ( !Validator.validateProductName(this.name) )
 			addError("Invalid Product Name Format");
 		if ( this.price < 0.0 )
 			addError("Price Should be greater than 0");
