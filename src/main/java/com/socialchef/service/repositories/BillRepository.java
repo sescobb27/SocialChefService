@@ -12,8 +12,8 @@ import com.socialchef.service.models.Bill;
 public interface BillRepository extends JpaRepository<Bill, Long> {
 	
 //	======
-	@Query("SELECT p FROM Bill p ")
-    public List<Bill> selectAll();
+	@Query("SELECT p FROM Bill p  order by p.chef_id ASC")
+	public List<Bill> selectAll();
 
 //	======
 

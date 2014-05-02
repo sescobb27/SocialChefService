@@ -26,6 +26,8 @@ public class Bill implements Serializable {
 	@Column(name="transaction_id", length=1000)
 	private Integer transaction_id;
 	
+	@Column(name="chef_id", length=1000)
+	private Integer chef_id;
 	@Column(name="date", length=1000)
 	private Timestamp 	date;
 	
@@ -49,6 +51,12 @@ public class Bill implements Serializable {
 	
 	
 	
+	public Integer getChef_id() {
+		return chef_id;
+	}
+	public void setChef_id(Integer chef_id) {
+		this.chef_id = chef_id;
+	}
 	public Integer getId() {
 		return id;
 	}
