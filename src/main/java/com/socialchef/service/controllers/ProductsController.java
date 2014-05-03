@@ -1,7 +1,8 @@
 package com.socialchef.service.controllers;
 
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,15 +29,14 @@ public class ProductsController {
     // /products/findby?key=category&search_value=carne
     @RequestMapping(value = "/products/findby", method = RequestMethod.GET)
     @ResponseBody
-    public List<Product> findBy(
+    public Set<Product> findBy(
     		@RequestParam(value = "search_value", required = false, defaultValue = "") 
     		String search_value) {
     	
-    	List<Product> result;
-		result = productRepo.findByName(search_value);
+    	Set<Product> result = new HashSet<Product>();
+		result.addAll(productRepo.findByName(search_value));
 	    result.addAll(productRepo.findByCategory(search_value));
 	    result.addAll(productRepo.findByLocation(search_value));
-	    result.addAll(productRepo.findByName(search_value));
 	    return result;
     }
 
