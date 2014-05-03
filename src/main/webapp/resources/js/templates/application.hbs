@@ -1,15 +1,6 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button"
-          class="navbar-toggle"
-          data-toggle="collapse"
-          data-target=".navbar-ex1-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-      </button>
       {{#link-to "index" class="navbar-brand" id="appname"}}
           SocialChef
       {{/link-to}}
@@ -19,10 +10,11 @@
       <ul class="nav navbar-nav navbar-right">
         <li> {{#link-to "products"}} Products {{/link-to}} </li>
           <li> {{#link-to "about"}} About {{/link-to}} </li>
-          <li> {{#link-to "login"}} Login {{/link-to}} </li>
           {{#if username}}
+              <li> {{#link-to "logout" username}} Cerrar Sesion {{/link-to}} </li>
               <li> {{#link-to "user" username}} {{username}} {{/link-to}} </li>
           {{else}}
+              <li> {{#link-to "login"}} Iniciar Sesion {{/link-to}} </li>
               <li> {{#link-to "register"}} Register {{/link-to}} </li>
           {{/if}}
       </ul>
@@ -34,6 +26,7 @@
     <div class="row">
       {{ products-search search="search"}}
       <div class="col-md-3">
+          {{auth-panel}}
           {{left-panel}}
       </div>
       <div class="container">

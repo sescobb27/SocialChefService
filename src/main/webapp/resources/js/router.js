@@ -1,6 +1,7 @@
 SocialChef.Router.map(function() {
     this.route('about');
     this.route('login');
+    this.route('logout');
     this.route('register');
     this.resource( 'index', { path: '/' } );
     this.resource( 'chefs', { path: '/chefs'} );
@@ -167,6 +168,23 @@ SocialChef.UserProductsIndexRoute = Em.Route.extend({
       Ember.$.getJSON("/chefs/listproducts").then(function(products) {
               controller.set('model', products);
       });
+  },
+  // renderTemplate: function() {},
+  // beforeModel: function() {},
+  // afterModel: function() {},
+
+  model: function() {
+      return ;
+  }
+});
+
+SocialChef.LogoutRoute = Ember.Route.extend({
+  // activate: function() {},
+  // deactivate: function() {},
+  setupController: function(controller, model) {
+      // Send Logout Action
+      // TO-DO
+      this.transitionToRoute("index");
   },
   // renderTemplate: function() {},
   // beforeModel: function() {},
