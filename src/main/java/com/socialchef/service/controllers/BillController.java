@@ -25,16 +25,16 @@ import com.socialchef.service.repositories.implementation.BillServiceRepository;
 public class BillController {
 	@Autowired
 	private BillServiceRepository BillRepo;
-	private List<Bill> listBills;
-	private List<Bill> userListBill = new ArrayList<Bill>();
-	private List<List<Bill>> usersListBills = new ArrayList<List<Bill>>();
-	private Integer chef_id = 0;
 
 	@RequestMapping(value = "/bill", method = RequestMethod.GET)
 	@ResponseBody
 	public List<List<Bill>> getAllProducts() {
+		List<Bill> listBills;
+		List<Bill> userListBill = new ArrayList<Bill>();
+		List<List<Bill>> usersListBills = new ArrayList<List<Bill>>();
+		Integer chef_id;
 
-		List<Bill> listBills = BillRepo.selectAll();
+		listBills = BillRepo.selectAll();
 
 		int iterator = 0;
 
@@ -42,7 +42,7 @@ public class BillController {
 
 		for (Bill bill : listBills) {
 
-			if (getChef_id() == bill.getChef_id()) {
+			if (chef_id==  bill.getChef_id()) {
 
 				userListBill.add(bill);
 				iterator++;
@@ -50,7 +50,7 @@ public class BillController {
 				continue;
 			} else {
 				usersListBills.add(userListBill);
-				this.userListBill = new ArrayList<Bill>();
+				userListBill = new ArrayList<Bill>();
 				userListBill.add(bill); // añado el nuevo
 				chef_id = (listBills.get(iterator).getChef_id());
 				iterator++;
@@ -59,6 +59,7 @@ public class BillController {
 			}
 
 		}
+		usersListBills.add(userListBill);//añade el ultimo usuario;
 		for (int x = 0; x < usersListBills.size(); x++) {
 			printer(usersListBills.get(x));
 
@@ -152,28 +153,6 @@ public class BillController {
 
 	}
 
-	public Integer getChef_id() {
-		return chef_id;
-	}
 
-	public void setChef_id(Integer chef_id) {
-		this.chef_id = chef_id;
-	}
-
-	public List<Bill> getListBills() {
-		return listBills;
-	}
-
-	public void setListBills(List<Bill> listBills) {
-		this.listBills = listBills;
-	}
-
-	public List<Bill> getUserListBill() {
-		return userListBill;
-	}
-
-	public void setUserListBill(List<Bill> userListBill) {
-		this.userListBill = userListBill;
-	}
 
 }
