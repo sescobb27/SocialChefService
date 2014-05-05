@@ -252,6 +252,13 @@
             <artifactId>jetty-jndi</artifactId>
             <version>8.1.14.v20131031</version>
         </dependency>
+         <!-- Itext -->
+        <dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.0.6</version>
+		</dependency>
+		 <!-- Itext -->
 	</dependencies>
     <build>
         <plugins>

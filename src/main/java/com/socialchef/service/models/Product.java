@@ -28,22 +28,16 @@ public class Product implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRODUCTS_ID_GENERATOR")
 	@Column(unique=true, nullable=false)
 	private Integer id;
-
 	@Column(name="created_at", nullable=false)
 	private Timestamp createdAt;
-
 	@Column(name="description", length=1000)
 	private String description;
-
 	@Column(name="name", nullable=false, length=50)
 	private String name;
-
 	@Column(name="price", nullable=false)
 	private double price;
-
 	@Column(name="rate", nullable=false)
 	private float rate;
-
 	@Column(name="image", nullable=false)
 	private String image = "images/default.png";
 
