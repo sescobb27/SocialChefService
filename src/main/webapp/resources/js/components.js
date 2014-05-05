@@ -69,32 +69,101 @@ SocialChef.AuthPanelComponent = Ember.Component.extend({
   classNames: [],
   providers: Ember.A([]),
   didInsertElement: function() {
-      this.get('providers').pushObjects(["Twitter", "Facebook", "Instagram"]);
+      this.get('providers').pushObjects(["Twitter", "Facebook"]);
   },
 
   actions: {
       signIn: function(provider) {
           var promise = null;
+          OAuth.initialize('CGeO08Q36jRyhGwGEcryHMOOzlw');
           if ( provider=="Twitter" ) {
-                  var self = this;
-                  promise = Ember.$.ajax({
-                      type: 'POST',
-                      url: "https://api.twitter.com/oauth/request_token",
-                  });
-                  promise.success(function(response){
-                      Ember.run(function(){
-                          self.twitterSuccess(response);
-                      });
-                  });
-                  promise.fail(function(response){
-                      Ember.run(function(){
-                          self.failure(response);
-                      });
-                  });
+              OAuth.popup('twitter', function(error, result) {
+                // result: {
+                //   "oauth_token": "TOKEN",
+                //   "oauth_token_secret": "TOKEN"
+                // }
+                if (error !== null) {
+                    var timestamp = new Date().getTime();
+                    var oauth_consumer_key = 'hIjIvn6gDwTcGm6cE12GNFT7G';
+                    var oauth_nonce = '';
+                    var oauth_signature = '';
+                    var oauth_signature_method = 'HMAC-SHA1';
+                    var oauth_timestamp = String(timestamp);
+                    var oauth_token = result.oauth_token;
+                    var oauth_version = '1.0';
+                    // START SIGNATURE
+                    var signature='GET&';
+                    signature +=
+                        encodeURIComponent(
+                            'https://api.twitter.com/1.1/account/verify_credentials.json');
+                    signature += '&';
+                    signature += encodeURIComponent(
+                        'include_entities=true&');
+                    signature += encodeURIComponent(
+                        "oauth_consumer_key="+oauth_consumer_key+"&");
+                    signature += encodeURIComponent(
+                        "oauth_nonce="+oauth_nonce+"&");
+                    signature += encodeURIComponent(
+                        "oauth_signature_method="+oauth_signature_method+"&");
+                    signature += encodeURIComponent(
+                        "oauth_timestamp="+oauth_timestamp+"&");
+                    signature += encodeURIComponent(
+                        "oauth_token="+oauth_token+"&");
+                    signature += encodeURIComponent(
+                        "oauth_version="+oauth_version+"&");
+                    Ember.$.ajax({
+                        url: "/signature",
+                        dataType: 'json',
+                        async: false,
+                        data: {
+                            'signature': signature,
+                            'secret': result.oauth_token_secret
+                        },
+                        success: function(response){
+                            oauth_signature = response.signature;
+                        }
+                    });
+                    // END SIGNATURE
+
+                    var authHeader = "OAuth ";
+                    authHeader += "oauth_consumer_key=";
+                    authHeader += "oauth_nonce=";
+                    authHeader += "oauth_signature=";
+                    authHeader += "oauth_signature_method=";
+                    authHeader += "oauth_timestamp=";
+                    authHeader += "oauth_token=";
+                    authHeader += "oauth_version=";
+                    promise = Ember.$.ajax({
+                        url: '',
+                        type: 'GET',
+                        headers: {
+                            'Authorization': authHeader
+                        },
+                        data: 'include_entities=true'
+                    });
+                    promise.success(function(response) {
+                        console.log("success");
+                        console.log(response);
+                    });
+                    promise.failure(function(response) {
+                        console.log("error");
+                    });
+
+                }
+                //handle error with error
+                //use result.access_token in your API request
+                console.log(result);
+              });
           } else if ( provider=="Facebook" ) {
-
-          } else if ( provider == "Instagram" ) {
-
+              OAuth.popup('facebook', function(error, result) {
+                // result: {
+                //   "access_token": "TOKEN",
+                //   "expires_in": TIME
+                // }
+                //handle error with error
+                //use result.access_token in your API request
+                console.log(result);
+              });
           }
       }
   },
