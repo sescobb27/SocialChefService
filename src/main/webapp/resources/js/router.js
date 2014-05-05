@@ -20,6 +20,10 @@ SocialChef.Router.map(function() {
         this.route('results', {path: ':query'});
     });
     this.resource('purchase', {path: '/purchase/:product'});
+    this.resource('oauth', function() {
+        this.route('twitter');
+        this.route('facebook');
+    });
 });
 
 SocialChef.UsersRoute = Ember.Route.extend({

@@ -11,23 +11,13 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 Ember.TEMPLATES["components/auth-panel"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var stack1, escapeExpression=this.escapeExpression, self=this;
+  var buffer = '', escapeExpression=this.escapeExpression;
 
-function program1(depth0,data) {
-  
-  var buffer = '', stack1;
-  data.buffer.push("\n    <button type=\"button\" ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "signIn", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
-  data.buffer.push(" class=\"btn btn-info\">\n        ");
-  stack1 = helpers._triageMustache.call(depth0, "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n    </button>\n");
+
+  data.buffer.push("\n<div class=\"container-fluid\">\n    <div class=\"row\">\n        <div class=\"col-md-offset-4 col-lg-offset-4 col-md-4 col-lg-4\">\n            <button id='modal-launcher'\n                class=\"btn btn-primary btn-lg\"\n                data-toggle=\"modal\"\n                data-target=\"#login-modal\">\n                Sign Up\n            </button>\n        </div>\n    </div>\n</div>\n\n<div class=\"modal fade\"\n    id=\"login-modal\" tabindex=\"-1\"\n    role=\"dialog\"\n    aria-labelledby=\"myModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header login_modal_header\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\"\n                    aria-hidden=\"true\">&times;</button>\n                <h2 class=\"modal-title\" id=\"myModalLabel\">\n                    Login to Your Account\n                </h2>\n            </div>\n            <div class=\"modal-body login-modal\">\n              <p>Login Description</p>\n              <br/>\n              <div class=\"clearfix\"></div>\n              <div id='social-icons-conatainer'>\n                  <div class='modal-body-left'>\n\n                      <div class=\"form-group\">\n                          <input type=\"text\"\n                              id=\"username\"\n                              placeholder=\"Enter your name\"\n                              value=\"\"\n                              class=\"form-control login-field\">\n                          <i class=\"fa fa-user login-field-icon\"></i>\n                      </div>\n\n                      <div class=\"form-group\">\n                          <input type=\"password\"\n                              id=\"login-pass\"\n                              placeholder=\"Password\"\n                              value=\"\"\n                              class=\"form-control login-field\">\n                          <i class=\"fa fa-lock login-field-icon\"></i>\n                      </div>\n\n                      <a href=\"#\" class=\"btn btn-success modal-login-btn\">Login</a>\n                      <a href=\"#\" class=\"login-link text-center\">Lost your password?</a>\n                  </div>\n\n                  <div class='modal-body-right'>\n                      <div class=\"modal-social-icons\">\n                          <a href='#' class=\"btn btn-default facebook\">\n                              <i class=\"fa fa-facebook modal-icons\"></i>\n                              Sign In with Facebook\n                          </a>\n                          <button class=\"btn btn-default twitter\"\n                              ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "signIn", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(">\n                              <i class=\"fa fa-twitter modal-icons\"></i>\n                              Sign In with Twitter\n                          </button>\n                          <a href='#' class=\"btn btn-default google\">\n                              <i class=\"fa fa-google-plus modal-icons\"></i>\n                              Sign In with Google\n                          </a>\n                      </div>\n                  </div>\n                  <div id='center-line'> OR </div>\n              </div>\n\n              <div class=\"clearfix\"></div>\n              <div class=\"form-group modal-register-btn\">\n                  <button class=\"btn btn-default\">\n                      New User Please Register\n                  </button>\n              </div>\n            </div>\n            <div class=\"clearfix\"></div>\n            <div class=\"modal-footer login_modal_footer\">\n            </div>\n        </div>\n      </div>\n</div>");
   return buffer;
-  }
-
-  stack1 = helpers.each.call(depth0, "providers", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  else { data.buffer.push(''); }
   
 });
 

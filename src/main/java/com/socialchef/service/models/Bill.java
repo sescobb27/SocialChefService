@@ -17,6 +17,11 @@ import javax.persistence.Table;
 @NamedQuery(name="Bill.findAll", query="SELECT p FROM Bill p")
 public class Bill implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4269786076143361586L;
+
 	@Id
 	@SequenceGenerator(name="BILL_ID_GENERATOR", sequenceName="BILL_ID_SEQUENCE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BILL_ID_GENERATOR")
