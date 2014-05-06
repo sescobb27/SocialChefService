@@ -78,7 +78,7 @@ SocialChef.AuthPanelComponent = Ember.Component.extend({
           var promise = Ember.$.getJSON("/oauthtwitter");
           promise.success(function(response){
               Ember.run(function(){
-                  window.open(response.url, '_parent');
+                  window.open(response.url, '_self');
               });
           });
           promise.fail(function(response){
