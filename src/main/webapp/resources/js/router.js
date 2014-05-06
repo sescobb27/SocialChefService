@@ -20,10 +20,6 @@ SocialChef.Router.map(function() {
         this.route('results', {path: ':query'});
     });
     this.resource('purchase', {path: '/purchase/:product'});
-    this.resource('oauth', function() {
-        this.route('twitter');
-        this.route('facebook');
-    });
 });
 
 SocialChef.UsersRoute = Ember.Route.extend({
@@ -198,3 +194,24 @@ SocialChef.LogoutRoute = Ember.Route.extend({
       return ;
   }
 });
+
+SocialChef.RegisterRoute = Ember.Route.extend({
+  // activate: function() {},
+  // deactivate: function() {},
+  setupController: function(controller, model) {
+      if (model.username !== null) {
+          controller.set('username', model.username);
+      }
+      if (model.name !== null) {
+          controller.set('name', model.name);
+      }
+  },
+  // renderTemplate: function() {},
+  // beforeModel: function() {},
+  // afterModel: function() {},
+
+  model: function() {
+      return ;
+  }
+});
+
