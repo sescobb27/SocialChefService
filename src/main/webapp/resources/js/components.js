@@ -67,25 +67,13 @@ SocialChef.LeftPanelComponent = Ember.Component.extend({
 SocialChef.AuthPanelComponent = Ember.Component.extend({
   tagName: '',
   classNames: [],
-  providers: Ember.A([]),
   didInsertElement: function() {
-      this.get('providers').pushObjects(["Twitter", "Facebook"]);
+
   },
 
   actions: {
       signIn: function(provider) {
           var self = this;
-          var promise = Ember.$.getJSON("/oauthtwitter");
-          promise.success(function(response){
-              Ember.run(function(){
-                  window.open(response.url, '_self');
-              });
-          });
-          promise.fail(function(response){
-              Ember.run(function(){
-                  console.log(response);
-              });
-           });
       }
   },
 
