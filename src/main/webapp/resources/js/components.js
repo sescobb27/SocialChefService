@@ -63,25 +63,3 @@ SocialChef.LeftPanelComponent = Ember.Component.extend({
     failure: function(response) {
     },
 });
-
-SocialChef.AuthPanelComponent = Ember.Component.extend({
-  tagName: '',
-  classNames: [],
-  didInsertElement: function() {
-
-  },
-
-  actions: {
-      signIn: function(provider) {
-          var self = this;
-      }
-  },
-
-  twitterSuccess: function(response) {
-      console.log(response);
-  },
-  generateNonce: function() {
-  },
-  getAccessToken: function() {
-  }
-});

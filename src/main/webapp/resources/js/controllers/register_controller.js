@@ -34,11 +34,11 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
             if (!this.empty(pass) && !this.empty(confirm)) {
                 if (pass !== confirm) {
                     errors.pushObject
-                        ("La contraseña y la confirmación de la contraseña no concuerdan");
+                        ("La contrase&ntilde;a y la confirmaci&oacute;n de la contrase&ntilde;a no concuerdan");
                 }
             } else {
                 errors.pushObject
-                    ("La contraseña y la confirmación de la contraseña no pueden estar vacias");
+                    ("La contrase&ntilde;a y la confirmaci&oacute;n de la contraseña no pueden estar vacias");
             }
 
             if (this.empty(name)) {

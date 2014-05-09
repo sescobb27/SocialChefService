@@ -35,12 +35,16 @@ SocialChef.LoginController = Ember.ObjectController.extend({
                 Ember.run(function(){
                     self.success(response['username']);
                 });
+            }).then(function(){
+                return true;
             });
             promise.fail(function(response){
                 Ember.run(function(){
                     self.failure(response);
                 });
-             });
+             }).then(function(){
+                return false;
+            });
         }
     },
 
@@ -51,7 +55,7 @@ SocialChef.LoginController = Ember.ObjectController.extend({
         this.setProperties({
             username: '',
             password: ''
-        })
+        });
         this.transitionToRoute('user', username);
     },
 

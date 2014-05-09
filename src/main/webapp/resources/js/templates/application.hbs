@@ -11,13 +11,17 @@
         <li> {{#link-to "products"}} Products {{/link-to}} </li>
           <li> {{#link-to "about"}} About {{/link-to}} </li>
           {{#if username}}
-              <li> {{#link-to "logout"}} Cerrar Sesion {{/link-to}} </li>
+              <li> {{#link-to "logout"}} Cerrar Sesi&oacute;n {{/link-to}} </li>
               <li> {{#link-to "user" username}} {{username}} {{/link-to}} </li>
           {{else}}
-              <li>  <a href="#" id='modal-launcher'
-                  data-toggle="modal"
-                  data-target="#login-modal">Iniciar Sesion</a>  </li>
-              <li> {{#link-to "register"}} Register {{/link-to}} </li>
+              <li>
+                  <a href="#" id='modal-launcher'
+                        data-toggle="modal"
+                        data-target="#login-modal">
+                      Iniciar Sesi&oacute;n
+                  </a>
+              </li>
+              <li> {{#link-to "register"}} Registrarse {{/link-to}} </li>
           {{/if}}
       </ul>
     </nav>
@@ -28,7 +32,6 @@
     <div class="row">
       {{ products-search search="search"}}
       <div class="col-md-3">
-          {{auth-panel}}
           {{left-panel}}
       </div>
       <div class="container">
@@ -48,6 +51,8 @@
         </div>
     </footer>
 </div>
+
+{{!-- modal --}}
 <div class="modal fade"
     id="login-modal" tabindex="-1"
     role="dialog"
@@ -59,64 +64,68 @@
                 <button type="button" class="close" data-dismiss="modal"
                     aria-hidden="true">&times;</button>
                 <h2 class="modal-title" id="myModalLabel">
-                    Login to Your Account
+                    Inicia Sesi&oacute;n en tu Cuenta
                 </h2>
             </div>
             <div class="modal-body login-modal">
-                <p>Login Description</p>
-                <br/>
-                <div class="clearfix"></div>
-                <div id='social-icons-conatainer'>
-                    <div class='modal-body-left'>
+              <h1>SocialChef</h1>
+              <br/>
+              <div class="clearfix"></div>
+              <div id='social-icons-conatainer'>
+                  <div class='modal-body-left'>
 
-                        <div class="form-group">
-                            <input type="text"
-                                id="username"
-                                placeholder="Enter your name"
-                                value=""
-                                class="form-control login-field">
-                            <i class="fa fa-user login-field-icon"></i>
-                        </div>
+                      <div class="form-group">
+                          {{input type="text" id="username"
+                              placeholder="Usuario o Correo"
+                              value=username
+                              class="form-control login-field"}}
+                          <i class="fa fa-user login-field-icon"></i>
+                      </div>
 
-                        <div class="form-group">
-                            <input type="password"
-                                id="login-pass"
-                                placeholder="Password"
-                                value=""
-                                class="form-control login-field">
-                            <i class="fa fa-lock login-field-icon"></i>
-                        </div>
+                      <div class="form-group">
+                          {{input type="password" id="login-pass"
+                              placeholder="Contrase&ntilde;a"
+                              value=password
+                              class="form-control login-field"}}
+                          <i class="fa fa-lock login-field-icon"></i>
+                      </div>
+                      <button id="login_btn"
+                          class="btn btn-success modal-login-btn"
+                          {{bind-attr disabled="isProcessing"}}
+                          {{action "login"}}
+                          type="button">Aceptar</button>
+                      <a href="#" class="login-link">
+                        recordar contrase&ntilde;a
+                      </a>
+                  </div>
 
-                        <a href="#" class="btn btn-success modal-login-btn">Login</a>
-                        <a href="#" class="login-link text-center">Lost your password?</a>
-                    </div>
+                  <div class='modal-body-right'>
+                      <div class="modal-social-icons">
+                          <a href='#' class="btn btn-default facebook">
+                              <i class="fa fa-facebook modal-icons"></i>
+                              Sign In with Facebook
+                          </a>
+                          <button class="btn btn-default twitter"
+                              {{action "signIn"}}>
+                              <i class="fa fa-twitter modal-icons"></i>
+                              Sign In with Twitter
+                          </button>
+                          <a href='#' class="btn btn-default google">
+                              <i class="fa fa-google-plus modal-icons"></i>
+                              Sign In with Google
+                          </a>
+                      </div>
+                  </div>
+                  <div id='center-line'> OR </div>
+              </div>
 
-                    <div class='modal-body-right'>
-                        <div class="modal-social-icons">
-                            <a href='#' class="btn btn-default facebook">
-                                <i class="fa fa-facebook modal-icons"></i>
-                                Sign In with Facebook
-                            </a>
-                            <button class="btn btn-default twitter"
-                                {{action "signIn"}}>
-                                <i class="fa fa-twitter modal-icons"></i>
-                                Sign In with Twitter
-                            </button>
-                            <a href='#' class="btn btn-default google">
-                                <i class="fa fa-google-plus modal-icons"></i>
-                                Sign In with Google
-                            </a>
-                        </div>
-                    </div>
-                    <div id='center-line'> OR </div>
-                </div>
-
-                <div class="clearfix"></div>
-                <div class="form-group modal-register-btn">
-                    <button class="btn btn-default">
-                        New User Please Register
-                    </button>
-                </div>
+              <div class="clearfix"></div>
+              <div class="form-group modal-register-btn">
+                  <button class="btn btn-default"
+                      {{action "register"}}>
+                      New User Please Register
+                  </button>
+              </div>
             </div>
             <div class="clearfix"></div>
             <div class="modal-footer login_modal_footer">
