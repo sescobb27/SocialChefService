@@ -11,7 +11,7 @@
         <li> {{#link-to "products"}} Products {{/link-to}} </li>
           <li> {{#link-to "about"}} About {{/link-to}} </li>
           {{#if username}}
-              <li> {{#link-to "logout" username}} Cerrar Sesion {{/link-to}} </li>
+              <li> {{#link-to "logout"}} Cerrar Sesion {{/link-to}} </li>
               <li> {{#link-to "user" username}} {{username}} {{/link-to}} </li>
           {{else}}
               <li> {{#link-to "login"}} Iniciar Sesion {{/link-to}} </li>

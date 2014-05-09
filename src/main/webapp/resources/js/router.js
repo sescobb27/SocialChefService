@@ -198,14 +198,7 @@ SocialChef.LogoutRoute = Ember.Route.extend({
 SocialChef.RegisterRoute = Ember.Route.extend({
   // activate: function() {},
   // deactivate: function() {},
-  setupController: function(controller, model) {
-      if (model.username !== null) {
-          controller.set('username', model.username);
-      }
-      if (model.name !== null) {
-          controller.set('name', model.name);
-      }
-  },
+  // setupController: function(controller, model) {},
   // renderTemplate: function() {},
   // beforeModel: function() {},
   // afterModel: function() {},
