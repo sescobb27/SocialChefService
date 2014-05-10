@@ -184,6 +184,22 @@ SocialChef.LogoutRoute = Ember.Route.extend({
   setupController: function(controller, model) {
       // Send Logout Action
       // TO-DO
+      var promise = Ember.$.ajax({
+          type: 'POST',
+          url: "/chefs/logout"
+      });
+      promise.success(function(){
+          Ember.run(function(){
+              var app_controller =
+                  SocialChef.__container__.lookup("controller:application");
+                  app_controller.set('username', '');
+          });
+      });
+      promise.fail(function(response){
+          Ember.run(function(){
+              self.failure(response);
+          });
+      });
       this.transitionToRoute("index");
   },
   // renderTemplate: function() {},

@@ -27,6 +27,8 @@ SocialChef.ApplicationController = Ember.ObjectController.extend({
                 this.transitionToRoute('login');
             }
             Ember.$('#login-modal').modal('toggle');
+            this.set('username', '');
+            this.set('password', '');
         },
         register: function() {
             Ember.$('#login-modal').modal('toggle');
