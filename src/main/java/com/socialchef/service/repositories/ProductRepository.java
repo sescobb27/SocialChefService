@@ -13,19 +13,19 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 
 //	======
 	@Query("SELECT new Product(p.name, p.description, p.price, p.image, p.rate) "
-			+ "FROM Product p WHERE LOWER(p.name) LIKE %:name%")
+			+ "FROM Product p WHERE LOWER(p.name) LIKE %:name% ORDER BY p.rate DESC")
     public List<Product> findByName(@Param("name") String name);
 
 //	======
 	@Query("SELECT new Product(p.name, p.description, p.price, p.image, p.rate) "
 			+ "FROM Product p INNER JOIN p.categories pc INNER JOIN pc.category c "
-			+ "WHERE LOWER(c.name) = LOWER(:category)")
+			+ "WHERE LOWER(c.name) = LOWER(:category) ORDER BY p.rate DESC")
     public List<Product> findByCategory(@Param("category") String category);
 
 //	======
 	@Query("SELECT new Product(p.name, p.description, p.price, p.image, p.rate) "
 			+ "FROM Product p INNER JOIN p.locations pl INNER JOIN pl.location l "
-			+ "WHERE LOWER(l.name) = LOWER(:location)")
+			+ "WHERE LOWER(l.name) = LOWER(:location) ORDER BY p.rate DESC")
     public List<Product> findByLocation(@Param("location") String location);
 
 //	======
