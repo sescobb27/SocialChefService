@@ -116,6 +116,9 @@ public class UserServiceRepository implements UserService {
 	@Transactional
 	public boolean validateLogin(String username, String password) {
 		User u = findByUsername(username);
+		if (u == null) {
+			return false;
+		}
 		try {
 			String []encrypt = {password,u.getCreatedAt().toString()};
 			String new_pass = Encryption.encryptSHA256(encrypt);
