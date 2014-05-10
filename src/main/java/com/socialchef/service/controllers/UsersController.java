@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.bouncycastle.crypto.tls.ContentType;
 import org.bouncycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -84,6 +83,7 @@ public class UsersController {
 			String session_id = makeSessionId(request);
 			Cookie cookie = new Cookie("session_id", session_id);
 //			cookie.setSecure(true);
+			cookie.setHttpOnly(true);
 			cookie.setMaxAge(1200); // 20min
 			response.addCookie(cookie);
 			session.setAttribute(session_id, userName);
@@ -234,6 +234,7 @@ public class UsersController {
 				session_id = makeSessionId(request);
 				Cookie cookie = new Cookie("session_id", session_id);
 //				cookie.setSecure(true);
+				cookie.setHttpOnly(true);
 				cookie.setMaxAge(1200); // 20min
 				response.addCookie(cookie);
 				session.setAttribute(session_id, uname);
@@ -248,5 +249,27 @@ public class UsersController {
 			return result;
 		}
 		throw new SocialChefException("Usuario Invalido");
+	}
+	
+	@RequestMapping(value="/chefs/logout", method=RequestMethod.POST)
+	public void logout(@CookieValue(value="session_id",
+			defaultValue="", required=true) String session_id,
+			HttpServletResponse response, HttpServletRequest request,
+			HttpSession session) {
+		
+		if (session_id != null && !session_id.trim().equals("")) {
+			if (session.getAttribute(session_id) == null) {
+				throw new SocialChefException("No has iniciado sesion todavia");
+			}
+			session.removeAttribute(session_id);
+			for (Cookie cookie : request.getCookies()) {
+				if (cookie.getName().equalsIgnoreCase("session_id")) {
+					cookie.setMaxAge(0);
+				}
+				response.addCookie(cookie);
+			}
+			return;
+		}
+		throw new SocialChefException("No has iniciado sesion todavia");
 	}
 }
