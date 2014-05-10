@@ -25,36 +25,32 @@ public class Bill implements Serializable {
 	@Id
 	@SequenceGenerator(name="BILL_ID_GENERATOR", sequenceName="BILL_ID_SEQUENCE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BILL_ID_GENERATOR")
-	@Column(unique=true, nullable=false)
+	@Column(name="id", unique=true, nullable=false)
 	private Integer id;
 	
-	@Column(name="transaction_id", length=1000)
+	@Column(name="transaction_id", nullable=false)
 	private Integer transaction_id;
 	
-	@Column(name="chef_id", length=1000)
+	@Column(name="chef_id", nullable=false)
 	private Integer chef_id;
-	@Column(name="date", length=1000)
+	
+	@Column(name="date", nullable=false)
 	private Timestamp 	date;
 	
-	@Column(name="productName", length=1000)
+	@Column(name="productName", nullable=false, length=50)
 	private String productName;
 	
-	@Column(name="customerName", length=1000)
+	@Column(name="customerName", nullable=false, length=50)
 	private String customerName;
 	
-	@Column(name="unitaryCost", length=1000)
+	@Column(name="unitaryCost", nullable=false, precision=2)
 	private Double unitaryCost ;
 	
-	@Column(name="totalCost", length=1000)
+	@Column(name="totalCost", nullable=false, precision=2)
 	private Double totalCost
 	;
-	@Column(name="comission", length=1000)
+	@Column(name="comission", nullable=false, precision=2)
 	private Double comission;
-	
-	
-	
-	
-	
 	
 	public Integer getChef_id() {
 		return chef_id;
@@ -110,7 +106,4 @@ public class Bill implements Serializable {
 	public void setComission(Double comission) {
 		this.comission = comission;
 	}
-	
-	
-
 }
