@@ -31,8 +31,8 @@ public class Validator {
 		return match.matches();
     }
     
-    public static boolean validateSearch(String unique_name) {
-		Pattern regex = Pattern.compile("\\A\\w+\\z",
+    public static boolean validateTextOnly(String unique_name) {
+		Pattern regex = Pattern.compile("\\A(\\w+|\\s)+\\z",
 				Pattern.CASE_INSENSITIVE);
 		Matcher match = regex.matcher(unique_name);
 		return match.matches();
