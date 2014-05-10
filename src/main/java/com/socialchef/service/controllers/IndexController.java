@@ -12,7 +12,6 @@ import com.socialchef.service.models.Category;
 import com.socialchef.service.models.Location;
 import com.socialchef.service.repositories.implementation.ValuesServiceRepository;
 
-//testing my fork
 @Controller
 public class IndexController {
 

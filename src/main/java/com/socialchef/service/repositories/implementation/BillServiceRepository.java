@@ -9,10 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.socialchef.service.exceptions.SocialChefException;
-import com.socialchef.service.helpers.Validator;
 import com.socialchef.service.models.Bill;
-import com.socialchef.service.models.Product;
 import com.socialchef.service.repositories.BillRepository;
 
 
@@ -22,12 +19,9 @@ public class BillServiceRepository {
 	private BillRepository billRepo;
 	@Autowired
 	private EntityManager entity;
-	
+
 	@Transactional
-		public List<Bill> selectAll() {
-		
-			return billRepo.selectAll();
-		
-		
+	public List<Bill> selectAll() {
+		return billRepo.selectAll();
 	}
 }
