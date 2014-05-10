@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.socialchef.service.exceptions.SocialChefException;
 import com.socialchef.service.helpers.Validator;
 import com.socialchef.service.models.Product;
-import com.socialchef.service.models.ProductsCategory;
 import com.socialchef.service.repositories.ProductCategoriesRepository;
 import com.socialchef.service.repositories.ProductLocationsRepository;
 import com.socialchef.service.repositories.ProductRepository;
@@ -35,7 +34,7 @@ public class ProductServiceRepository implements ProductService {
 		Query q = entity.createQuery(
 				"SELECT new Product(p.name, p.description, p.price, p.image, p.rate) "
 				+ "FROM Product p "
-				+ "ORDER BY p.rate DESC");
+				+ "ORDER BY p.rate DESC", Product.class);
 		return q.getResultList();
 	}
 
@@ -43,7 +42,7 @@ public class ProductServiceRepository implements ProductService {
 	@Override
 	public List<Product> findByName(String name) {
 		if (name != null && !name.isEmpty() &&
-				Validator.validateSearch(name)) {
+				Validator.validateProductName(name)) {
 			return productRepo.findByName(name.toLowerCase());
 		}
 		throw new SocialChefException("Nombre del Producto Invalido");
@@ -53,7 +52,7 @@ public class ProductServiceRepository implements ProductService {
 	@Override
 	public List<Product> findByCategory(String category) {
 		if (category != null && !category.isEmpty() &&
-				Validator.validateSearch(category))
+				Validator.validateTextOnly(category))
 			return productRepo.findByCategory(category);
 		throw new SocialChefException("Categoria Invalida");
 	}
@@ -62,9 +61,9 @@ public class ProductServiceRepository implements ProductService {
 	@Override
 	public List<Product> findByLocation(String location) {
 		if (location != null && !location.isEmpty() &&
-				Validator.validateSearch(location))
+				Validator.validateTextOnly(location))
 			return productRepo.findByLocation(location);
-		throw new SocialChefException("Ubicacion Invalido");
+		throw new SocialChefException("Ubicacion Invalida");
 	}
 
 	@Transactional
