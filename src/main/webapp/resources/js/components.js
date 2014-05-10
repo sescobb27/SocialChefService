@@ -15,8 +15,9 @@ SocialChef.LeftPanelComponent = Ember.Component.extend({
     classNames: [],
     categories: Ember.A([]),
     locations: Ember.A([]),
+
     didInsertElement: function() {
-      this.send('get') ;
+        this.send('get') ;
     },
 
     actions: {

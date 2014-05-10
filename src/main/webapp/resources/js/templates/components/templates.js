@@ -36,7 +36,7 @@ function program2(depth0,data) {
   data.buffer.push("\n                  </ul>\n              </div>\n          </div>\n      </div>\n      <div class=\"panel panel-default\">\n          <div class=\"panel-heading\">\n              <h4 class=\"panel-title\">\n                  <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseFour\">\n                      Categorias\n                   </a>\n              </h4>\n          </div>\n          <div id=\"collapseFour\" class=\"panel-collapse collapse\">\n              <div class=\"panel-body\">\n                  <ul class=\"list-group\">\n                      ");
   stack1 = helpers.each.call(depth0, "categories", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n                  </ul>\n              </div>\n          </div>\n      </div>\n      <div class=\"panel panel-default\">\n          <div class=\"panel-heading\">\n              <h4 class=\"panel-title\">\n                  <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseFive\">\n                      Precios\n                   </a>\n              </h4>\n          </div>\n          <div id=\"collapseFive\" class=\"panel-collapse collapse\">\n              <div class=\"panel-body\">\n                  Precios ...\n              </div>\n          </div>\n      </div>\n  </div>");
+  data.buffer.push("\n                  </ul>\n              </div>\n          </div>\n      </div>\n  </div>");
   return buffer;
   
 });
@@ -438,7 +438,7 @@ function program1(depth0,data) {
     'class': ("form-control"),
     'required': (true)
   },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING",'required': "BOOLEAN"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0,'required': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
-  data.buffer.push("\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"user_password\" class=\"col-sm-2 control-label\">\n                Contraseña\n            </label>\n            <div class=\"col-sm-5\">\n                ");
+  data.buffer.push("\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"user_password\" class=\"col-sm-2 control-label\">\n                Contrase&ntilde;a\n            </label>\n            <div class=\"col-sm-5\">\n                ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("password"),
     'id': ("user_password"),
@@ -447,7 +447,7 @@ function program1(depth0,data) {
     'class': ("form-control"),
     'required': (true)
   },hashTypes:{'type': "STRING",'id': "STRING",'placeholder': "STRING",'value': "ID",'class': "STRING",'required': "BOOLEAN"},hashContexts:{'type': depth0,'id': depth0,'placeholder': depth0,'value': depth0,'class': depth0,'required': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
-  data.buffer.push("\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"confirm_password\" class=\"col-sm-2 control-label\">\n                Confirmaci&oacute;n Contraseña\n            </label>\n            <div class=\"col-sm-5\">\n                ");
+  data.buffer.push("\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"confirm_password\" class=\"col-sm-2 control-label\">\n                Confirmaci&oacute;n Contrase&ntilde;a\n            </label>\n            <div class=\"col-sm-5\">\n                ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("password"),
     'id': ("confirm_password"),
