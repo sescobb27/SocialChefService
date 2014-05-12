@@ -87,18 +87,6 @@ SocialChef.SearchResultsRoute = Ember.Route.extend({
   }
 });
 
-
-SocialChef.SearchController = Ember.ArrayController.extend({
-    query: '',
-    category: ''
-});
-
-SocialChef.SearchResultsController = Ember.ArrayController.extend({
-    query: '',
-    category: ''
-});
-
-
 SocialChef.ProductsRoute = Ember.Route.extend({
     setupController: function(productsController) {
         console.log("Fetching Products");
