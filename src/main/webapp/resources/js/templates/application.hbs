@@ -10,9 +10,9 @@
       <ul class="nav navbar-nav navbar-right">
         <li> {{#link-to "products"}} Products {{/link-to}} </li>
           <li> {{#link-to "about"}} About {{/link-to}} </li>
-          {{#if username}}
+          {{#if user_username}}
               <li> {{#link-to "logout"}} Cerrar Sesi&oacute;n {{/link-to}} </li>
-              <li> {{#link-to "user" username}} {{username}} {{/link-to}} </li>
+              <li> {{#link-to "user" user_username}} {{user_username}} {{/link-to}} </li>
           {{else}}
               <li>
                   <a href="#" id='modal-launcher'
@@ -77,7 +77,7 @@
                       <div class="form-group">
                           {{input type="text" id="username"
                               placeholder="Usuario o Correo"
-                              value=username
+                              value=user_username
                               class="form-control login-field"}}
                           <i class="fa fa-user login-field-icon"></i>
                       </div>
@@ -85,7 +85,7 @@
                       <div class="form-group">
                           {{input type="password" id="login-pass"
                               placeholder="Contrase&ntilde;a"
-                              value=password
+                              value=user_password
                               class="form-control login-field"}}
                           <i class="fa fa-lock login-field-icon"></i>
                       </div>

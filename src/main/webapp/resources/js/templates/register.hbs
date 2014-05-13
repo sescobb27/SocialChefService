@@ -38,14 +38,14 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="username" class="col-sm-2 control-label">
+            <label for="u_username" class="col-sm-2 control-label">
                 Usuario
             </label>
             <div class="col-sm-5">
                 {{input type="text"
-                    id="username"
+                    id="u_username"
                     placeholder="Usuario"
-                    value=username
+                    value=u_username
                     class="form-control"
                     required=true}}
             </div>
@@ -71,7 +71,7 @@
                 {{input type="password"
                     id="user_password"
                     placeholder="Contrase&ntilde;a"
-                    value=password
+                    value=u_password
                     class="form-control"
                     required=true}}
             </div>
@@ -131,7 +131,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-5">
             <button type="submit" class="btn btn-primary"
-                {{action "validate" on="submit"}}
+                {{action 'validate' on='submit'}}
                 {{bind-attr disabled="isProcessing"}}>Aceptar</button>
             </div>
         </div>

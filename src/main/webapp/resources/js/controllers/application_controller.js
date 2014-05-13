@@ -1,6 +1,6 @@
 SocialChef.ApplicationController = Ember.ObjectController.extend({
-    username: '',
-    password: null,
+    user_username: '',
+    user_password: null,
     category: '',
     actions: {
         search: function (search_query) {
@@ -13,11 +13,11 @@ SocialChef.ApplicationController = Ember.ObjectController.extend({
             this.set('category', category);
         },
         loggedIn: function(username) {
-            this.set('username', username);
+            this.set('user_username', username);
         },
         login: function() {
-            var user = this.get('username');
-            var pass = this.get('password');
+            var user = this.get('user_username');
+            var pass = this.get('user_password');
             var login_controller =
                 SocialChef.__container__.lookup("controller:login");
             login_controller.set('username', user);
@@ -27,8 +27,8 @@ SocialChef.ApplicationController = Ember.ObjectController.extend({
                 this.transitionToRoute('login');
             }
             Ember.$('#login-modal').modal('toggle');
-            this.set('username', '');
-            this.set('password', '');
+            this.set('user_username', '');
+            this.set('user_password', '');
         },
         register: function() {
             Ember.$('#login-modal').modal('toggle');

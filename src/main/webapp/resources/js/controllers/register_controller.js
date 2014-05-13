@@ -4,9 +4,9 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
     // ==========================================================================
     name: '',
     last_name: '',
-    username: '',
+    u_username: '',
     email: '',
-    password: '',
+    u_password: '',
     confirm_password: '',
     address: '',
     cellphone: '',
@@ -20,15 +20,15 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
     actions: {
         validate: function () {
             this.set('isProcessing', true);
-            var name = $.trim(this.get("name"));
-            var last_name = $.trim(this.get("last_name"));
-            var username = $.trim(this.get("username"));
-            var email = $.trim(this.get('email'));
-            var pass = $.trim(this.get('password'));
-            var confirm = $.trim(this.get('confirm_password'));
-            var address = $.trim(this.get('address'));
-            var cellphone = $.trim(this.get('cellphone'));
-            var telephone = $.trim(this.get('telephone'));
+            var name = this.get("name");
+            var last_name = this.get("last_name");
+            var username = this.get("u_username");
+            var email = this.get('email');
+            var pass = this.get('u_password');
+            var confirm = this.get('confirm_password');
+            var address = this.get('address');
+            var cellphone = this.get('cellphone');
+            var telephone = this.get('telephone');
             var errors = this.get('errors');
             errors.clear();
             if (!this.empty(pass) && !this.empty(confirm)) {
@@ -67,7 +67,7 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
                 errors.pushObject("El Campo Telefono No puede estar vacio");
             }
 
-            if (this.get('errors').length !== 0) {
+            if (errors.length !== 0) {
                 this.set('isProcessing', false);
                 return false;
             } else {
@@ -103,16 +103,17 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
         return {
             name: this.get('name'),
             lastName: this.get('last_name'),
-            userName: this.get('username'),
+            userName: this.get('u_username'),
             email: this.get('email'),
-            password: this.get('password')
+            password: this.get('u_password')
         };
     },
     success: function() {
+        console.log("===SUCCESS===");
         var controller = SocialChef.__container__.lookup("controller:application");
-        controller.send('loggedIn', this.get('username'));
-        this.transitionToRoute('user', this.get('username'));
-        this.reset();
+        controller.send('loggedIn', this.get('u_username'));
+        this.transitionToRoute('user', this.get('u_username'));
+        // this.reset();
     },
     failure: function(response) {
         this.set('isProcessing', false);
