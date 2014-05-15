@@ -83,7 +83,7 @@ public class UsersController {
 			String session_id = makeSessionId(request);
 			Cookie cookie = new Cookie("session_id", session_id);
 //			cookie.setSecure(true);
-			cookie.setHttpOnly(true);
+//			cookie.setHttpOnly(true);
 			cookie.setMaxAge(1200); // 20min
 			response.addCookie(cookie);
 			session.setAttribute(session_id, userName);
@@ -234,7 +234,7 @@ public class UsersController {
 				session_id = makeSessionId(request);
 				Cookie cookie = new Cookie("session_id", session_id);
 //				cookie.setSecure(true);
-				cookie.setHttpOnly(true);
+//				cookie.setHttpOnly(true);
 				cookie.setMaxAge(1200); // 20min
 				response.addCookie(cookie);
 				session.setAttribute(session_id, uname);
