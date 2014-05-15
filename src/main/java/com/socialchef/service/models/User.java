@@ -99,6 +99,13 @@ public class User implements Serializable {
 		this.createdAt = new Timestamp(new Date().getTime());
 		this.errors = new LinkedList<String>();
 	}
+	
+	public User(Integer id, String name, String username, String email) {
+		this.id = id;
+		this.name = name;
+		this.username = username;
+		this.email = email;
+	}
 
 	public Integer getId() {
 		return this.id;
