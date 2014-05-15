@@ -6,6 +6,7 @@ SocialChef.PurchaseController = Ember.ObjectController.extend({
   actions: {
       purchase: function() {
           var self = this;
+          this.set('isProcessing', true);
           var promise = Ember.$.ajax({
               type: 'POST',
               url: "/purchase",
@@ -26,11 +27,16 @@ SocialChef.PurchaseController = Ember.ObjectController.extend({
       }
   },
   success: function(response) {
-      alert(response);
+      alert(response.msg);
+      this.setProperties({
+          product: null,
+          isProcessing: false,
+          address: ''});
+      this.transitionToRoute('index');
   },
   failure: function(response) {
       this.set('isProcessing', false);
-      alert(response);
+      alert(response.errors);
   },
   serialize: function() {
       var product = this.get('product');
