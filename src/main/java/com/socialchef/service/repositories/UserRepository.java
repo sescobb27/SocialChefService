@@ -17,4 +17,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query("SELECT u FROM User u WHERE LOWER(u.username) = LOWER(:username)")
 	public User findByUsername(@Param("username") String username);
 	
+	@Query("SELECT new User(u.id, u.name, u.username, u.email) FROM Product p "
+			+ "INNER JOIN p.user u WHERE p.id = :p_id")
+	public User findUserByProductId(@Param("p_id") Integer p_id);
 }

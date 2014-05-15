@@ -33,6 +33,11 @@ public class PurchasesProduct implements Serializable {
 
 	public PurchasesProduct() {
 	}
+	
+	public PurchasesProduct(Product product, Purchase purchase) {
+		this.product = product;
+		this. purchase = purchase;
+	}
 
 	public Integer getId() {
 		return this.id;

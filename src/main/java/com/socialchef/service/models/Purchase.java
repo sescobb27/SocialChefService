@@ -45,6 +45,12 @@ public class Purchase implements Serializable {
 
 	public Purchase() {
 	}
+	
+	public Purchase(double totalPrice, User chef, User purchaser) {
+		this.totalPrice = totalPrice;
+		this.chef = chef;
+		this.purchaser = purchaser;
+	}
 
 	public Integer getId() {
 		return this.id;

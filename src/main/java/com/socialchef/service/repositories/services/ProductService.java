@@ -12,4 +12,5 @@ public interface ProductService {
     public List<Product> findByPrice(double bottom, double top) throws Exception;
     public boolean create(Product product) throws Exception;
     public List<Product> findByUserName(String username) throws Exception;
+    public Product findById(Integer id) throws Exception;
 }

@@ -1,5 +1,6 @@
 package com.socialchef.service.repositories.implementation;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,9 +14,14 @@ import org.springframework.stereotype.Service;
 import com.socialchef.service.exceptions.SocialChefException;
 import com.socialchef.service.helpers.Validator;
 import com.socialchef.service.models.Product;
+import com.socialchef.service.models.Purchase;
+import com.socialchef.service.models.PurchasesProduct;
+import com.socialchef.service.models.User;
 import com.socialchef.service.repositories.ProductCategoriesRepository;
 import com.socialchef.service.repositories.ProductLocationsRepository;
 import com.socialchef.service.repositories.ProductRepository;
+import com.socialchef.service.repositories.PurchasesRepository;
+import com.socialchef.service.repositories.UserRepository;
 import com.socialchef.service.repositories.services.ProductService;
 
 @Service
@@ -27,12 +33,17 @@ public class ProductServiceRepository implements ProductService {
 	private ProductCategoriesRepository productCategoriesRepo;
 	@Resource
 	private ProductLocationsRepository productLocationsRepo;
+	@Resource
+	private UserRepository userRepo;
+	@Resource
+	private PurchasesRepository purchasesRepo;
+	
 	@Autowired
 	private EntityManager entity;
 	
 	public List<Product> findByRate() {
 		Query q = entity.createQuery(
-				"SELECT new Product(p.name, p.description, p.price, p.image, p.rate) "
+				"SELECT new Product(p.id, p.name, p.description, p.price, p.image, p.rate) "
 				+ "FROM Product p "
 				+ "ORDER BY p.rate DESC", Product.class);
 		return q.getResultList();
@@ -97,4 +108,37 @@ public class ProductServiceRepository implements ProductService {
 		throw new SocialChefException("Usuario Invalido");
 	}
 
+	@Transactional
+	@Override
+	public Product findById(Integer id) {
+		return productRepo.findById(id);
+	}
+	
+	@Transactional
+	public void purchase(Product p, User purchaser) {
+		User u = userRepo.findUserByProductId(p.getId());
+		purchaser = userRepo.findByUsername(purchaser.getUsername());
+		if (purchaser == null) {
+	    	User unknown = 
+	    			new User(
+	    					"Unknown", "Unknown", "Unknown",
+	    					"Unknown@Unknown.com", "");
+			purchaser = userRepo.save(unknown);
+		}
+		if (u == null) {
+			throw new SocialChefException("Vendedor Invalido");
+		}
+
+		Purchase purchase = new Purchase(p.getPrice(), u, purchaser);
+		List<Product> l_products = new LinkedList<Product>();
+		l_products.add(p);
+
+		List<PurchasesProduct> l_pp = new LinkedList<PurchasesProduct>();
+		for (Product purchased_product : l_products) {
+			l_pp.add(new PurchasesProduct(purchased_product, purchase));
+		}
+		
+		purchase.setPurchasesProducts(l_pp);
+		purchasesRepo.save(purchase);
+	}
 }
