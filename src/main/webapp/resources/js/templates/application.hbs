@@ -1,135 +1,275 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      {{#link-to "index" class="navbar-brand" id="appname"}}
-          SocialChef
-      {{/link-to}}
-    </div>
+<section id="topbar">
+   <div class="container"><div class="row hidden-sm hidden-xs">
+     <ul class="links pull-right">
+      <li> {{#link-to "about"}} About {{/link-to}} </li>
+      <li> {{#link-to "login" class="icon-user"}} Login {{/link-to}} </li>
+      {{#if username}}
+              <li> {{#link-to "user" username}} {{username}} {{/link-to}} </li>
+      {{else}}
+              <li> {{#link-to "register" class="icon-file"}} Register {{/link-to}} </li>
+      {{/if}}
+     </ul>
+    </div>     
+</section>
 
-    <nav class="navbar-inner collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li> {{#link-to "products"}} Products {{/link-to}} </li>
-          <li> {{#link-to "about"}} About {{/link-to}} </li>
-          {{#if user_username}}
-              <li> {{#link-to "logout"}} Cerrar Sesi&oacute;n {{/link-to}} </li>
-              <li> {{#link-to "user" user_username}} {{user_username}} {{/link-to}} </li>
-          {{else}}
-              <li>
-                  <a href="#" id='modal-launcher'
-                        data-toggle="modal"
-                        data-target="#login-modal">
-                      Iniciar Sesi&oacute;n
-                  </a>
-              </li>
-              <li> {{#link-to "register"}} Registrarse {{/link-to}} </li>
-          {{/if}}
-      </ul>
-    </nav>
-  </nav>
+
+<section id="header-main">
+<div class="container">
+<div class="row header-wrap">
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 inner">
+<div id="logo">{{#link-to "index"}}<img src="images/logo.png" alt="logo">{{/link-to}}
+</div>
+</div>
+
+<div class="header-right col-lg-8 col-md-8 col-sm-12 header-hidden inner">
+<div class="box-services"><span class="btn-info iconbox pull-left"><i class="icon-truck">
+&nbsp;</i></span>
+
+<div class="media-body">
+<h4>Entrega gratis</h4>
+<small>Pedidos superiores a $50.000</small>
+</div>
+</div> 
+
+<div class="box-services"><span class="iconbox pull-left"><i class="icon-phone">&nbsp;</i></span>
+
+<div class="media-body">
+<h4>LLamanos gratis</h4>
+<small>018000-1800-123</small>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+</section>
+
+
+<section id="pav-mainnav">
+<div class="container">
+<div class="mainnav-wrap">
+<div class="row">
+<div class="col-lg-9 col-md-9 col-sm-6 col-xs-12">
+<div class="navbar navbar-inverse">
+<nav class="pav-megamenu" role="navigation">
+
+<div class="pav-megamenu">
+<div class="navbar">
+<div id="mainmenutop" class="megamenu" role="navigation">
+<div class="navbar-header">
+<a href="javascript:;" data-target=".navbar-collapse" data-toggle="collapse"
+class="navbar-toggle">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+<ul class="nav navbar-nav megamenu">
+<li class="home">
+{{#link-to "index"}}<img src="images/icon-home.png"><span
+class="menu-title"> Inicio</span>{{/link-to}}</li>
+
+<li class="parent dropdown pav-parrent">
+<a class="dropdown-toggle" data-toggle="dropdown"
+href="http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=17"><span
+class="menu-title">Desayunos</span><b
+class="caret"></b></a>
+
+
+<div class="dropdown-menu" style="width:900px"><div class="dropdown-menu-inner"><div class="row"><div class="mega-col col-xs-12 col-sm-12 col-md-3 "> <div class="mega-col-inner"><div class="pavo-widget" id="wid-10"><div class="menu-title">Lo último</div>
+<div class="widget-product-list">
+  <div class="widget-inner">
+    
+            <div class="w-product clearfix">
+                <div class="image"><img src="http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce14-200x236.jpg" alt="Posuere lacus"></div>
+                <div class="name">Posuere lacus</div>
+                <div class="price">
+                    <span class="price-old">$119.50</span> <span class="price-new">$101.88</span>
+                  </div>
+                        <div class="rating"><img src="catalog/view/theme/default/image/stars-4.png" alt="Based on 1 reviews."></div>
+                <!--<div class="cart"><input type="button" value="Add to Cart" onclick="addToCart('48');" class="button" /></div> -->
+      </div>
+        </div>
+</div></div></div></div><div class="mega-col col-xs-12 col-sm-12 col-md-5 "> <div class="mega-col-inner"><div class="pavo-widget" id="wid-2"><div class="menu-title">Mas puntuado</div>
+<div class="widget-html">
+	<div class="widget-inner">
+		<p><img src="image/data/desayuno.jpg" alt="food"></p>
+<p>Fusce a congue purus, sit amet sollicitudin libero. In hac habitasse platea dictumst.</p>	</div>
+</div></div></div></div><div class="mega-col col-xs-12 col-sm-12 col-md-4 "> <div class="mega-col-inner"><div class="pavo-widget" id="wid-3"><div class="menu-title">Lo mas vendido</div>
+<div class="widget-product-list">
+  <div class="widget-inner">
+    
+            <div class="w-product clearfix">
+                <div class="image"><img src="http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce05-60x65.jpg" alt="Fusce vestibulum"></div>
+                <div class="name">Fusce vestibulum</div>
+                <div class="price">
+                    $119.50                  </div>
+                        <div class="rating"><img src="catalog/view/theme/default/image/stars-5.png" alt="Based on 1 reviews."></div>
+                <!--<div class="cart"><input type="button" value="Add to Cart" onclick="addToCart('34');" class="button" /></div> -->
+      </div>
+            <div class="w-product clearfix">
+                <div class="image"><img src="http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce10-60x65.jpg" alt="Morbi ullamcorper"></div>
+                <div class="name">Morbi ullamcorper</div>
+                <div class="price">
+                    <span class="price-old">$119.50</span> <span class="price-new">$96.00</span>
+                  </div>
+                        <div class="rating"><img src="catalog/view/theme/default/image/stars-2.png" alt="Based on 1 reviews."></div>
+                <!--<div class="cart"><input type="button" value="Add to Cart" onclick="addToCart('28');" class="button" /></div> -->
+      </div>
+            <div class="w-product clearfix">
+                <div class="image"><img src="http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce01-60x65.jpg" alt="Mollicitudin lobortis"></div>
+                <div class="name">Mollicitudin lobortis</div>
+                <div class="price">
+                    <span class="price-old">$119.50</span> <span class="price-new">$113.63</span>
+                  </div>
+                        <div class="rating"><img src="catalog/view/theme/default/image/stars-2.png" alt="Based on 1 reviews."></div>
+                <!--<div class="cart"><input type="button" value="Add to Cart" onclick="addToCart('36');" class="button" /></div> -->
+      </div>
+            <div class="w-product clearfix">
+                <div class="image"><img src="http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce03-60x65.jpg" alt="Donec tellus purus"></div>
+                <div class="name">Donec tellus purus</div>
+                <div class="price">
+                    $119.50                  </div>
+                        <div class="rating"><img src="catalog/view/theme/default/image/stars-3.png" alt="Based on 1 reviews."></div>
+                <!--<div class="cart"><input type="button" value="Add to Cart" onclick="addToCart('47');" class="button" /></div> -->
+      </div>
+        </div>
+</div></div></div></div></div><div class="row"><div class="mega-col col-xs-12 col-sm-12 col-md-12 hidden-title"> <div class="mega-col-inner"><div class="pavo-widget" id="wid-5"><div class="menu-title">Band</div>
+</div></div></div></div></div>
+
+
+
+
+</li>
+
+<li class="parent dropdown pav-parrent">
+<a class="dropdown-toggle" data-toggle="dropdown"
+href="http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=17"><span
+class="menu-title">Almuerzos</span><b
+class="caret"></b></a>
+
+<div class="dropdown-menu level1">
+<div class="dropdown-menu-inner">
+<div class="row">
+<div class="mega-col col-xs-12 col-sm-12 col-md-12"
+data-type="menu">
+<div class="mega-col-inner">
+<ul>
+<li class=" "><a
+href="http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=25"><span
+class="menu-title">BandejaPaisa</span></a>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li>
+
+<li class="parent dropdown pav-parrent">
+<a class="dropdown-toggle" data-toggle="dropdown"
+href="http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=17"><span
+class="menu-title">Cenas</span><b
+class="caret"></b></a>
+
+<div class="dropdown-menu level1">
+<div class="dropdown-menu-inner">
+<div class="row">
+<div class="mega-col col-xs-12 col-sm-12 col-md-12"
+data-type="menu">
+<div class="mega-col-inner">
+<ul>
+<li class=" "><a
+href="http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=25"><span
+class="menu-title">spaguettis</span></a>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li>
+
+<li class="parent dropdown pav-parrent">
+<a class="dropdown-toggle" data-toggle="dropdown"
+href="http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=17"><span
+class="menu-title">Postres</span><b
+class="caret"></b></a>
+
+<div class="dropdown-menu level1">
+<div class="dropdown-menu-inner">
+<div class="row">
+<div class="mega-col col-xs-12 col-sm-12 col-md-12"
+data-type="menu">
+<div class="mega-col-inner">
+<ul>
+<li class=" "><a
+href="http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=25"><span
+class="menu-title">Chocoflan</span></a>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
 </nav>
-<div class="container">
-    <div><h1>SocialChef</h1></div>
-    <div class="row">
-      {{ products-search search="search"}}
-      <div class="col-md-3">
-          {{left-panel}}
-      </div>
-      <div class="container">
-          <div class="col-md-9">
-            {{outlet}}
-          </div>
-      </div>
-    </div>
+
 </div>
-<div class="container">
-  <hr>
-  <footer>
-      <div class="row">
-          <div class="col-lg-12">
-              <p id="copyright">Copyright &copy; SocialChef 2014</p>
-          </div>
-        </div>
-    </footer>
 </div>
 
-{{!-- modal --}}
-<div class="modal fade"
-    id="login-modal" tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header login_modal_header">
-                <button type="button" class="close" data-dismiss="modal"
-                    aria-hidden="true">&times;</button>
-                <h2 class="modal-title" id="myModalLabel">
-                    Inicia Sesi&oacute;n en tu Cuenta
-                </h2>
-            </div>
-            <div class="modal-body login-modal">
-              <h1>SocialChef</h1>
-              <br/>
-              <div class="clearfix"></div>
-              <div id='social-icons-conatainer'>
-                  <div class='modal-body-left'>
 
-                      <div class="form-group">
-                          {{input type="text" id="username"
-                              placeholder="Usuario o Correo"
-                              value=user_username
-                              class="form-control login-field"}}
-                          <i class="fa fa-user login-field-icon"></i>
-                      </div>
+<div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+<div id="search" class="pull-right">
+{{products-search search="search"}}
+<span class="button-search"></span>
+</div>
+</div>
 
-                      <div class="form-group">
-                          {{input type="password" id="login-pass"
-                              placeholder="Contrase&ntilde;a"
-                              value=user_password
-                              class="form-control login-field"}}
-                          <i class="fa fa-lock login-field-icon"></i>
-                      </div>
-                      <button id="login_btn"
-                          class="btn btn-success modal-login-btn"
-                          {{bind-attr disabled="isProcessing"}}
-                          {{action "login"}}
-                          type="button">Aceptar</button>
-                      <a href="#" class="login-link">
-                        recordar contrase&ntilde;a
-                      </a>
-                  </div>
 
-                  <div class='modal-body-right'>
-                      <div class="modal-social-icons">
-                          <a href='#' class="btn btn-default facebook">
-                              <i class="fa fa-facebook modal-icons"></i>
-                              Sign In with Facebook
-                          </a>
-                          <button class="btn btn-default twitter"
-                              {{action "signIn"}}>
-                              <i class="fa fa-twitter modal-icons"></i>
-                              Sign In with Twitter
-                          </button>
-                          <a href='#' class="btn btn-default google">
-                              <i class="fa fa-google-plus modal-icons"></i>
-                              Sign In with Google
-                          </a>
-                      </div>
-                  </div>
-                  <div id='center-line'> OR </div>
-              </div>
+</div>
+</div>
+</div>
+</section>
 
-              <div class="clearfix"></div>
-              <div class="form-group modal-register-btn">
-                  <button class="btn btn-default"
-                      {{action "register"}}>
-                      New User Please Register
-                  </button>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="modal-footer login_modal_footer">
-            </div>
-        </div>
-      </div>
+
+<div class="container">
+
+
+
+<div class="col-md-3">
+{{left-panel}}
+</div>
+<div class="container">
+<div class="col-md-9">
+{{outlet}}
+</div>
+</div>
+
+
+</div>
+<div class="container">
+<hr>
+<footer>
+<div class="row">
+<div class="col-lg-12">
+<p id="copyright">Copyright &copy; SocialChef 2014</p>
+</div>
+</div>
+</footer>
 </div>
