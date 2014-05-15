@@ -1,6 +1,7 @@
 SocialChef.PurchaseController = Ember.ObjectController.extend({
   product: null,
   isProcessing: false,
+  address: '',
 
   actions: {
       purchase: function() {
@@ -36,7 +37,8 @@ SocialChef.PurchaseController = Ember.ObjectController.extend({
       return {
           id: product.id,
           name: product.name,
-          price: product.price
+          price: product.price,
+          entrega: this.get('address')
       };
   }
 });

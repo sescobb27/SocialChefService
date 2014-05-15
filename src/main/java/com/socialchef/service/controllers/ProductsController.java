@@ -53,6 +53,7 @@ public class ProductsController {
     	int id = Integer.parseInt(body.get("id"));
     	String name = body.get("name");
     	double price = Double.parseDouble(body.get("price"));
+    	String address = body.get("entrega");
     	Product p = new Product(name, "", price, "");
     	if (!p.validateProduct()) {
     		throw new SocialChefException(p.getErrors());
@@ -65,7 +66,7 @@ public class ProductsController {
     			new User(
     					"Unknown", "Unknown", "Unknown",
     					"Unknown@Unknown.com", "");
-    	productRepo.purchase(p, unknown);
+    	productRepo.purchase(p, unknown, address);
     	Map<String, String> response = new HashMap<String, String>();
     	response.put("msg", "Compra Satisfactoria");
     	return response;

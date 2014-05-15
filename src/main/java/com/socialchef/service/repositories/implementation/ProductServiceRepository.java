@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.socialchef.service.exceptions.SocialChefException;
+import com.socialchef.service.helpers.Notifications;
 import com.socialchef.service.helpers.Validator;
 import com.socialchef.service.models.Product;
 import com.socialchef.service.models.Purchase;
@@ -115,7 +116,7 @@ public class ProductServiceRepository implements ProductService {
 	}
 	
 	@Transactional
-	public void purchase(Product p, User purchaser) {
+	public void purchase(Product p, User purchaser, String address) {
 		User u = userRepo.findUserByProductId(p.getId());
 		purchaser = userRepo.findByUsername(purchaser.getUsername());
 		if (purchaser == null) {
@@ -140,5 +141,10 @@ public class ProductServiceRepository implements ProductService {
 		
 		purchase.setPurchasesProducts(l_pp);
 		purchasesRepo.save(purchase);
+		
+		String email_format = "Has vendido un %s por el precio de %.2f, el producto "
+				+ "debe ser entregado en la siguiente direccion: %s";
+		Notifications.sendEmail(u, String.format(email_format, 
+				p.getName(), p.getPrice(), address));
 	}
 }
