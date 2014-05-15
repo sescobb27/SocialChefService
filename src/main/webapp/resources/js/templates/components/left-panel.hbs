@@ -1,40 +1,15 @@
-<p class="lead">Buscar Por</p>
+<div class="box box-product special highlighted nopadding">
+<div class="box-heading"><span>Buscar Por</span></div>
+    </div>
   <div class="panel-group" id="accordion">
+
       <div class="panel panel-default">
           <div class="panel-heading">
               <h4 class="panel-title">
-                  <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion"> Populares </a>
-              </h4>
-          </div>
-          <div id="collapseOne" class="panel-collapse collapse in">
-              <div class="panel-body">
-                  Populares ...
-              </div>
-          </div>
-      </div>
-      <div class="panel panel-default">
-          <div class="panel-heading">
-              <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                      Nuevos
-                   </a>
-              </h4>
-          </div>
-          <div id="collapseTwo" class="panel-collapse collapse">
-              <div class="panel-body">
-                  Nuevos ...
-              </div>
-          </div>
-      </div>
-      <div class="panel panel-default">
-          <div class="panel-heading">
-              <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                       Ubicaci&oacute;n
-                   </a>
               </h4>
           </div>
-          <div id="collapseThree" class="panel-collapse collapse">
+          <div id="collapseThree" class="">
               <div class="panel-body">
                   <ul class="list-group">
                       {{#each locations}}
@@ -42,19 +17,17 @@
                               {{#link-to "search.results" this}}{{this}}{{/link-to}}
                           </li>
                       {{/each}}
-                  </ul>
+                  </ul> 
               </div>
           </div>
       </div>
       <div class="panel panel-default">
           <div class="panel-heading">
               <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                      Categorias
-                   </a>
+                      Categorias                   
               </h4>
           </div>
-          <div id="collapseFour" class="panel-collapse collapse">
+          <div id="collapseFour" class="">
               <div class="panel-body">
                   <ul class="list-group">
                       {{#each categories}}
@@ -67,3 +40,118 @@
           </div>
       </div>
   </div>
+
+  <br><br>
+
+<div class="box box-product special highlighted nopadding">
+  <div class="box-heading"><span>Especiales</span></div>
+  <div class="box-content">
+    <div class="box-product">
+		  <div class="row">	 			
+			  				  
+			  <div class=" col-lg-3-3"><div class="product-block">
+			  
+                <div class="image">
+        <a href="http://demopavothemes.com/pav_food_store/index.php?route=product/product&amp;product_id=42"><img src="http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce09-80x95.jpg" title="Lorem ipsum dolor" alt="Lorem ipsum dolor"></a>
+        
+      </div>
+                <div class="product-meta">
+        <h3 class="name"><a href="http://demopavothemes.com/pav_food_store/index.php?route=product/product&amp;product_id=42">Huevos Revueltos con frutas</a></h3>
+      
+                <div class="price">
+                <span class="price-old">$7000</span> <span class="price-new">$5000</span>
+              </div>
+                       <div class="rating"><img src="catalog/view/theme/pav_foodstore/image/stars-4.png" alt="Based on 1 reviews."></div>
+       
+        <div class="cart">
+          <input type="button" value="Adicionar al Carro" onclick="addToCart('42');" class="button">
+        </div>
+
+        <div class="wishlist"><a class="icon-heart" onclick="addToWishList('42');" title="Lista de Deseo"><span>Lista de Deseo;</span></a></div>
+        <div class="compare"><a class="icon-retweet" onclick="addToCompare('42');" title="Comparar"><span>Comparar</span></a></div>
+    </div>
+			  </div></div>
+			  
+			 			
+			  				  
+			  <div class=" col-lg-3-3"><div class="product-block">
+			  
+                <div class="image">
+        <a href="http://demopavothemes.com/pav_food_store/index.php?route=product/product&amp;product_id=36"><img src="http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce01-80x95.jpg" title="Mollicitudin lobortis" alt="Mollicitudin lobortis"></a>
+        
+      </div>
+                <div class="product-meta">
+        <h3 class="name"><a href="http://demopavothemes.com/pav_food_store/index.php?route=product/product&amp;product_id=36">Helado</a></h3>
+      
+                <div class="price">
+                <span class="price-old">$3000</span> <span class="price-new">$2000</span>
+              </div>
+                       <div class="rating"><img src="catalog/view/theme/pav_foodstore/image/stars-2.png" alt="Based on 1 reviews."></div>
+       
+        <div class="cart">
+          <input type="button" value="Adicionar al Carro" onclick="addToCart('36');" class="button">
+        </div>
+
+        <div class="wishlist"><a class="icon-heart" onclick="addToWishList('36');" title="Lista de Deseo"><span>Lista Deseo;</span></a></div>
+        <div class="compare"><a class="icon-retweet" onclick="addToCompare('36');" title="Comparar"><span>Comparar</span></a></div>
+    </div>
+			  </div></div>
+			  
+			 			
+			  				  
+			  <div class=" col-lg-3-3"><div class="product-block">
+			  
+                <div class="image">
+        <a href="http://demopavothemes.com/pav_food_store/index.php?route=product/product&amp;product_id=45"><img src="http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce08-80x95.jpg" title="Malteada" alt="Mollis eleifend"></a>
+        
+      </div>
+                <div class="product-meta">
+        <h3 class="name"><a href="http://demopavothemes.com/pav_food_store/index.php?route=product/product&amp;product_id=45">Malteada</a></h3>
+      
+                <div class="price">
+                <span class="price-old">$5000</span> <span class="price-new">$3500</span>
+              </div>
+                       <div class="rating"><img src="catalog/view/theme/pav_foodstore/image/stars-3.png" alt="Based on 1 reviews."></div>
+       
+        <div class="cart">
+          <input type="button" value="Adicionar al Carro" onclick="addToCart('45');" class="button">
+        </div>
+
+        <div class="wishlist"><a class="icon-heart" onclick="addToWishList('45');" title="Lista de Deseo"><span>Lista de Deseo;</span></a></div>
+        <div class="compare"><a class="icon-retweet" onclick="addToCompare('45');" title="Comparar"><span>Comparar</span></a></div>
+    </div>
+			  </div></div>
+			  
+			 				 </div>
+							
+			  				 				  <div class="row">
+				 
+			  <div class=" col-lg-3-3"><div class="product-block">
+			  
+                <div class="image">
+        <a href="http://demopavothemes.com/pav_food_store/index.php?route=product/product&amp;product_id=28"><img src="http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce10-80x95.jpg" title="Morbi ullamcorper" alt="Morbi ullamcorper"></a>
+        
+      </div>
+                <div class="product-meta">
+        <h3 class="name"><a href="http://demopavothemes.com/pav_food_store/index.php?route=product/product&amp;product_id=28">Pastas</a></h3>
+      
+                <div class="price">
+                <span class="price-old">$8000</span> <span class="price-new">$6500</span>
+              </div>
+                       <div class="rating"><img src="catalog/view/theme/pav_foodstore/image/stars-2.png" alt="Based on 1 reviews."></div>
+       
+        <div class="cart">
+          <input type="button" value="Adicionar al Carro" onclick="addToCart('28');" class="button">
+        </div>
+
+        <div class="wishlist"><a class="icon-heart" onclick="addToWishList('28');" title="Lista de Deseo"><span>Lista de Deseo;</span></a></div>
+        <div class="compare"><a class="icon-retweet" onclick="addToCompare('28');" title="Comparar"><span>Comparar</span></a></div>
+    </div>
+			  </div></div>
+			  
+			 				 </div>
+							
+			  
+    </div>
+  </div>
+   </div>
