@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <h1>{{title}}</h1>
-        {{#each product in controller}}
+        {{#each product in model}}
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <div class="thumbnail">
                         <img  {{bind-attr src='product.image'}}>

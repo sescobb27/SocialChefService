@@ -1,5 +1,4 @@
 SocialChef.PurchaseController = Ember.ObjectController.extend({
-  needs: ['product'],
   product: null,
   isProcessing: false,
 
@@ -11,24 +10,33 @@ SocialChef.PurchaseController = Ember.ObjectController.extend({
               url: "/purchase",
               contentType: "application/json",
               dataType: "json",
-              data: JSON.stringify(self.get('product'))
+              data: JSON.stringify(self.serialize())
           });
-          promise.success(function(){
+          promise.success(function(response){
               Ember.run(function(){
-                  self.success();
+                  self.success(response);
               });
           });
-          promise.fail(function(){
+          promise.fail(function(response){
               Ember.run(function(){
-                  self.set('isProcessing', false);
+                  self.failure(response);
               });
            });
       }
   },
-  success: function() {
-
+  success: function(response) {
+      alert(response);
   },
   failure: function(response) {
       this.set('isProcessing', false);
+      alert(response);
+  },
+  serialize: function() {
+      var product = this.get('product');
+      return {
+          id: product.id,
+          name: product.name,
+          price: product.price
+      };
   }
 });
