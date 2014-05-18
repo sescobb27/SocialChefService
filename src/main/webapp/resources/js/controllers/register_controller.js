@@ -34,11 +34,11 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
             if (!this.empty(pass) && !this.empty(confirm)) {
                 if (pass !== confirm) {
                     errors.pushObject
-                        ("La contrase&ntilde;a y la confirmaci&oacute;n de la contrase&ntilde;a no concuerdan");
+                        ("La contrase\u00F1a y la confirmaci\u00F3n de la contrase\u00F1a no concuerdan");
                 }
             } else {
                 errors.pushObject
-                    ("La contrase&ntilde;a y la confirmaci&oacute;n de la contraseña no pueden estar vacias");
+                    ("La contrase\u00F1a y la confirmaci\u00F3n de la contrase\u00F1a no pueden estar vacias");
             }
 
             if (this.empty(name)) {
@@ -58,7 +58,7 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
             }
 
             if (this.empty(address)) {
-                errors.pushObject("El Campo Dirección No puede estar vacio");
+                errors.pushObject("El Campo Direcci\u00F3n No puede estar vacio");
             }
             if (this.empty(cellphone)) {
                 errors.pushObject("El Campo Celular No puede estar vacio");
