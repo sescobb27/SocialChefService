@@ -1,28 +1,38 @@
-<div class="col-sm-4 col-lg-4 col-md-4">
-    <div class="thumbnail">
-        <img  {{bind-attr src='product.image'}}>
-        <div class="caption">
-            <h4 class="pull-right">$ {{product.price}}</h4>
-            <h4>
-                {{#link-to 'product' product.name}}
+
+
+<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"><div class="product-block">
+
+
+<div class="image">
+<img  {{bind-attr src='product.image'}}>
+
+
+</div>
+<div class="product-meta">
+<h3 class="name">{{#link-to 'product' product.name}}
                     {{product.name}}
-                {{/link-to}}
-            </h4>
-            <button class='btn btn-success'
-                {{action "buy" product}}>
+                {{/link-to}}</h3>
+<div class="description">
+{{product.description}}
+</div>
+
+<div class="price">
+{{product.price}}										  									</div>
+<div class="rating"><img src="catalog/view/theme/pav_foodstore/image/stars-5.png" alt="Based on 1 reviews."></div>
+
+
+<div class="cart">
+
+
+   <button class='button'   {{action "buy" product}}>
                 Comprar
             </button>
-            <p>{{product.description}}</p>
-        </div>
-    </div>
-    <div class="ratings">
-        <p class="pull-right">{{product.rate}}</p>
-        <p>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star-empty"></span>
-        </p>
-    </div>
+
+</div>
+
+
+</div>
+
+
+</div>
 </div>
