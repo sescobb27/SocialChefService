@@ -245,6 +245,8 @@ input.button {
   box-shadow: none;
   -webkit-transition: all 0.4s ease 0s;
   transition: all 0.4s ease 0s;
+  height: 35px;
+  width: 95px;
 }
 .button:hover,
 input.button:hover {
