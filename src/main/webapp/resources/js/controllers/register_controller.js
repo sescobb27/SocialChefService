@@ -109,14 +109,28 @@ SocialChef.RegisterController = Ember.ObjectController.extend({
         };
     },
     success: function() {
-        console.log("===SUCCESS===");
         var controller = SocialChef.__container__.lookup("controller:application");
         controller.send('loggedIn', this.get('u_username'));
         this.transitionToRoute('user', this.get('u_username'));
-        // this.reset();
+        this.reset();
     },
     failure: function(response) {
         this.set('isProcessing', false);
         this.get('errors').pushObject(response.errors);
+    },
+    reset: function() {
+        this.setProperties({
+            name: '',
+            last_name: '',
+            u_username: '',
+            email: '',
+            u_password: '',
+            confirm_password: '',
+            address: '',
+            cellphone: '',
+            telephone: '',
+            isProcessing: false,
+            errors: Ember.A([])
+        });
     }
 });
