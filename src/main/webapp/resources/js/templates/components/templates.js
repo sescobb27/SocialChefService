@@ -263,8 +263,7 @@ function program1(depth0,data) {
   stack1 = helpers._triageMustache.call(depth0, "product.description", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n</div>\n\n<div class=\"price\">\n");
-  stack1 = helpers._triageMustache.call(depth0, "product.price", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(escapeExpression((helper = helpers.formatPrice || (depth0 && depth0.formatPrice),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "product.price", options) : helperMissing.call(depth0, "formatPrice", "product.price", options))));
   data.buffer.push("										  									</div>\n<div class=\"rating\"><img src=\"catalog/view/theme/pav_foodstore/image/stars-5.png\" alt=\"Based on 1 reviews.\"></div>\n\n\n<div class=\"cart\">\n\n\n   <button class='button'   ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "buy", "product", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
   data.buffer.push(">\n                Comprar\n            </button>\n\n</div>\n\n\n</div>\n\n\n</div>\n</div>\n");
@@ -284,7 +283,7 @@ function program1(depth0,data) {
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
     'src': ("product.image")
   },hashTypes:{'src': "STRING"},hashContexts:{'src': depth0},contexts:[],types:[],data:data})));
-  data.buffer.push(">   \n\n\n</div>\n<div class=\"product-meta\">\n<h3 class=\"name\">");
+  data.buffer.push(">\n\n\n</div>\n<div class=\"product-meta\">\n<h3 class=\"name\">");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "product", "product.name", options) : helperMissing.call(depth0, "link-to", "product", "product.name", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</h3>\n<div class=\"description\">\n");
@@ -330,8 +329,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   stack1 = helpers._triageMustache.call(depth0, "product.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</h3>\n   <h3>");
-  stack1 = helpers._triageMustache.call(depth0, "product.price", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(escapeExpression((helper = helpers.formatPrice || (depth0 && depth0.formatPrice),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "product.price", options) : helperMissing.call(depth0, "formatPrice", "product.price", options))));
   data.buffer.push("</h3>\n   ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("text"),
@@ -491,15 +489,14 @@ function program1(depth0,data) {
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
     'src': ("product.image")
   },hashTypes:{'src': "STRING"},hashContexts:{'src': depth0},contexts:[],types:[],data:data})));
-  data.buffer.push(">   \n\n\n</div>\n<div class=\"product-meta\">\n<h3 class=\"name\">");
+  data.buffer.push(">\n\n\n</div>\n<div class=\"product-meta\">\n<h3 class=\"name\">");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "product", "product.name", options) : helperMissing.call(depth0, "link-to", "product", "product.name", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</h3>\n<div class=\"description\">\n");
   stack1 = helpers._triageMustache.call(depth0, "product.description", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n</div>\n\n<div class=\"price\">\n");
-  stack1 = helpers._triageMustache.call(depth0, "product.price", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(escapeExpression((helper = helpers.formatPrice || (depth0 && depth0.formatPrice),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "product.price", options) : helperMissing.call(depth0, "formatPrice", "product.price", options))));
   data.buffer.push("										  									</div>\n<div class=\"rating\"><img src=\"catalog/view/theme/pav_foodstore/image/stars-5.png\" alt=\"Based on 1 reviews.\"></div>\n\n\n<div class=\"cart\">\n\n\n   <button class='button'   ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "buy", "product", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
   data.buffer.push(">\n                Comprar\n            </button>\n\n</div>\n\n\n</div>\n\n\n</div>\n</div>\n        ");
