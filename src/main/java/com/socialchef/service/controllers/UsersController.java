@@ -99,8 +99,6 @@ public class UsersController {
 	public void addProduct(HttpSession session,
 			@CookieValue(value="session_id",
 				defaultValue="", required=true) String session_id,
-			@RequestParam(value = "username",
-				required = true, defaultValue = "") String username,
 			@RequestParam(value = "productname",
 				required = true, defaultValue = "") String productname,
 			@RequestParam(value = "price",
@@ -109,9 +107,8 @@ public class UsersController {
 			@RequestParam(value= "categories") List<String> categories,
 			@RequestParam(value= "locations") List<String> locations ) {
 
-		String uname = (String) session.getAttribute(session_id);
-		if( username == null || username.length() == 0 ||
-				uname == null || !username.equalsIgnoreCase(uname) ) {
+		String username = (String) session.getAttribute(session_id);
+		if( !isLoggedIn(username) ) {
 			throw new SocialChefException(
 					"Necesitas iniciar sesion para agregar un producto");
 		}
@@ -193,13 +190,10 @@ public class UsersController {
 	public List<Product> listProducts(@CookieValue(value="session_id",
 			defaultValue="", required=true) String session_id,
 			HttpSession session) {
-		String username;
-		synchronized (session) {
-			username = (String) session.getAttribute(session_id);
-			if( username == null || username.length() == 0 ) {
-				throw new SocialChefException(
-						"Necesitas iniciar sesion para listar tus productos");
-			}
+		String username = (String) session.getAttribute(session_id);
+		if( !isLoggedIn(username) ) {
+			throw new SocialChefException(
+					"Necesitas iniciar sesion para listar tus productos");
 		}
 		return productRepo.findByUserName(username);
 	}
@@ -214,6 +208,14 @@ public class UsersController {
 			e.printStackTrace();
 		}
 		return "";
+	}
+	
+	private boolean isLoggedIn(String username) {
+		if( username == null || username.length() == 0 || 
+				username.trim().equals("")) {
+			return false;
+		}
+		return true;
 	}
 
 	@RequestMapping(value="/chefs/login", method=RequestMethod.POST)
@@ -257,19 +259,20 @@ public class UsersController {
 			HttpServletResponse response, HttpServletRequest request,
 			HttpSession session) {
 		
-		if (session_id != null && !session_id.trim().equals("")) {
-			if (session.getAttribute(session_id) == null) {
+		String username = (String) session.getAttribute(session_id);
+		if ( !isLoggedIn(username)) {
 				throw new SocialChefException("No has iniciado sesion todavia");
-			}
-			session.removeAttribute(session_id);
-			for (Cookie cookie : request.getCookies()) {
-				if (cookie.getName().equalsIgnoreCase("session_id")) {
-					cookie.setMaxAge(0);
-				}
+		}
+		session.removeAttribute(session_id);
+		session.invalidate();
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equalsIgnoreCase("session_id")) {
+				cookie.setValue("");
+				cookie.setPath("/");
+				cookie.setMaxAge(0);
 				response.addCookie(cookie);
 			}
-			return;
 		}
-		throw new SocialChefException("No has iniciado sesion todavia");
+		response.setStatus(200);
 	}
 }

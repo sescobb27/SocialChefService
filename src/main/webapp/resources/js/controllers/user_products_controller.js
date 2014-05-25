@@ -139,7 +139,6 @@ SocialChef.UserProductsAddController = Ember.ObjectController.extend({
   addProduct: function() {
       var self = this;
       var imageData = new FormData();
-      imageData.append('username', self.get('application').get('user_username'));
       imageData.append('productname', self.get('product_name'));
       imageData.append('price', self.get('price'));
       imageData.append('image', this.get('product_image'), 'file');

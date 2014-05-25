@@ -7,8 +7,5 @@ SocialChef.SearchResultsController = Ember.ArrayController.extend({
             this.transitionToRoute('purchase', product.name);
             this.get('purchase').set('product', product);
         }
-    },
-    formattedPrice: function (price) {
-        return parseInt(price).format();
     }
 });
