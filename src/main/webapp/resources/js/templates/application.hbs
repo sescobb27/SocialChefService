@@ -2,11 +2,12 @@
  <div class="container"><div class="row hidden-sm hidden-xs">
    <ul class="links pull-right">
     <li> {{#link-to "about"}} About {{/link-to}} </li>
-    <li> {{#link-to "login" class="icon-user"}} Login {{/link-to}} </li>
-    {{#if username}}
-    <li> {{#link-to "user" username}} {{username}} {{/link-to}} </li>
+    {{#if user_username}}
+    <li> {{#link-to "user" user_username}} {{user_username}} {{/link-to}} </li>
+    <li> {{#link-to "logout"}} Cerrar Sesi&oacute;n {{/link-to}} </li>
     {{else}}
-    <li> {{#link-to "register" class="icon-file"}} Register {{/link-to}} </li>
+    <li> {{#link-to "login" class="icon-user"}} Iniciar Sesi&oacute;n {{/link-to}} </li>
+    <li> {{#link-to "register" class="icon-file"}} Registrarse {{/link-to}} </li>
     {{/if}}
   </ul>
 </div>

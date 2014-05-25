@@ -180,7 +180,7 @@ SocialChef.LogoutRoute = Ember.Route.extend({
           Ember.run(function(){
               var app_controller =
                   SocialChef.__container__.lookup("controller:application");
-                  app_controller.set('username', '');
+                  app_controller.set('user_username', '');
           });
       });
       promise.fail(function(response){

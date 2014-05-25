@@ -79,27 +79,30 @@ function program1(depth0,data) {
 
 function program3(depth0,data) {
   
-  
-  data.buffer.push(" Login ");
-  }
-
-function program5(depth0,data) {
-  
   var buffer = '', stack1, helper, options;
   data.buffer.push("\r\n    <li> ");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "user", "username", options) : helperMissing.call(depth0, "link-to", "user", "username", options));
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "user", "user_username", options) : helperMissing.call(depth0, "link-to", "user", "user_username", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(" </li>\r\n    <li> ");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "logout", options) : helperMissing.call(depth0, "link-to", "logout", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" </li>\r\n    ");
   return buffer;
   }
-function program6(depth0,data) {
+function program4(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push(" ");
-  stack1 = helpers._triageMustache.call(depth0, "username", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers._triageMustache.call(depth0, "user_username", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" ");
   return buffer;
+  }
+
+function program6(depth0,data) {
+  
+  
+  data.buffer.push(" Cerrar Sesi&oacute;n ");
   }
 
 function program8(depth0,data) {
@@ -107,8 +110,13 @@ function program8(depth0,data) {
   var buffer = '', stack1, helper, options;
   data.buffer.push("\r\n    <li> ");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{
+    'class': ("icon-user")
+  },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "login", options) : helperMissing.call(depth0, "link-to", "login", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(" </li>\r\n    <li> ");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{
     'class': ("icon-file")
-  },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "register", options) : helperMissing.call(depth0, "link-to", "register", options));
+  },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "register", options) : helperMissing.call(depth0, "link-to", "register", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" </li>\r\n    ");
   return buffer;
@@ -116,16 +124,22 @@ function program8(depth0,data) {
 function program9(depth0,data) {
   
   
-  data.buffer.push(" Register ");
+  data.buffer.push(" Iniciar Sesi&oacute;n ");
   }
 
 function program11(depth0,data) {
   
   
-  data.buffer.push("<img src=\"images/logo.png\" alt=\"logo\">");
+  data.buffer.push(" Registrarse ");
   }
 
 function program13(depth0,data) {
+  
+  
+  data.buffer.push("<img src=\"images/logo.png\" alt=\"logo\">");
+  }
+
+function program15(depth0,data) {
   
   
   data.buffer.push("<img src=\"images/icon-home.png\"><span\r\n                          class=\"menu-title\"> Inicio</span>");
@@ -134,19 +148,14 @@ function program13(depth0,data) {
   data.buffer.push("<section id=\"topbar\">\r\n <div class=\"container\"><div class=\"row hidden-sm hidden-xs\">\r\n   <ul class=\"links pull-right\">\r\n    <li> ");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "about", options) : helperMissing.call(depth0, "link-to", "about", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push(" </li>\r\n    <li> ");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{
-    'class': ("icon-user")
-  },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "login", options) : helperMissing.call(depth0, "link-to", "login", options));
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" </li>\r\n    ");
-  stack1 = helpers['if'].call(depth0, "username", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(8, program8, data),fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers['if'].call(depth0, "user_username", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(8, program8, data),fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n  </ul>\r\n</div>\r\n</section>\r\n\r\n\r\n<section id=\"header-main\">\r\n  <div class=\"container\">\r\n    <div class=\"row header-wrap\">\r\n      <div class=\"col-lg-4 col-md-4 col-sm-12 col-xs-12 inner\">\r\n        <div id=\"logo\">");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "index", options) : helperMissing.call(depth0, "link-to", "index", options));
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "index", options) : helperMissing.call(depth0, "link-to", "index", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"header-right col-lg-8 col-md-8 col-sm-12 header-hidden inner\">\r\n        <div class=\"box-services\"><span class=\"btn-info iconbox pull-left\"><i class=\"icon-truck\">\r\n          &nbsp;</i></span>\r\n\r\n          <div class=\"media-body\">\r\n            <h4>Entrega gratis</h4>\r\n            <small>Pedidos superiores a $50.000</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"box-services\"><span class=\"iconbox pull-left\"><i class=\"icon-phone\">&nbsp;</i></span>\r\n\r\n          <div class=\"media-body\">\r\n            <h4>LLamanos gratis</h4>\r\n            <small>018000-1800-123</small>\r\n          </div>\r\n        </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n\r\n<section id=\"pav-mainnav\">\r\n  <div class=\"container\">\r\n    <div class=\"mainnav-wrap\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-9 col-md-9 col-sm-6 col-xs-12\">\r\n          <div class=\"navbar navbar-inverse\">\r\n            <nav class=\"pav-megamenu\" role=\"navigation\">\r\n\r\n              <div class=\"pav-megamenu\">\r\n                <div class=\"navbar\">\r\n                  <div id=\"mainmenutop\" class=\"megamenu\" role=\"navigation\">\r\n                    <div class=\"navbar-header\">\r\n                      <a href=\"javascript:;\" data-target=\".navbar-collapse\" data-toggle=\"collapse\"\r\n                      class=\"navbar-toggle\">\r\n                      <span class=\"icon-bar\"></span>\r\n                      <span class=\"icon-bar\"></span>\r\n                      <span class=\"icon-bar\"></span>\r\n                    </a>\r\n\r\n                    <div class=\"collapse navbar-collapse navbar-ex1-collapse\">\r\n                      <ul class=\"nav navbar-nav megamenu\">\r\n                        <li class=\"home\">\r\n                          ");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "index", options) : helperMissing.call(depth0, "link-to", "index", options));
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(15, program15, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "index", options) : helperMissing.call(depth0, "link-to", "index", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</li>\r\n\r\n                          <li class=\"parent dropdown pav-parrent\">\r\n                            <a class=\"dropdown-toggle\" data-toggle=\"dropdown\"\r\n                              href=\"http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=17\">\r\n                              <span class=\"menu-title\">Desayunos</span>\r\n                              <b class=\"caret\"></b>\r\n                            </a>\r\n\r\n\r\n                            <div class=\"dropdown-menu\" style=\"width:900px\"><div class=\"dropdown-menu-inner\"><div class=\"row\"><div class=\"mega-col col-xs-12 col-sm-12 col-md-3 \"> <div class=\"mega-col-inner\"><div class=\"pavo-widget\" id=\"wid-10\"><div class=\"menu-title\">Lo &uacute;ltimo</div>\r\n                            <div class=\"widget-product-list\">\r\n                              <div class=\"widget-inner\">\r\n\r\n                                <div class=\"w-product clearfix\">\r\n                                  <div class=\"image\"><img src=\"http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce14-200x236.jpg\" alt=\"Posuere lacus\"></div>\r\n                                  <div class=\"name\">Posuere lacus</div>\r\n                                  <div class=\"price\">\r\n                                    <span class=\"price-old\">$119.50</span> <span class=\"price-new\">$101.88</span>\r\n                                  </div>\r\n                                  <div class=\"rating\"><img src=\"catalog/view/theme/default/image/stars-4.png\" alt=\"Based on 1 reviews.\"></div>\r\n                                  <!--<div class=\"cart\"><input type=\"button\" value=\"Add to Cart\" onclick=\"addToCart('48');\" class=\"button\" /></div> -->\r\n                                </div>\r\n                              </div>\r\n                            </div></div></div></div><div class=\"mega-col col-xs-12 col-sm-12 col-md-5 \"> <div class=\"mega-col-inner\"><div class=\"pavo-widget\" id=\"wid-2\"><div class=\"menu-title\">Mas puntuado</div>\r\n                            <div class=\"widget-html\">\r\n                             <div class=\"widget-inner\">\r\n                              <p><img src=\"image/data/desayuno.jpg\" alt=\"food\"></p>\r\n                              <p>Fusce a congue purus, sit amet sollicitudin libero. In hac habitasse platea dictumst.</p>	</div>\r\n                            </div></div></div></div><div class=\"mega-col col-xs-12 col-sm-12 col-md-4 \"> <div class=\"mega-col-inner\"><div class=\"pavo-widget\" id=\"wid-3\"><div class=\"menu-title\">Lo mas vendido</div>\r\n                            <div class=\"widget-product-list\">\r\n                              <div class=\"widget-inner\">\r\n\r\n                                <div class=\"w-product clearfix\">\r\n                                  <div class=\"image\"><img src=\"http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce05-60x65.jpg\" alt=\"Fusce vestibulum\"></div>\r\n                                  <div class=\"name\">Fusce vestibulum</div>\r\n                                  <div class=\"price\">\r\n                                    $119.50                  </div>\r\n                                    <div class=\"rating\"><img src=\"catalog/view/theme/default/image/stars-5.png\" alt=\"Based on 1 reviews.\"></div>\r\n                                    <!--<div class=\"cart\"><input type=\"button\" value=\"Add to Cart\" onclick=\"addToCart('34');\" class=\"button\" /></div> -->\r\n                                  </div>\r\n                                  <div class=\"w-product clearfix\">\r\n                                    <div class=\"image\"><img src=\"http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce10-60x65.jpg\" alt=\"Morbi ullamcorper\"></div>\r\n                                    <div class=\"name\">Morbi ullamcorper</div>\r\n                                    <div class=\"price\">\r\n                                      <span class=\"price-old\">$119.50</span> <span class=\"price-new\">$96.00</span>\r\n                                    </div>\r\n                                    <div class=\"rating\"><img src=\"catalog/view/theme/default/image/stars-2.png\" alt=\"Based on 1 reviews.\"></div>\r\n                                    <!--<div class=\"cart\"><input type=\"button\" value=\"Add to Cart\" onclick=\"addToCart('28');\" class=\"button\" /></div> -->\r\n                                  </div>\r\n                                  <div class=\"w-product clearfix\">\r\n                                    <div class=\"image\"><img src=\"http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce01-60x65.jpg\" alt=\"Mollicitudin lobortis\"></div>\r\n                                    <div class=\"name\">Mollicitudin lobortis</div>\r\n                                    <div class=\"price\">\r\n                                      <span class=\"price-old\">$119.50</span> <span class=\"price-new\">$113.63</span>\r\n                                    </div>\r\n                                    <div class=\"rating\"><img src=\"catalog/view/theme/default/image/stars-2.png\" alt=\"Based on 1 reviews.\"></div>\r\n                                    <!--<div class=\"cart\"><input type=\"button\" value=\"Add to Cart\" onclick=\"addToCart('36');\" class=\"button\" /></div> -->\r\n                                  </div>\r\n                                  <div class=\"w-product clearfix\">\r\n                                    <div class=\"image\"><img src=\"http://demopavothemes.com/pav_food_store/image/cache/data/demo/img-produce03-60x65.jpg\" alt=\"Donec tellus purus\"></div>\r\n                                    <div class=\"name\">Donec tellus purus</div>\r\n                                    <div class=\"price\">\r\n                                      $119.50                  </div>\r\n                                      <div class=\"rating\"><img src=\"catalog/view/theme/default/image/stars-3.png\" alt=\"Based on 1 reviews.\"></div>\r\n                                      <!--<div class=\"cart\"><input type=\"button\" value=\"Add to Cart\" onclick=\"addToCart('47');\" class=\"button\" /></div> -->\r\n                                    </div>\r\n                                  </div>\r\n                                </div></div></div></div></div><div class=\"row\"><div class=\"mega-col col-xs-12 col-sm-12 col-md-12 hidden-title\"> <div class=\"mega-col-inner\"><div class=\"pavo-widget\" id=\"wid-5\"><div class=\"menu-title\">Band</div>\r\n                              </div></div></div></div></div>\r\n\r\n\r\n\r\n\r\n                            </li>\r\n\r\n                            <li class=\"parent dropdown pav-parrent\">\r\n                              <a class=\"dropdown-toggle\" data-toggle=\"dropdown\"\r\n                              href=\"http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=17\"><span\r\n                              class=\"menu-title\">Almuerzos</span><b\r\n                              class=\"caret\"></b></a>\r\n\r\n                              <div class=\"dropdown-menu level1\">\r\n                                <div class=\"dropdown-menu-inner\">\r\n                                  <div class=\"row\">\r\n                                    <div class=\"mega-col col-xs-12 col-sm-12 col-md-12\"\r\n                                    data-type=\"menu\">\r\n                                    <div class=\"mega-col-inner\">\r\n                                      <ul>\r\n                                        <li class=\" \"><a\r\n                                          href=\"http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=25\"><span\r\n                                          class=\"menu-title\">BandejaPaisa</span></a>\r\n                                        </li>\r\n\r\n                                      </ul>\r\n                                    </div>\r\n                                  </div>\r\n                                </div>\r\n                              </div>\r\n                            </div>\r\n                          </li>\r\n\r\n                          <li class=\"parent dropdown pav-parrent\">\r\n                            <a class=\"dropdown-toggle\" data-toggle=\"dropdown\"\r\n                            href=\"http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=17\"><span\r\n                            class=\"menu-title\">Cenas</span><b\r\n                            class=\"caret\"></b></a>\r\n\r\n                            <div class=\"dropdown-menu level1\">\r\n                              <div class=\"dropdown-menu-inner\">\r\n                                <div class=\"row\">\r\n                                  <div class=\"mega-col col-xs-12 col-sm-12 col-md-12\"\r\n                                  data-type=\"menu\">\r\n                                  <div class=\"mega-col-inner\">\r\n                                    <ul>\r\n                                      <li class=\" \"><a\r\n                                        href=\"http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=25\"><span\r\n                                        class=\"menu-title\">spaguettis</span></a>\r\n                                      </li>\r\n\r\n                                    </ul>\r\n                                  </div>\r\n                                </div>\r\n                              </div>\r\n                            </div>\r\n                          </div>\r\n                        </li>\r\n\r\n                        <li class=\"parent dropdown pav-parrent\">\r\n                          <a class=\"dropdown-toggle\" data-toggle=\"dropdown\"\r\n                          href=\"http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=17\"><span\r\n                          class=\"menu-title\">Postres</span><b\r\n                          class=\"caret\"></b></a>\r\n\r\n                          <div class=\"dropdown-menu level1\">\r\n                            <div class=\"dropdown-menu-inner\">\r\n                              <div class=\"row\">\r\n                                <div class=\"mega-col col-xs-12 col-sm-12 col-md-12\"\r\n                                data-type=\"menu\">\r\n                                <div class=\"mega-col-inner\">\r\n                                  <ul>\r\n                                    <li class=\" \"><a\r\n                                      href=\"http://demopavothemes.com/pav_food_store/index.php?route=product/category&amp;path=25\"><span\r\n                                      class=\"menu-title\">Chocoflan</span></a>\r\n                                    </li>\r\n\r\n                                  </ul>\r\n                                </div>\r\n                              </div>\r\n                            </div>\r\n                          </div>\r\n                        </div>\r\n                      </li>\r\n\r\n                    </ul>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </nav>\r\n\r\n      </div>\r\n    </div>\r\n\r\n\r\n    <div class=\"col-lg-3 col-md-3 hidden-sm hidden-xs\">\r\n      <div id=\"search\" class=\"pull-right\">\r\n        ");
   data.buffer.push(escapeExpression((helper = helpers['products-search'] || (depth0 && depth0['products-search']),options={hash:{
@@ -290,8 +299,7 @@ function program1(depth0,data) {
   stack1 = helpers._triageMustache.call(depth0, "product.description", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n</div>\n\n<div class=\"price\">\n");
-  stack1 = helpers._triageMustache.call(depth0, "product.price", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(escapeExpression((helper = helpers.formatPrice || (depth0 && depth0.formatPrice),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "product.price", options) : helperMissing.call(depth0, "formatPrice", "product.price", options))));
   data.buffer.push("										  									</div>\n<div class=\"rating\"><img src=\"catalog/view/theme/pav_foodstore/image/stars-5.png\" alt=\"Based on 1 reviews.\"></div>\n\n\n<div class=\"cart\">\n\n\n   <button class='button'   ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "buy", "product", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
   data.buffer.push(">\n                Comprar\n            </button>\n\n</div>\n\n\n</div>\n\n\n</div>\n</div>\n        ");
@@ -653,15 +661,14 @@ function program1(depth0,data) {
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
     'src': ("product.image")
   },hashTypes:{'src': "STRING"},hashContexts:{'src': depth0},contexts:[],types:[],data:data})));
-  data.buffer.push(">   \n\n\n</div>\n<div class=\"product-meta\">\n<h3 class=\"name\">");
+  data.buffer.push(">\n\n\n</div>\n<div class=\"product-meta\">\n<h3 class=\"name\">");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "product", "product.name", options) : helperMissing.call(depth0, "link-to", "product", "product.name", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</h3>\n<div class=\"description\">\n");
   stack1 = helpers._triageMustache.call(depth0, "product.description", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n</div>\n\n<div class=\"price\">\n");
-  stack1 = helpers._triageMustache.call(depth0, "product.price", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(escapeExpression((helper = helpers.formatPrice || (depth0 && depth0.formatPrice),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "product.price", options) : helperMissing.call(depth0, "formatPrice", "product.price", options))));
   data.buffer.push("										  									</div>\n<div class=\"rating\"><img src=\"catalog/view/theme/pav_foodstore/image/stars-5.png\" alt=\"Based on 1 reviews.\"></div>\n\n\n<div class=\"cart\">\n\n\n   <button class='button'   ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "buy", "product", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
   data.buffer.push(">\n                Comprar\n            </button>\n\n</div>\n\n\n</div>\n\n\n</div>\n</div>\n        ");
